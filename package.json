@@ -1,0 +1,56 @@
+{
+  "name": "beidou-example-redux",
+  "version": "1.0.1",
+  "description": "beidou css modules template",
+  "scripts": {
+    "start": "beidou start",
+    "debug": "beidou debug",
+    "stop": "beidou stop",
+    "dev": "beidou dev",
+    "build": "beidou build",
+    "build:node": "beidou build --target=node",
+    "lint": "eslint --fix --ext .jsx,.js app client config"
+  },
+  "dependencies": {
+    "antd": "^3.4.0",
+    "axios": "^0.18.0",
+    "babel-polyfill": "6.26.0",
+    "beidou-cli": "^1.0.0",
+    "beidou-core": "^1.0.1",
+    "classnames": "^2.2.3",
+    "egg-mongoose": "^2.2.0",
+    "egg-validate": "^1.0.0",
+    "fs-readfile-promise": "^3.0.1",
+    "immer": "^1.2.1",
+    "marked": "^0.3.19",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-fastclick": "^3.0.2",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "redux-actions": "^2.2.1",
+    "redux-logger": "^3.0.6",
+    "redux-saga": "^0.16.0",
+    "redux-thunk": "^2.2.0",
+    "reqwest": "^2.0.5",
+    "whatwg-fetch": "^2.0.4"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.5.3",
+    "babel-eslint": "^7.1.1",
+    "eslint": "^4.11.0",
+    "eslint-config-beidou": "^1.0.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-react": "^7.5.1"
+  },
+  "engines": {
+    "node": ">= 8.0.0"
+  },
+  "license": "MIT",
+  "boilerplate": {
+    "name": "beidou-example-redux",
+    "version": "1.0.1",
+    "description": "beidou css modules template"
+  }
+}
