@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## Install
 
 ```bash
@@ -21,3 +22,6 @@ then navigate to [http://127.0.0.1:6001/](http://127.0.0.1:6001/)
 ## License
 
 [MIT](LICENSE)
+=======
+# react-blog
+>>>>>>> d6805e5ec3179d54af63d0c06fe9b0b32fa0d705
