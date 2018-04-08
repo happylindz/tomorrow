@@ -36,10 +36,9 @@ export const posts = (state = { state: INITIAL_STATE, postsData: [] }, action) =
       break;
     case LOADING_POSTS_SUCCESS:
       draft.state = SUCCESS_STATE;
-      draft.type = action.payload.type;
-      draft.size = action.payload.size;
-      draft.pageIndex = action.payload.pageIndex;
-      draft.projectData = draft.postsData.concat(action.payload.postsData);
+      draft.total = action.payload.total;
+      draft.page = action.payload.page;
+      draft.postsData = draft.postsData.concat(action.payload.postsData);
       break;
     case LOADING_POSTS_FAILURE:
       draft.state = FAILURE_STATE;

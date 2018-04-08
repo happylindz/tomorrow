@@ -35,14 +35,14 @@ class Project extends Component {
     const { projectData, state } = this.props;
     switch (state) {
       case constants.INITIAL_STATE:
-        return <setion>initial state</setion>;
+        return <section>initial state</section>;
       case constants.LOADING_STATE:
-        return <setion>loading state</setion>;
+        return <section>loading state</section>;
       case constants.SUCCESS_STATE:
         return (<section>{
           projectData.map((item) => {
             return (<section key={item._id}>
-              <h2>{ item.title }</h2>
+              <h2><a href={item.href}>{ item.title }</a></h2>
               <div>{ item.content }</div>
             </section>);
           })
