@@ -46,7 +46,6 @@ class Home extends Component {
 
   render() {
     const { postsData, state } = this.props;
-    console.log(postsData);
     switch (state) {
       case constants.INITIAL_STATE:
         return <section>initial state</section>;
@@ -57,7 +56,7 @@ class Home extends Component {
           postsData.map((item) => {
             return (<section key={item._id}>
               <h2><Link to={`/detail/${item.url}`}>{ item.title }</Link></h2>
-              <div>{ item.createdTime.toString() }</div>
+              <div>{ item.createdTime }</div>
             </section>);
           })
         }</section>);

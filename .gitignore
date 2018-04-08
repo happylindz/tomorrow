@@ -26,3 +26,4 @@ track
 .run/
 .vscode/
 !.run/isomorphic
+jsconfig.json

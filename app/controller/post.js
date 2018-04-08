@@ -6,16 +6,15 @@ const constants = require('../../client/constants');
 class PostController extends Controller {
   async index(ctx) {
     if (ctx.query.type === constants.ALL_POSTS) {
-      ctx.body = await ctx.service.post.get({
-        type: 'ALL',
-        query: 'title url createdTime',
-      });
+      ctx.body = {
+        type: constants.ALL_POSTS,
+        ...await ctx.service.post.queryAllData('title url createdTime'),
+      };
     } else if (ctx.query.type === constants.PART_POSTS && ctx.query.page) {
-      ctx.body = await ctx.service.post.get({
-        type: 'PART',
-        query: 'title cover url createdTime',
-        page: parseInt(ctx.query.page, 10),
-      });
+      ctx.body = {
+        type: constants.PART_POSTS,
+        ...await ctx.service.post.queryPartData('title cover url createdTime', parseInt(ctx.query.page, 10)),
+      };
     } else {
       throw new Error('参数不正确，无法获取数据');
     }

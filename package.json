@@ -1,7 +1,7 @@
 {
-  "name": "beidou-example-redux",
+  "name": "tomorrow",
   "version": "1.0.1",
-  "description": "beidou css modules template",
+  "description": "An isomorphic progressive web blog built by React & Node",
   "scripts": {
     "start": "beidou start",
     "debug": "beidou debug",
@@ -23,6 +23,7 @@
     "fs-readfile-promise": "^3.0.1",
     "immer": "^1.2.1",
     "marked": "^0.3.19",
+    "moment": "^2.22.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-fastclick": "^3.0.2",
@@ -47,10 +48,5 @@
   "engines": {
     "node": ">= 8.0.0"
   },
-  "license": "MIT",
-  "boilerplate": {
-    "name": "beidou-example-redux",
-    "version": "1.0.1",
-    "description": "beidou css modules template"
-  }
+  "license": "MIT"
 }

@@ -8,43 +8,67 @@ class IndexController extends Controller {
     const { ctx } = this;
     let preloadedState = null;
     if (ctx.params.route === '' || ctx.params.route === undefined) {
-      try {
-        let data = null;
-        data = await ctx.service.post.get({
-          type: 'PART',
-          query: 'title cover url createdTime',
-          page: parseInt(ctx.query.page, 10) || 1,
-        });
-        preloadedState = {
-          posts: {
-            state: constants.SUCCESS_STATE,
-            ...data,
-            type: constants.PART_POSTS,
-          },
-        };
-      } catch (e) {
-        ctx.app.emit('error', e);
-      }
+      preloadedState = await this.queryPostsDataByPage(ctx.query.page);
     } else if (ctx.params.route === 'archives') {
-      // console.log('archives');
+      preloadedState = await this.queryAllPostsData();
     } else if (ctx.params.route === 'project') {
-      try {
-        const data = await ctx.service.project.get();
-        if (Array.isArray(data)) {
-          preloadedState = {
-            project: {
-              projectData: data,
-              state: constants.SUCCESS_STATE,
-            },
-          };
-        }
-      } catch (e) {
-        ctx.app.emit('error', e);
-      }
+      preloadedState = await this.queryProjectData();
     } else if (ctx.params.route === 'about') {
       // console.log('about');
     }
     await ctx.render('index', { preloadedState });
+  }
+
+  async queryAllPostsData() {
+    const { ctx } = this;
+    try {
+      const data = await ctx.service.post.queryAllData('title cover url createdTime');
+      const preloadedState = {
+        posts: {
+          state: constants.SUCCESS_STATE,
+          type: constants.ALL_POSTS,
+          ...data,
+        },
+      };
+      return preloadedState;
+    } catch (e) {
+      ctx.app.emit('error', e);
+    }
+  }
+
+  async queryPostsDataByPage(page) {
+    const { ctx } = this;
+    try {
+      const data = await ctx.service.post.queryPartData('title cover url createdTime', parseInt(page, 10) || 1);
+      const preloadedState = {
+        posts: {
+          state: constants.SUCCESS_STATE,
+          type: constants.PART_POSTS,
+          ...data,
+        },
+      };
+      return preloadedState;
+    } catch (e) {
+      ctx.app.emit('error', e);
+    }
+  }
+
+  async queryProjectData() {
+    const { ctx } = this;
+    try {
+      const data = await ctx.service.project.get();
+      if (Array.isArray(data)) {
+        const preloadedState = {
+          project: {
+            projectData: data,
+            state: constants.SUCCESS_STATE,
+          },
+        };
+        return preloadedState;
+      }
+    } catch (e) {
+      ctx.app.emit('error', e);
+    }
   }
 }
 

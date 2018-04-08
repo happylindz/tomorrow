@@ -22,9 +22,6 @@ export default props => (
         <li>
           <Link to="/archives">归档</Link>
         </li>
-        <li>
-          <a href="/admin">登录</a>
-        </li>
       </ul>
       <hr />
       <Switch>

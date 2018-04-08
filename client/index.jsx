@@ -60,5 +60,5 @@ if (__CLIENT__) {
       <Router />
     </Provider>
   );
-  ReactDOM.render(app, document.getElementById('container'));
+  ReactDOM.hydrate(app, document.getElementById('container'));
 }

@@ -5,8 +5,8 @@ module.exports = (app) => {
     url: { type: String },
     title: { type: String },
     cover: { type: String },
-    createdTime: { type: Date, default: new Date() },
-    content: '',
+    createdTime: { type: String },
+    content: { type: String },
   });
   return mongoose.model('Post', PostSchema);
 };
