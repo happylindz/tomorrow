@@ -1,12 +1,13 @@
 import Detail from './detail';
-import Works from './works';
+import Project from './project';
 import About from './about';
-import List from './list';
-
+import Archives from './archives';
+import Home from './home';
 
 export {
+  Home,
   Detail,
-  Works,
+  Project,
   About,
-  List,
+  Archives,
 };

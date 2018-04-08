@@ -4,11 +4,11 @@ import React, { Component } from 'react';
 
 export default class extends Component {
   componentDidMount() {
-    document.title = 'Hello List';
+    document.title = 'Hello archives';
   }
 
   render() {
-    return (<h1>Hello List</h1>);
+    return (<h1>Hello archives</h1>);
   }
 }
 

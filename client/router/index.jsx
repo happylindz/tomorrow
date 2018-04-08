@@ -1,8 +1,8 @@
 'use strict';
 
 import React from 'react';
-import { BrowserRouter, StaticRouter, Route, Link, Redirect, Switch } from 'react-router-dom';
-import { List, Works, About } from '../container';
+import { BrowserRouter, StaticRouter, Route, Link, Switch } from 'react-router-dom';
+import { Home, Archives, Project, About } from '../container';
 
 const Router = __CLIENT__ ? BrowserRouter : StaticRouter;
 
@@ -11,21 +11,24 @@ export default props => (
     <div>
       <ul>
         <li>
-          <Link to="/list">博文</Link>
+          <Link to="/">首页</Link>
+        </li>
+        <li>
+          <Link to="/project">项目</Link>
         </li>
         <li>
           <Link to="/about">关于</Link>
         </li>
         <li>
-          <Link to="/works">作品</Link>
+          <Link to="/archives">归档</Link>
         </li>
       </ul>
       <hr />
       <Switch>
-        <Redirect exact from="/" to="/list" />
-        <Route path="/list" component={List} />
+        <Route path="/" component={Home} />
+        <Route path="/project" component={Project} />
         <Route path="/about" component={About} />
-        <Route path="/works" component={Works} />
+        <Route path="/archives" component={Archives} />
       </Switch>
     </div>
   </Router>

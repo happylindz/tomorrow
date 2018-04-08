@@ -1,8 +1,11 @@
 import produce from 'immer';
 import {
-  LOADING_WORKS,
-  LOADING_WORKS_SUCCESS,
-  LOADING_WORKS_FAILURE,
+  LOADING_PROJECT,
+  LOADING_PROJECT_SUCCESS,
+  LOADING_PROJECT_FAILURE,
+  LOADING_POSTS,
+  LOADING_POSTS_SUCCESS,
+  LOADING_POSTS_FAILURE,
 } from '../actionTypes';
 import {
   INITIAL_STATE,
@@ -11,16 +14,34 @@ import {
   FAILURE_STATE,
 } from '../constants';
 
-export const works = (state = { state: INITIAL_STATE, works: [] }, action) => produce(state, (draft) => {
+export const project = (state = { state: INITIAL_STATE, projectData: [] }, action) => produce(state, (draft) => {
   switch (action.type) {
-    case LOADING_WORKS:
+    case LOADING_PROJECT:
       draft.state = LOADING_STATE;
       break;
-    case LOADING_WORKS_SUCCESS:
+    case LOADING_PROJECT_SUCCESS:
       draft.state = SUCCESS_STATE;
-      draft.works = draft.works.concat(action.payload);
+      draft.projectData = draft.projectData.concat(action.payload);
       break;
-    case LOADING_WORKS_FAILURE:
+    case LOADING_PROJECT_FAILURE:
+      draft.state = FAILURE_STATE;
+      break;
+  }
+});
+
+export const posts = (state = { state: INITIAL_STATE, postsData: [] }, action) => produce(state, (draft) => {
+  switch (action.type) {
+    case LOADING_POSTS:
+      draft.state = LOADING_STATE;
+      break;
+    case LOADING_POSTS_SUCCESS:
+      draft.state = SUCCESS_STATE;
+      draft.type = action.payload.type;
+      draft.size = action.payload.size;
+      draft.pageIndex = action.payload.pageIndex;
+      draft.projectData = draft.postsData.concat(action.payload.postsData);
+      break;
+    case LOADING_POSTS_FAILURE:
       draft.state = FAILURE_STATE;
       break;
   }
