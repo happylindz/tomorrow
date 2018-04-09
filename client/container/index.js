@@ -1,4 +1,4 @@
-import Detail from './detail';
+import Article from './article';
 import Project from './project';
 import About from './about';
 import Archives from './archives';
@@ -6,7 +6,7 @@ import Home from './home';
 
 export {
   Home,
-  Detail,
+  Article,
   Project,
   About,
   Archives,

@@ -30,6 +30,8 @@ export default class Index extends Component {
       <html>
         <head>
           <title>{ title }</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+          <link rel="stylesheet" href={helper.asset('index.css')} />
         </head>
         <body>
           <div

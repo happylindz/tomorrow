@@ -16,6 +16,11 @@ module.exports = (app) => {
       };
       return data;
     }
+
+    async queryArticleByUrl(url) {
+      const html = await this.ctx.model.Post.find({ url }, 'content').limit(1);
+      return html;
+    }
   }
   return Post;
 };

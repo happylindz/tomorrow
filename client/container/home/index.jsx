@@ -3,6 +3,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Pagination from 'rc-pagination';
+import 'rc-pagination/assets/index.css';
 import actions from '../../actions';
 import * as constants from '../../constants';
 import { query } from '../../util';
@@ -21,6 +23,17 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class Home extends Component {
+  componentWillReceiveProps(nextProps) {
+    const nextPage = query(nextProps.location.search).page || 1;
+    const thisPage = query(this.props.location.search).page || 1;
+    if (nextPage !== thisPage) {
+      this.props.fetchPostsData({
+        type: constants.PART_POSTS,
+        page: nextPage,
+      });
+    }
+  }
+
   componentDidMount() {
     document.title = 'Hello Posts';
     const {
@@ -43,9 +56,16 @@ class Home extends Component {
     }
   }
 
+  onChangePagination = (page) => {
+    const {
+      match,
+      history,
+    } = this.props;
+    history.push(`${match.path}?page=${page}`);
+  }
 
   render() {
-    const { postsData, state } = this.props;
+    const { postsData, state, page, total } = this.props;
     switch (state) {
       case constants.INITIAL_STATE:
         return <section>initial state</section>;
@@ -55,10 +75,18 @@ class Home extends Component {
         return (<section>{
           postsData.map((item) => {
             return (<section key={item._id}>
-              <h2><Link to={`/detail/${item.url}`}>{ item.title }</Link></h2>
+              <h2><Link to={`/article/${item.url}`}>{ item.title }</Link></h2>
               <div>{ item.createdTime }</div>
             </section>);
           })
+        }{
+          <Pagination
+            showLessItems
+            showQuickJumper
+            onChange={this.onChangePagination}
+            current={page}
+            total={total}
+          />
         }</section>);
       default:
         return <section>something error on page, please fresh!</section>;

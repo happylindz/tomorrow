@@ -6,6 +6,9 @@ import {
   LOADING_POSTS,
   LOADING_POSTS_SUCCESS,
   LOADING_POSTS_FAILURE,
+  LOADING_ARTICLE,
+  LOADING_ARTICLE_SUCCESS,
+  LOADING_ARTICLE_FAILURE,
 } from '../actionTypes';
 import {
   INITIAL_STATE,
@@ -21,7 +24,7 @@ export const project = (state = { state: INITIAL_STATE, projectData: [] }, actio
       break;
     case LOADING_PROJECT_SUCCESS:
       draft.state = SUCCESS_STATE;
-      draft.projectData = draft.projectData.concat(action.payload);
+      draft.projectData = action.payload;
       break;
     case LOADING_PROJECT_FAILURE:
       draft.state = FAILURE_STATE;
@@ -36,12 +39,26 @@ export const posts = (state = { state: INITIAL_STATE, postsData: [] }, action) =
       break;
     case LOADING_POSTS_SUCCESS:
       draft.state = SUCCESS_STATE;
-      draft.total = action.payload.total;
-      draft.type = action.payload.type;
-      draft.page = action.payload.page;
-      draft.postsData = action.payload.postsData;
+      Object.keys(action.payload).forEach((key) => {
+        draft[key] = action.payload[key];
+      });
       break;
     case LOADING_POSTS_FAILURE:
+      draft.state = FAILURE_STATE;
+      break;
+  }
+});
+
+export const article = (state = { state: INITIAL_STATE, article: { url: '', content: '' } }, action) => produce(state, (draft) => {
+  switch (action.type) {
+    case LOADING_ARTICLE:
+      draft.state = LOADING_STATE;
+      break;
+    case LOADING_ARTICLE_SUCCESS:
+      draft.state = SUCCESS_STATE;
+      draft.article = action.payload;
+      break;
+    case LOADING_ARTICLE_FAILURE:
       draft.state = FAILURE_STATE;
       break;
   }

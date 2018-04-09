@@ -55,7 +55,7 @@ class Archives extends Component {
         return (<section>{
           postsData.map((item) => {
             return (<section key={item._id}>
-              <h2><Link to={`/detail/${item.url}`}>{ item.title }</Link></h2>
+              <h2><Link to={`/article/${item.url}`}>{ item.title }</Link></h2>
               <div>{ item.createdTime }</div>
             </section>);
           })

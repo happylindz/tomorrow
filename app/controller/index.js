@@ -4,40 +4,14 @@ const { Controller } = require('beidou-core');
 const constants = require('../../client/constants');
 
 class IndexController extends Controller {
-  async route() {
-    const { ctx } = this;
-    let preloadedState = null;
-    if (ctx.params.route === '' || ctx.params.route === undefined) {
-      preloadedState = await this.queryPostsDataByPage(ctx.query.page);
-    } else if (ctx.params.route === 'archives') {
-      preloadedState = await this.queryAllPostsData();
-    } else if (ctx.params.route === 'project') {
-      preloadedState = await this.queryProjectData();
-    } else if (ctx.params.route === 'about') {
-      // console.log('about');
-    }
-    await ctx.render('index', { preloadedState });
+  async route(ctx) {
+    await ctx.render('index');
   }
 
-  async queryAllPostsData() {
-    const { ctx } = this;
-    try {
-      const data = await ctx.service.post.queryAllData('title cover url createdTime');
-      const preloadedState = {
-        posts: {
-          state: constants.SUCCESS_STATE,
-          type: constants.ALL_POSTS,
-          ...data,
-        },
-      };
-      return preloadedState;
-    } catch (e) {
-      ctx.app.emit('error', e);
-    }
-  }
-
-  async queryPostsDataByPage(page) {
-    const { ctx } = this;
+  async home(ctx) {
+    const {
+      page,
+    } = ctx.query;
     try {
       const data = await ctx.service.post.queryPartData('title cover url createdTime', parseInt(page, 10) || 1);
       const preloadedState = {
@@ -47,14 +21,33 @@ class IndexController extends Controller {
           ...data,
         },
       };
-      return preloadedState;
+      await ctx.render('index', { preloadedState });
     } catch (e) {
       ctx.app.emit('error', e);
     }
   }
 
-  async queryProjectData() {
-    const { ctx } = this;
+  async archives(ctx) {
+    try {
+      const data = await ctx.service.post.queryAllData('title cover url createdTime');
+      const preloadedState = {
+        posts: {
+          state: constants.SUCCESS_STATE,
+          type: constants.ALL_POSTS,
+          ...data,
+        },
+      };
+      await ctx.render('index', { preloadedState });
+    } catch (e) {
+      ctx.app.emit('error', e);
+    }
+  }
+
+  async about(ctx) {
+    await ctx.render('index');
+  }
+
+  async project(ctx) {
     try {
       const data = await ctx.service.project.get();
       if (Array.isArray(data)) {
@@ -64,8 +57,27 @@ class IndexController extends Controller {
             state: constants.SUCCESS_STATE,
           },
         };
-        return preloadedState;
+        await ctx.render('index', { preloadedState });
       }
+    } catch (e) {
+      ctx.app.emit('error', e);
+    }
+  }
+
+  async article(ctx) {
+    const { url } = ctx.params;
+    try {
+      const data = await ctx.service.post.queryArticleByUrl(url);
+      const preloadedState = {
+        article: {
+          state: constants.SUCCESS_STATE,
+          article: {
+            url,
+            content: data[0].content,
+          },
+        },
+      };
+      await ctx.render('index', { preloadedState });
     } catch (e) {
       ctx.app.emit('error', e);
     }

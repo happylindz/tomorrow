@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { BrowserRouter, StaticRouter, Route, Link, Switch } from 'react-router-dom';
-import { Home, Archives, Project, About } from '../container';
+import { Home, Archives, Project, About, Article } from '../container';
 
 const Router = __CLIENT__ ? BrowserRouter : StaticRouter;
 
@@ -29,6 +29,7 @@ export default props => (
         <Route path="/project" component={Project} />
         <Route path="/about" component={About} />
         <Route path="/archives" component={Archives} />
+        <Route path="/article/:url" component={Article} />
       </Switch>
     </div>
   </Router>
