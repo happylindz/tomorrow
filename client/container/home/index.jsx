@@ -73,14 +73,14 @@ class Home extends Component {
         return <section>loading state</section>;
       case constants.SUCCESS_STATE:
         return (<section>{
-          postsData.map((item) => {
+          postsData.length > 0 ? postsData.map((item) => {
             return (<section key={item._id}>
               <h2><Link to={`/article/${item.url}`}>{ item.title }</Link></h2>
               <div>{ item.createdTime }</div>
             </section>);
-          })
-        }{
-          <Pagination
+          }) : '暂无博文'
+        } {
+          total > 10 && <Pagination
             showLessItems
             showQuickJumper
             onChange={this.onChangePagination}

@@ -26,6 +26,7 @@ export default class Index extends Component {
 
   render() {
     const { html, helper, state } = this.props;
+    console.log(helper);
     return (
       <html>
         <head>

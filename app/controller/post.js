@@ -8,12 +8,12 @@ class PostController extends Controller {
     if (ctx.query.type === constants.ALL_POSTS) {
       ctx.body = {
         type: constants.ALL_POSTS,
-        ...await ctx.service.post.queryAllData('title url createdTime'),
+        ...await ctx.service.post.queryAllData('title url tags createdTime'),
       };
     } else if (ctx.query.type === constants.PART_POSTS && ctx.query.page) {
       ctx.body = {
         type: constants.PART_POSTS,
-        ...await ctx.service.post.queryPartData('title cover url createdTime', parseInt(ctx.query.page, 10)),
+        ...await ctx.service.post.queryPartData('title cover url tags createdTime', parseInt(ctx.query.page, 10)),
       };
     } else {
       throw new Error('参数不正确，无法获取数据');

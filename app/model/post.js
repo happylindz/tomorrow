@@ -5,6 +5,7 @@ module.exports = (app) => {
     url: { type: String },
     title: { type: String },
     cover: { type: String },
+    tags: { type: String },
     createdTime: { type: String },
     content: { type: String },
   });
