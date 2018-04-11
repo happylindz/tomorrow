@@ -14,42 +14,66 @@ class AdminPostController extends Controller {
   }
 
   async create(ctx) {
-    const stream = await ctx.getFileStream();
-    const filename = stream.filename.replace(/.md/g, '');
-    const data = stream.fields;
-    const content = await streamToPromise(stream);
-    data.url = filename;
-    data.content = content.toString();
-    await ctx.service.post.add(data);
-    ctx.body = {
-      message: '成功新增博文',
-    };
+    try {
+      const stream = await ctx.getFileStream();
+      const filename = stream.filename.replace(/.md/g, '');
+      const data = stream.fields;
+      const content = await streamToPromise(stream);
+      data.url = filename;
+      data.content = content.toString();
+      await ctx.service.post.add(data);
+      ctx.body = {
+        message: '成功新增博文',
+        code: 0,
+      };
+    } catch (e) {
+      ctx.body = {
+        message: '创建失败',
+        code: 1,
+      };
+    }
     ctx.type = 'json';
     ctx.status = 200;
   }
 
   async update(ctx) {
-    const { id } = ctx.params;
-    const stream = await ctx.getFileStream();
-    const filename = stream.filename.replace(/.md/g, '');
-    const data = stream.fields;
-    const content = await streamToPromise(stream);
-    data.url = filename;
-    data.content = content.toString();
-    await ctx.service.post.update(id, data);
-    ctx.body = {
-      message: '成功修改博文',
-    };
+    try {
+      const { id } = ctx.params;
+      const stream = await ctx.getFileStream();
+      const filename = stream.filename.replace(/.md/g, '');
+      const data = stream.fields;
+      const content = await streamToPromise(stream);
+      data.url = filename;
+      data.content = content.toString();
+      await ctx.service.post.update(id, data);
+      ctx.body = {
+        message: '成功修改博文',
+        code: 0,
+      };
+    } catch (e) {
+      ctx.boyd = {
+        message: '修改失败',
+        code: 1,
+      };
+    }
     ctx.type = 'json';
     ctx.status = 200;
   }
 
   async destroy(ctx) {
-    const { id } = ctx.params;
-    await ctx.service.post.delete(id);
-    ctx.body = {
-      message: '成功删除',
-    };
+    try {
+      const { id } = ctx.params;
+      await ctx.service.post.delete(id);
+      ctx.body = {
+        message: '成功删除',
+        code: 0,
+      };
+    } catch (e) {
+      ctx.body = {
+        message: '删除失败',
+        code: 1,
+      };
+    }
     ctx.type = 'json';
     ctx.status = 200;
   }

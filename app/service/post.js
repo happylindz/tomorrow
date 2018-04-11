@@ -37,9 +37,7 @@ module.exports = (app) => {
       } else {
         delete data.content;
       }
-      delete data.id;
-      const res = await this.ctx.model.Post.update({ _id: id }, data);
-      return res;
+      return this.ctx.model.Post.update({ _id: id }, data);
     }
 
     async delete(id) {
