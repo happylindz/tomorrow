@@ -13,7 +13,7 @@ class PostController extends Controller {
     } else if (ctx.query.type === constants.PART_POSTS && ctx.query.page) {
       ctx.body = {
         type: constants.PART_POSTS,
-        ...await ctx.service.post.queryPartData('title cover url tags createdTime', parseInt(ctx.query.page, 10)),
+        ...await ctx.service.post.queryPartData('title cover url tags createdTime desc index', parseInt(ctx.query.page, 10)),
       };
     } else {
       throw new Error('参数不正确，无法获取数据');

@@ -72,7 +72,7 @@ class Article extends Component {
       case constants.LOADING_STATE:
         return <section>loading state</section>;
       case constants.SUCCESS_STATE:
-        return <div className="article-wrapper" dangerouslySetInnerHTML={{ __html: article.content }} />;
+        return <div className="article-wrapper markdown-body" dangerouslySetInnerHTML={{ __html: article.content }} />;
       default:
         return <section>something error on page, please fresh!</section>;
     }

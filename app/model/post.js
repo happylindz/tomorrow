@@ -8,6 +8,8 @@ module.exports = (app) => {
     tags: { type: String },
     createdTime: { type: String },
     content: { type: String },
+    desc: { type: String },
+    index: [{ _id: false, tag: String, content: String, anchor: String }],
   });
   return mongoose.model('Post', PostSchema);
 };

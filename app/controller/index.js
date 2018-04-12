@@ -13,7 +13,7 @@ class IndexController extends Controller {
       page,
     } = ctx.query;
     try {
-      const data = await ctx.service.post.queryPartData('title cover url createdTime', parseInt(page, 10) || 1);
+      const data = await ctx.service.post.queryPartData('title cover url createdTime desc index', parseInt(page, 10) || 1);
       const preloadedState = {
         posts: {
           state: constants.SUCCESS_STATE,
@@ -24,6 +24,7 @@ class IndexController extends Controller {
       await ctx.render('index', { preloadedState });
     } catch (e) {
       ctx.app.emit('error', e);
+      await ctx.render('index');
     }
   }
 
@@ -40,6 +41,7 @@ class IndexController extends Controller {
       await ctx.render('index', { preloadedState });
     } catch (e) {
       ctx.app.emit('error', e);
+      await ctx.render('index');
     }
   }
 
@@ -61,6 +63,7 @@ class IndexController extends Controller {
       }
     } catch (e) {
       ctx.app.emit('error', e);
+      await ctx.render('index');
     }
   }
 
@@ -80,6 +83,7 @@ class IndexController extends Controller {
       await ctx.render('index', { preloadedState });
     } catch (e) {
       ctx.app.emit('error', e);
+      await ctx.render('index');
     }
   }
 }

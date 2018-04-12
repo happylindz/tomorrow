@@ -77,6 +77,7 @@ class Home extends Component {
             return (<section key={item._id}>
               <h2><Link to={`/article/${item.url}`}>{ item.title }</Link></h2>
               <div>{ item.createdTime }</div>
+              <div>{ item.desc }</div>
             </section>);
           }) : '暂无博文'
         } {

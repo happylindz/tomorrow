@@ -31,6 +31,8 @@ export default class Index extends Component {
         <head>
           <title>{ title }</title>
           <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+          <link href="https://cdn.bootcss.com/github-markdown-css/2.8.0/github-markdown.min.css" rel="stylesheet" />
+          <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/github-gist.min.css" rel="stylesheet" />
           <link rel="stylesheet" href={helper.asset('index.css')} />
         </head>
         <body>

@@ -1,4 +1,4 @@
-import marked from 'marked';
+const parse = require('../util/parse.js');
 
 module.exports = (app) => {
   class Post extends app.Service {
@@ -6,7 +6,7 @@ module.exports = (app) => {
       page = parseInt(page, 10);
       size = parseInt(size, 10);
       const data = {
-        postsData: await this.ctx.model.Post.find({}, query).skip((page - 1) * size).limit(size),
+        postsData: await this.ctx.model.Post.find({}, query).sort({ createdTime: -1 }).skip((page - 1) * size).limit(size),
         total: await this.ctx.model.Post.count(),
         page,
       };
@@ -15,7 +15,7 @@ module.exports = (app) => {
 
     async queryAllData(query) {
       const data = {
-        postsData: await this.ctx.model.Post.find({}, query),
+        postsData: await this.ctx.model.Post.find({}, query).sort({ createdTime: -1 }),
         total: await this.ctx.model.Post.count(),
       };
       return data;
@@ -27,13 +27,19 @@ module.exports = (app) => {
     }
 
     async add(data) {
-      data.content = marked(data.content);
+      const { html, index, desc } = parse(data.content);
+      data.content = html;
+      data.index = index;
+      data.desc = desc;
       await this.ctx.model.Post.create(data);
     }
 
     async update(id, data) {
       if (data.content !== '') {
-        data.content = marked(data.content);
+        const { html, index, desc } = parse(data.content);
+        data.content = html;
+        data.index = index;
+        data.desc = desc;
       } else {
         delete data.content;
       }

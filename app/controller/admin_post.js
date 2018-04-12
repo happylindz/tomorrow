@@ -1,4 +1,5 @@
-// 'use strict';
+'use strict';
+
 const streamToPromise = require('stream-to-promise');
 const { Controller } = require('beidou-core');
 
