@@ -4,12 +4,12 @@ module.exports = () => {
       await next();
     } catch (err) {
       ctx.app.emit('error', err, ctx);
-      const status = err.status || 500;
-      const error = status === 500 && ctx.app.config.env === 'prod' ? 'Internal Server Error' : err.message;
+      const error = ctx.app.config.env === 'prod' ? 'Internal Server Error' : err.message;
       ctx.body = {
-        error,
+        code: 1,
+        message: error,
       };
-      ctx.status = status;
+      ctx.status = 200;
     }
   };
 };

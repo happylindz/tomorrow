@@ -5,7 +5,7 @@ const { Controller } = require('beidou-core');
 class ArticleController extends Controller {
   async index(ctx) {
     const { url } = ctx.query;
-    const data = await ctx.service.post.queryArticleByUrl(url);
+    const data = await ctx.service.post.queryArticle(url);
     ctx.body = {
       url,
       content: data[0].content,

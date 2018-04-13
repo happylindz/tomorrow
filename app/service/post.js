@@ -1,40 +1,35 @@
-const parse = require('../util/parse.js');
+
+const { parse } = require('../util/parse.js');
 
 module.exports = (app) => {
   class Post extends app.Service {
-    async queryPartData(query, page, size = 10) {
+    query(query, page, size = 10) {
       page = parseInt(page, 10);
       size = parseInt(size, 10);
-      const data = {
-        postsData: await this.ctx.model.Post.find({}, query).sort({ createdTime: -1 }).skip((page - 1) * size).limit(size),
-        total: await this.ctx.model.Post.count(),
-        page,
-      };
-      return data;
+      return this.ctx.model.Post.find({}, query).sort({ createdTime: -1 }).skip((page - 1) * size).limit(size);
     }
 
-    async queryAllData(query) {
-      const data = {
-        postsData: await this.ctx.model.Post.find({}, query).sort({ createdTime: -1 }),
-        total: await this.ctx.model.Post.count(),
-      };
-      return data;
+    queryAll(query) {
+      return this.ctx.model.Post.find({}, query).sort({ createdTime: -1 });
     }
 
-    async queryArticleByUrl(url) {
-      const html = await this.ctx.model.Post.find({ url }, 'content').limit(1);
-      return html;
+    count() {
+      return this.ctx.model.Post.count();
     }
 
-    async add(data) {
+    queryArticle(url) {
+      return this.ctx.model.Post.find({ url }, 'content').limit(1);
+    }
+
+    add(data) {
       const { html, index, desc } = parse(data.content);
       data.content = html;
       data.index = index;
       data.desc = desc;
-      await this.ctx.model.Post.create(data);
+      return this.ctx.model.Post.create(data);
     }
 
-    async update(id, data) {
+    update(_id, data) {
       if (data.content !== '') {
         const { html, index, desc } = parse(data.content);
         data.content = html;
@@ -43,11 +38,11 @@ module.exports = (app) => {
       } else {
         delete data.content;
       }
-      return this.ctx.model.Post.update({ _id: id }, data);
+      return this.ctx.model.Post.update({ _id }, data);
     }
 
-    async delete(id) {
-      return this.ctx.model.Post.remove({ _id: id });
+    delete(_id) {
+      return this.ctx.model.Post.remove({ _id });
     }
   }
   return Post;

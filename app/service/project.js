@@ -1,21 +1,42 @@
+const { parse2 } = require('../util/parse.js');
 
 
 module.exports = (app) => {
   class Project extends app.Service {
-    async query(query) {
-      return this.ctx.model.Project.find({}, query);
+    queryAll() {
+      return this.ctx.model.Project.find({}).sort({ _id: -1 });
     }
 
-    async add(data) {
+    count() {
+      return this.ctx.model.Project.count();
+    }
+
+    query(query, page, size = 10) {
+      page = parseInt(page, 10);
+      size = parseInt(size, 10);
+      return this.ctx.model.Project.find({}, query).skip((page - 1) * size).limit(size);
+    }
+
+    add(data) {
+      if (data.contentType === 'markdown') {
+        data.html = parse2(data.content);
+      } else if (data.contentType === 'normal') {
+        data.html = data.content;
+      }
       return this.ctx.model.Project.create(data);
     }
 
-    async update(id, data) {
-      return this.ctx.model.Project.update({ _id: id }, data);
+    update(_id, data) {
+      if (data.contentType === 'markdown') {
+        data.html = parse2(data.content);
+      } else if (data.contentType === 'normal') {
+        data.html = data.content;
+      }
+      return this.ctx.model.Project.update({ _id }, data);
     }
 
-    async delete(id) {
-      return this.ctx.model.Project.remove({ _id: id });
+    delete(_id) {
+      return this.ctx.model.Project.remove({ _id });
     }
   }
   return Project;

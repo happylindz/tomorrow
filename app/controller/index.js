@@ -13,7 +13,11 @@ class IndexController extends Controller {
       page,
     } = ctx.query;
     try {
-      const data = await ctx.service.post.queryPartData('title cover url createdTime desc index', parseInt(page, 10) || 1);
+      const data = {
+        postsData: await ctx.service.post.query('title cover url createdTime desc index', page || 1),
+        total: await ctx.service.post.count(),
+        page,
+      };
       const preloadedState = {
         posts: {
           state: constants.SUCCESS_STATE,
@@ -30,7 +34,7 @@ class IndexController extends Controller {
 
   async archives(ctx) {
     try {
-      const data = await ctx.service.post.queryAllData('title cover url createdTime');
+      const data = await ctx.service.post.queryAll('title cover url createdTime');
       const preloadedState = {
         posts: {
           state: constants.SUCCESS_STATE,
@@ -51,7 +55,7 @@ class IndexController extends Controller {
 
   async project(ctx) {
     try {
-      const data = await ctx.service.project.get();
+      const data = await ctx.service.project.queryAll();
       if (Array.isArray(data)) {
         const preloadedState = {
           project: {
@@ -70,7 +74,7 @@ class IndexController extends Controller {
   async article(ctx) {
     const { url } = ctx.params;
     try {
-      const data = await ctx.service.post.queryArticleByUrl(url);
+      const data = await ctx.service.post.queryArticle(url);
       const preloadedState = {
         article: {
           state: constants.SUCCESS_STATE,

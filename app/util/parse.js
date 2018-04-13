@@ -7,7 +7,12 @@ marked.setOptions({
   },
 });
 
-module.exports = function (content) {
+exports.parse2 = function (content) {
+  return marked(content);
+};
+
+
+exports.parse = function (content) {
   const data = {};
   const html = marked(content);
   const $ = cheerio.load(html);
