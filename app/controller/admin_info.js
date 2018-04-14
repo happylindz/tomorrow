@@ -23,7 +23,7 @@ class AdminInfoController extends Controller {
   async update(ctx) {
     const { id } = ctx.params;
     const data = ctx.request.body;
-    await ctx.service.project.update(id, data);
+    await ctx.service.info.update(id, data);
     ctx.body = {
       message: '成功修改个人信息',
       code: 0,
