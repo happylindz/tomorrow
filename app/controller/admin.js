@@ -6,13 +6,17 @@ const path = require('path');
 
 class AdminController extends Controller {
   async route(ctx) {
-    ctx.body = fs.createReadStream(path.join(__dirname, '../public/index.html'));
-    ctx.type = 'html';
+    // ctx.body = fs.createReadStream(path.join(__dirname, '../public/admin.html'));
+    // ctx.redirect('/admin', '/public/admin.html');
+    // ctx.type = 'html';
+    await ctx.render('admin');
   }
 
   async login(ctx) {
-    ctx.body = fs.createReadStream(path.join(__dirname, '../public/index.html'));
-    ctx.type = 'html';
+    // ctx.body = fs.createReadStream(path.join(__dirname, '../public/admin.html'));
+    // ctx.redirect('/admin/login', '/public/admin.html');
+    await ctx.render('admin');
+    // ctx.type = 'html';
     // ctx.redirect('/admin/login', '/admin.html', 302);
   }
 

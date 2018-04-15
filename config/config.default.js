@@ -29,6 +29,12 @@ exports.security = {
 
 exports.session = {
   key: 'EGG_SESS',
+  maxAge: 24 * 3600 * 1000,
   httpOnly: true,
   encrypt: true,
+};
+
+exports.view = {
+  defaultExtension: '.html',
+  root: '/app/view',
 };

@@ -10,6 +10,7 @@
     "react/prop-types": 0,
     "import/prefer-default-export": 0,
     "default-case": 0,
-    "max-len": 0
+    "max-len": 0,
+    "no-tabs": 0
   }
 }

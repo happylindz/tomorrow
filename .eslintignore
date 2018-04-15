@@ -6,3 +6,4 @@ mocks
 node_modules
 spm_modules
 test/fixtures
+app/public
