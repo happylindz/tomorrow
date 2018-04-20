@@ -1,0 +1,36 @@
+Arguments: 
+  /Users/Mac/.nvm/versions/node/v8.5.0/bin/node /Users/Mac/.nvm/versions/node/v8.5.0/bin/yarn init
+
+PATH: 
+  /usr/local/p/versions/python:/Users/Mac/.nvm/versions/node/v8.5.0/bin:/usr/local/opt/curl/bin:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin:/usr/local/mongodb/bin:/own/:/Applications/MAMP/Library/bin:/usr/local/mysql/bin/:/usr/local/nginx/bin:/usr/local/sbin:/usr/local/go/bin:/Users/Mac/bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/usr/local/aria2/bin:/Users/Mac/gocode/bin:/own/apache-maven-3.5.0/bin
+
+Yarn version: 
+  1.2.1
+
+Node version: 
+  8.5.0
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: canceled
+      at Interface.<anonymous> (/Users/Mac/.nvm/versions/node/v8.5.0/lib/node_modules/yarn/lib/cli.js:120971:13)
+      at emitNone (events.js:105:13)
+      at Interface.emit (events.js:207:7)
+      at Interface._ttyWrite (readline.js:770:16)
+      at ReadStream.onkeypress (readline.js:158:10)
+      at emitTwo (events.js:125:13)
+      at ReadStream.emit (events.js:213:7)
+      at emitKeys (internal/readline.js:420:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (readline.js:1007:36)
