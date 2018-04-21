@@ -3346,19 +3346,16 @@ var admin_default_0 = /*#__PURE__*/__webpack_require__.n(admin_0);
 
 moment_default.a.locale('zh-cn');
 
-var onAction = null;
-if (true) {
-  onAction = null;
-} else {
-  onAction = createLogger;
-}
-var app = dva_default()({
+var options = {
   history: createBrowserHistory_default()(),
-  onAction: onAction,
   onError: function onError(e) {
     message_default.a.error(e.message, 3);
   }
-});
+};
+if (false) {
+  options.onAction = createLogger;
+}
+var app = dva_default()(options);
 
 app.router(admin_router);
 

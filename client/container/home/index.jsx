@@ -26,15 +26,9 @@ class Home extends Component {
     document.title = 'Hello Posts';
     const {
       state,
-      type,
       location,
     } = this.props;
-    if (type !== constants.PART_POSTS) {
-      this.props.fetchPostsData({
-        type: constants.PART_POSTS,
-        page: query(location.search).page || 1,
-      });
-    } else if (state === constants.INITIAL_STATE || state === constants.FAILURE_STATE) {
+    if (state === constants.INITIAL_STATE || state === constants.FAILURE_STATE) {
       this.props.fetchPostsData({
         type: constants.PART_POSTS,
         page: query(location.search).page || 1,

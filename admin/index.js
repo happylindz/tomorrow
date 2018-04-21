@@ -11,19 +11,16 @@ import './index.scss';
 
 moment.locale('zh-cn');
 
-let onAction = null;
-if (process.env.NODE_ENV === 'production') {
-  onAction = null;
-} else {
-  onAction = createLogger;
-}
-const app = dva({
+const options = {
   history: createHistory(),
-  onAction,
   onError: (e) => {
     message.error(e.message, 3);
   }
-});
+};
+if (process.env.NODE_ENV !== 'production') {
+  options.onAction = createLogger;
+}
+const app = dva(options);
 
 app.router(router);
 

@@ -9,6 +9,9 @@ import {
   LOADING_ARTICLE,
   LOADING_ARTICLE_SUCCESS,
   LOADING_ARTICLE_FAILURE,
+  LOADING_ARCHIVES,
+  LOADING_ARCHIVES_SUCCESS,
+  LOADING_ARCHIVES_FAILURE,
 } from '../actionTypes';
 import {
   INITIAL_STATE,
@@ -59,6 +62,23 @@ export const article = (state = { state: INITIAL_STATE, article: { url: '', cont
     draft.article = action.payload;
     break;
   case LOADING_ARTICLE_FAILURE:
+    draft.state = FAILURE_STATE;
+    break;
+  }
+});
+
+export const archives = (state = { state: INITIAL_STATE, postsData: [] }, action) => produce(state, (draft) => {
+  switch (action.type) {
+  case LOADING_ARCHIVES:
+    draft.state = LOADING_STATE;
+    break;
+  case LOADING_ARCHIVES_SUCCESS:
+    draft.state = SUCCESS_STATE;
+    Object.keys(action.payload).forEach((key) => {
+      draft[key] = action.payload[key];
+    });
+    break;
+  case LOADING_ARCHIVES_FAILURE:
     draft.state = FAILURE_STATE;
     break;
   }

@@ -8,3 +8,4 @@ run
 .vscode/
 jsconfig.json
 webpack_cache/
+secret/

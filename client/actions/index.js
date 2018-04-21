@@ -72,4 +72,28 @@ export default {
       }
     };
   },
+  fetchArchivesData: (options) => {
+    return async (dispatch) => {
+      dispatch({
+        type: actionTypes.LOADING_ARCHIVES,
+      });
+      try {
+        const res = await axios.get('/api/post', {
+          params: options,
+        });
+        if (res.status === 200) {
+          dispatch({
+            type: actionTypes.LOADING_ARCHIVES_SUCCESS,
+            payload: res.data,
+          });
+        } else {
+          throw new Error('获取数据失败');
+        }
+      } catch (e) {
+        dispatch({
+          type: actionTypes.LOADING_ARCHIVES_FAILURE,
+        });
+      }
+    };
+  },
 };

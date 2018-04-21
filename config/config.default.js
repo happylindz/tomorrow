@@ -2,8 +2,8 @@
 const path = require('path');
 
 exports.keys = 'private key';
-// exports.middleware = ['errorHandler', 'login'];
-exports.middleware = ['errorHandler'];
+exports.middleware = ['errorHandler', 'login'];
+// exports.middleware = ['errorHandler'];
 exports.errorHandler = {
   match: '/api',
 };

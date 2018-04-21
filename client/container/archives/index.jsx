@@ -7,37 +7,31 @@ import { query } from '../../util';
 
 const mapStateToProps = (state) => {
   return {
-    ...state.posts,
+    ...state.archives,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchPostsData: (options) => {
-      dispatch(actions.fetchPostsData(options));
+    fetchArchivesData: (options) => {
+      dispatch(actions.fetchArchivesData(options));
     },
   };
 };
 
 class Archives extends Component {
   componentDidMount() {
-    document.title = 'Hello Posts';
+    document.title = 'Hello Archives';
     const {
       state,
-      type,
       location,
     } = this.props;
-    if (type !== constants.ALL_POSTS) {
-      this.props.fetchPostsData({
-        type: constants.ALL_POSTS,
-        page: query(location.search).page,
-      });
-    } else if (state === constants.INITIAL_STATE || state === constants.FAILURE_STATE) {
-      this.props.fetchPostsData({
+    if (state === constants.INITIAL_STATE || state === constants.FAILURE_STATE) {
+      this.props.fetchArchivesData({
         type: constants.ALL_POSTS,
         page: query(location.search).page || 1,
       });
     } else if (state === constants.SUCCESS_STATE) {
-      console.log('isomorphism fetch posts data');
+      console.log('isomorphism fetch archives data');
     }
   }
 
@@ -54,7 +48,6 @@ class Archives extends Component {
         postsData.map((item) => {
           return (<section key={item._id}>
             <h2><Link to={`/article/${item.url}`}>{item.title}</Link></h2>
-            <div>{item.createdTime}</div>
           </section>);
         })
       }</section>);

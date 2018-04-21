@@ -7,7 +7,6 @@ export default function asyncComponent(importComponent) {
 
       this.state = {
         component: null,
-        visible: false,
       };
     }
 
@@ -16,7 +15,6 @@ export default function asyncComponent(importComponent) {
 
       this.setState({
         component: component,
-        visible: true,
       });
     }
 

@@ -1,13 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, NavLink, Switch } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-// import {
-//   Home,
-//   Archives,
-//   Project,
-//   About,
-//   Article
-// } from '../container/index';
 import asyncComponent from './async';
 import './index.scss';
 
@@ -17,6 +10,10 @@ const Archives = asyncComponent(() => import('../container/archives'));
 const Project = asyncComponent(() => import('../container/project'));
 const About = asyncComponent(() => import('../container/about'));
 const Article = asyncComponent(() => import('../container/article'));
+const activeStyle = {
+  fontWeight: 'bold',
+  color: 'red'
+};
 
 export default () => (
   <Router>
@@ -25,22 +22,21 @@ export default () => (
         <div>
           <ul>
             <li>
-              <Link to="/">首页</Link>
+              <NavLink exact to="/" activeStyle={activeStyle}>首页</NavLink>
             </li>
             <li>
-              <Link to="/project">项目</Link>
+              <NavLink to="/project" activeStyle={activeStyle}>项目</NavLink>
             </li>
             <li>
-              <Link to="/about">关于</Link>
+              <NavLink to="/about" activeStyle={activeStyle}>关于</NavLink>
             </li>
             <li>
-              <Link to="/archives">归档</Link>
+              <NavLink to="/archives" activeStyle={activeStyle}>归档</NavLink>
             </li>
           </ul>
           <hr />
           <TransitionGroup className="content">
-            <CSSTransition key={location.key} classNames="fade" timeout={3000} transitionAppear={true} transitionEnter={true}
-              transitionLeave={true}>
+            <CSSTransition key={location.key} classNames="fade" timeout={800}>
               <Switch location={location}>
                 <Route exact path="/" component={Home} />
                 <Route path="/project" component={Project} />
