@@ -1,6 +1,9 @@
 
 const { Controller } = require('egg');
 const constants = require('../../client/constants');
+// const { renderToString } = require('react-dom/server');
+// const createApp = require('../../client/index.jsx');
+// import createApp from '../../client/index.jsx';
 
 class IndexController extends Controller {
   async route(ctx) {
@@ -27,7 +30,10 @@ class IndexController extends Controller {
     //   await ctx.render('index', { preloadedState });
     // } catch (e) {
     //   ctx.app.emit('error', e);
-    await ctx.render('index');
+    // await ctx.render('index');
+    // const html = renderToString(createApp());
+    const tpl = await ctx.renderView('index');
+    ctx.body = tpl;
     // }
   }
 

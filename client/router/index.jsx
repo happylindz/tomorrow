@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, NavLink, Switch } from 'react-router-dom';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
+// import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import asyncComponent from './async';
 import './index.scss';
 
@@ -35,17 +35,17 @@ export default () => (
             </li>
           </ul>
           <hr />
-          <TransitionGroup className="content">
-            <CSSTransition key={location.key} classNames="fade" timeout={800}>
-              <Switch location={location}>
-                <Route exact path="/" component={Home} />
-                <Route path="/project" component={Project} />
-                <Route path="/about" component={About} />
-                <Route path="/archives" component={Archives} />
-                <Route path="/article/:url" component={Article} />
-              </Switch>
-            </CSSTransition>
-          </TransitionGroup>
+          {/* <TransitionGroup className="content">
+            <CSSTransition key={location.key} classNames="fade" timeout={250}> */}
+          <Switch location={location}>
+            <Route exact path="/" component={Home} />
+            <Route path="/project" component={Project} />
+            <Route path="/about" component={About} />
+            <Route path="/archives" component={Archives} />
+            <Route path="/article/:url" component={Article} />
+          </Switch>
+          {/* </CSSTransition>
+          </TransitionGroup> */}
         </div>
       )}
     />

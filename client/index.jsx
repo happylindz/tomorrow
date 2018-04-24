@@ -15,3 +15,6 @@ if (module.hot && process.env.NODE_ENV === 'development') {
     ReactDOM.render(<Provider store={store}><Router /></Provider>, document.getElementById('root'));
   });
 }
+export default () => {
+  return <Provider store={store}><Router /></Provider>;
+};
