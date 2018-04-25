@@ -78,9 +78,7 @@ export default {
         type: actionTypes.LOADING_ARCHIVES,
       });
       try {
-        const res = await axios.get('/api/post', {
-          params: options,
-        });
+        const res = await axios.get('/api/archives');
         if (res.status === 200) {
           dispatch({
             type: actionTypes.LOADING_ARCHIVES_SUCCESS,

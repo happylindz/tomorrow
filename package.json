@@ -1,10 +1,11 @@
 {
-  "name": "tomorrow2",
+  "name": "tomorrow",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "server": "egg-bin dev",
+    "server": "cross-env EGG_SERVER_ENV=prod node index.js",
+    "server:dev": "egg-bin dev",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --inline --progress --config ./build/webpack.config.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config ./build/webpack.config.prod.js",
     "dll": "cross-env NODE_ENV=production webpack --config ./build/dll.config.js"

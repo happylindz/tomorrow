@@ -4,6 +4,7 @@ module.exports = (app) => {
   app.resources('post', '/api/post', 'post');
   app.resources('project', '/api/project', 'project');
   app.resources('article', '/api/article', 'article');
+  app.resources('archives', '/api/archives', 'archives');
 
   router.get('', controller.index.home);
   router.get('/project', controller.index.project);

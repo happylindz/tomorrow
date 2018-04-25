@@ -12,19 +12,28 @@ const mapStateToProps = (state, ownProps) => {
   const tagsRes = {
     'all': postsData.length,
   };
-  let postsRes = [];
+  let posts = {};
   let topic = '';
   if (search !== '') {
     topic = decodeURI(query(search).topic) || '';
-  } else {
-    postsRes = postsData;
   }
   postsData.forEach((post) => {
     try {
-      const tags = post.tags.split(',');
+      const tags = post.tags;
+      if (topic === '') {
+        const year = post.year;
+        if (!posts[year]) {
+          posts[year] = [];
+        }
+        posts[year].push(post);
+      }
       for (let tag of tags) {
         if (tag === topic) {
-          postsRes.push(post);
+          const year = post.year;
+          if (!posts[year]) {
+            posts[year] = [];
+          }
+          posts[year].push(post);
         }
         if (tagsRes[tag]) {
           tagsRes[tag] += 1;
@@ -40,7 +49,7 @@ const mapStateToProps = (state, ownProps) => {
     ...state.archives,
     tags: tagsRes,
     topic: topic,
-    postsData: postsRes,
+    posts,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -56,13 +65,9 @@ class Archives extends Component {
     document.title = 'Hello Archives';
     const {
       state,
-      location,
     } = this.props;
     if (state === constants.INITIAL_STATE || state === constants.FAILURE_STATE) {
-      this.props.fetchArchivesData({
-        type: constants.ALL_POSTS,
-        page: query(location.search).page || 1,
-      });
+      this.props.fetchArchivesData();
     } else if (state === constants.SUCCESS_STATE) {
       console.log('isomorphism fetch archives data');
     }
@@ -70,7 +75,7 @@ class Archives extends Component {
 
 
   render() {
-    const { postsData, state, tags, topic } = this.props;
+    const { posts, state, tags, topic } = this.props;
     switch (state) {
     case constants.INITIAL_STATE:
       return <section>initial state</section>;
@@ -79,14 +84,23 @@ class Archives extends Component {
     case constants.SUCCESS_STATE:
       return (<section>{
         <Tags tags={tags} topic={topic} />
-      }{
-        <hr />
-      }{
-        postsData.map((item) => {
-          return (<section key={item._id}>
-            <h2><Link to={`/article/${item.url}`}>{item.title}</Link></h2>
-          </section>);
+      }
+      <hr />
+      {
+        Object.keys(posts).map(year => { return parseInt(year, 10) }).sort((a, b) => {
+          return b - a;
+        }).map((year) => {
+          return <div key={year}>
+            {year}
+            {posts[year].map((post) => {
+              return (<section key={post._id}>
+                <h2>{post.time}<Link to={`/article/${post.url}`}>{post.title}</Link></h2>
+              </section>);
+            })}
+            <hr />
+          </div>;
         })
+
       }</section>);
     default:
       return <section>something error on page, please fresh!</section>;
