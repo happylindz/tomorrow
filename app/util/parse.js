@@ -1,6 +1,14 @@
 const marked = require('marked');
 const cheerio = require('cheerio');
 
+function htmlDecode(str) {
+  str = unescape(str.replace(/\\u/g, '%u'));
+  str = str.replace(/&#(x)?(\w+);/g, function($, $1, $2) {
+    return String.fromCharCode(parseInt($2, $1 ? 16 : 10));
+  });
+
+  return str;
+}
 marked.setOptions({
   highlight(code) {
     return require('highlight.js').highlightAuto(code).value;
@@ -27,7 +35,7 @@ exports.parse = function (content) {
       anchor,
     });
   });
-  data.html = $.root().html();
+  data.html = htmlDecode($('body').html());
   const desc = $.root().text();
   data.index = index;
   data.desc = `${desc.replace(/\r|\n|\s/g, ' ').slice(0, 120)}...`;

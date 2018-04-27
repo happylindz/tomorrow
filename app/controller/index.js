@@ -1,53 +1,75 @@
 
 const { Controller } = require('egg');
 const constants = require('../../client/constants');
-// const { renderToString } = require('react-dom/server');
-// const createApp = require('../../client/index.jsx');
-// import createApp from '../../client/index.jsx';
+const createApp = require('../server/index.js').default;
+const moment = require('moment');
 
 class IndexController extends Controller {
-  async route(ctx) {
-    await ctx.render('index');
+  async renderView(ctx, data) {
+    const [html, state] = await createApp(data, ctx.req.url);
+    let tpl = await ctx.renderView('index');
+    tpl = tpl.replace('<div id=root></div>', `<div id=root>${html}</div>`);
+    tpl = tpl.replace('</head>', `<script>window.__INITIAL_STATE__=${JSON.stringify(state)}</script></head>`);
+    ctx.body = tpl;
   }
 
   async home(ctx) {
-    // const {
-    //   page,
-    // } = ctx.query;
-    // try {
-    //   const data = {
-    //     postsData: await ctx.service.post.query('title cover url createdTime desc index', page || 1),
-    //     total: await ctx.service.post.count(),
-    //     page,
-    //   };
-    //   const preloadedState = {
-    //     posts: {
-    //       state: constants.SUCCESS_STATE,
-    //       type: constants.PART_POSTS,
-    //       ...data,
-    //     },
-    //   };
-    //   await ctx.render('index', { preloadedState });
-    // } catch (e) {
-    //   ctx.app.emit('error', e);
-    // await ctx.render('index');
-    // const html = renderToString(createApp());
-    const tpl = await ctx.renderView('index');
-    ctx.body = tpl;
-    // }
+    const {
+      page,
+    } = ctx.query;
+    try {
+      const postsData = await ctx.service.post.query('title cover tags url createdTime desc', page || 1);
+      for (let i = 0; i < postsData.length; i++) {
+        const post = postsData[i];
+        postsData[i] = {
+          _id: post._id,
+          title: post.title,
+          cover: post.cover,
+          tags: post.tags.split(','),
+          url: post.url,
+          createdTime: moment(post.createdTime).format('YYYY-MM-DD'),
+          desc: post.desc,
+        };
+      }
+      const data = {
+        postsData,
+        total: await ctx.service.post.count(),
+        page,
+      };
+      const preloadedState = {
+        posts: {
+          state: constants.SUCCESS_STATE,
+          ...data,
+        },
+      };
+      await this.renderView(ctx, preloadedState);
+    } catch (e) {
+      ctx.app.emit('error', e);
+      await ctx.render('index');
+    }
   }
 
   async archives(ctx) {
     try {
-      const data = await ctx.service.post.queryAll('title cover url createdTime');
+      const postsData = await ctx.service.post.queryAll('title url tags createdTime');
+      for (let i = 0; i < postsData.length; i++) {
+        const post = postsData[i];
+        postsData[i] = {
+          _id: post._id,
+          title: post.title,
+          tags: post.tags.split(','),
+          url: post.url,
+          year: moment(post.createdTime).format('YYYY'),
+          time: moment(post.createdTime).format('MM-DD'),
+        };
+      }
       const preloadedState = {
-        posts: {
+        archives: {
           state: constants.SUCCESS_STATE,
-          type: constants.ALL_POSTS,
-          ...data,
+          postsData,
         },
       };
-      await ctx.render('index', { preloadedState });
+      await this.renderView(ctx, preloadedState);
     } catch (e) {
       ctx.app.emit('error', e);
       await ctx.render('index');
@@ -68,7 +90,7 @@ class IndexController extends Controller {
             state: constants.SUCCESS_STATE,
           },
         };
-        await ctx.render('index', { preloadedState });
+        await this.renderView(ctx, preloadedState);
       }
     } catch (e) {
       ctx.app.emit('error', e);
@@ -86,10 +108,11 @@ class IndexController extends Controller {
           article: {
             url,
             content: data[0].content,
+            index: data[0].index,
           },
         },
       };
-      await ctx.render('index', { preloadedState });
+      await this.renderView(ctx, preloadedState);
     } catch (e) {
       ctx.app.emit('error', e);
       await ctx.render('index');

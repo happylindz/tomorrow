@@ -8,7 +8,8 @@
     "server:dev": "egg-bin dev",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --inline --progress --config ./build/webpack.config.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config ./build/webpack.config.prod.js",
-    "dll": "cross-env NODE_ENV=production webpack --config ./build/dll.config.js"
+    "dll": "cross-env NODE_ENV=production webpack --config ./build/dll.config.js",
+    "pre": "cross-env webpack --config ./build/webpack.config.server.js"
   },
   "dependencies": {
     "antd": "^3.4.1",
@@ -67,6 +68,7 @@
     "html-webpack-harddisk-plugin": "^0.2.0",
     "html-webpack-include-assets-plugin": "^1.0.4",
     "html-webpack-plugin": "^3.2.0",
+    "ignore-loader": "^0.1.2",
     "immer": "^1.2.1",
     "marked": "^0.3.19",
     "node-sass": "^4.8.3",
@@ -79,7 +81,8 @@
     "uglifyjs-webpack-plugin": "^1.2.4",
     "url-loader": "^1.0.1",
     "webpack-bundle-analyzer": "^2.11.1",
-    "webpack-merge": "^4.1.2"
+    "webpack-merge": "^4.1.2",
+    "webpack-node-externals": "^1.7.2"
   },
   "engines": {
     "node": ">= 8.0.0"

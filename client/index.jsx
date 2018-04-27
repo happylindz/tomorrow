@@ -6,8 +6,7 @@ import 'babel-polyfill';
 import Router from './router';
 import configureStore from './store';
 import './index.scss';
-
-const store = configureStore();
+const store = configureStore(window.__INITIAL_STATE__);
 ReactDOM.render(<Provider store={store}><Router /></Provider>, document.getElementById('root'));
 
 if (module.hot && process.env.NODE_ENV === 'development') {
@@ -15,6 +14,3 @@ if (module.hot && process.env.NODE_ENV === 'development') {
     ReactDOM.render(<Provider store={store}><Router /></Provider>, document.getElementById('root'));
   });
 }
-export default () => {
-  return <Provider store={store}><Router /></Provider>;
-};

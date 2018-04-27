@@ -1,10 +1,17 @@
 import React from 'react';
-import { BrowserRouter, Route, NavLink, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, NavLink, Switch, StaticRouter } from 'react-router-dom';
 // import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import asyncComponent from './async';
+// import {
+//   Home,
+//   Archives,
+//   Project,
+//   About,
+//   Article,
+// } from '../container';
 import './index.scss';
 
-const Router = BrowserRouter;
+const Router = process.env.__CLIENT__ === 'client' ? BrowserRouter : StaticRouter;
 const Home = asyncComponent(() => import('../container/home'));
 const Archives = asyncComponent(() => import('../container/archives'));
 const Project = asyncComponent(() => import('../container/project'));
@@ -15,8 +22,26 @@ const activeStyle = {
   color: 'red'
 };
 
-export default () => (
-  <Router>
+export const preloadComponent = (url) => {
+  if (process.env.__CLIENT__ !== 'client') {
+    if (url === '/') {
+      return Home.load();
+    } else if (url.startsWith('/project')) {
+      return Project.load();
+    } else if (url.startsWith('/about')) {
+      return About.load();
+    } else if (url.startsWith('/archives')) {
+      return Archives.load();
+    } else if (url.startsWith('/article')) {
+      return Article.load();
+    } else {
+      return Promise.resolve();
+    }
+  }
+};
+
+export default (props) => (
+  <Router {...props}>
     <Route
       render={({ location }) => (
         <div>

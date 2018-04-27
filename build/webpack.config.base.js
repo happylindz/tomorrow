@@ -51,6 +51,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        __CLIENT__: JSON.stringify('client'),
       },
     }),
     new webpack.NamedChunksPlugin(),

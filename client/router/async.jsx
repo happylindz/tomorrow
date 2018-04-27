@@ -1,21 +1,28 @@
 import React, { Component } from 'react';
 
 export default function asyncComponent(importComponent) {
+  let LoadedComponent = null;
   class AsyncComponent extends Component {
-    constructor(props) {
-      super(props);
+    static load() {
+      return importComponent().then((ResolvedComponent) => {
+        LoadedComponent = ResolvedComponent.default || ResolvedComponent;
+      });
+    }
 
+    constructor(...args) {
+      super(...args);
       this.state = {
-        component: null,
+        component: LoadedComponent,
       };
     }
 
     async componentDidMount() {
-      const { default: component } = await importComponent();
-
-      this.setState({
-        component: component,
-      });
+      if (this.state.component === null) {
+        const { default: component } = await importComponent();
+        this.setState({
+          component: component,
+        });
+      }
     }
 
     render() {

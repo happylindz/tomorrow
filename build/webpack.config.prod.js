@@ -14,7 +14,7 @@ module.exports = webpackMerge(baseConfig, {
   output: {
     path: constants.distPath,
     filename: 'js/[name].[chunkhash:8].js',
-    publicPath: 'http://p7ilythwx.bkt.clouddn.com/',
+    publicPath: '/public/',
     chunkFilename: 'js/[name].[chunkhash:8].js',
   },
   module: {
@@ -74,22 +74,22 @@ module.exports = webpackMerge(baseConfig, {
       files: 'admin.html',
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new UglifyJSPlugin({
-      uglifyOptions: {
-        compress: {
-          warnings: false,
-          drop_console: true,
-          collapse_vars: true,
-          reduce_vars: true,
-        },
-        output: {
-          beautify: false,
-          comments: false,
-        },
-      },
-      parallel: true,
-      cache: true,
-    }),
+    // new UglifyJSPlugin({
+    //   uglifyOptions: {
+    //     compress: {
+    //       warnings: false,
+    //       drop_console: true,
+    //       collapse_vars: true,
+    //       reduce_vars: true,
+    //     },
+    //     output: {
+    //       beautify: false,
+    //       comments: false,
+    //     },
+    //   },
+    //   parallel: true,
+    //   cache: true,
+    // }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'main-vendor',
       minChunks: ({ resource }) => (
