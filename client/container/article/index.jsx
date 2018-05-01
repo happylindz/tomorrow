@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {
   fetchArticleData,
   addComment,
+  fetchCommentData,
 } from '../../actions';
 import * as constants from '../../constants';
 import scroll from '../../util/scroll';
@@ -15,18 +16,22 @@ import MessageBoard from '@/components/MessageBoard';
 const mapStateToProps = (state) => {
   return {
     ...state.article,
+    ...state.comment,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     fetchArticleData: (options) => {
       dispatch(fetchArticleData(options));
     },
     addComment: (options) => {
-      console.log(options);
       dispatch(addComment(options));
     },
+    fetchCommentData: (options) => {
+      dispatch(fetchCommentData(options));
+
+    }
   };
 };
 
@@ -36,40 +41,49 @@ class Article extends Component {
     const {
       state,
       article: {
-        url,
+        url: prevUrl,
       },
+    } = this.props;
+    this.fetchArticleData(this.props, prevUrl, state);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {
+      match: {
+        params: {
+          url: prevUrl = '',
+        },
+      },
+    } = this.props;
+    this.fetchArticleData(nextProps, prevUrl);
+  }
+
+  fetchCommentData(options) {
+    this.props.fetchCommentData(options);
+  }
+
+  fetchArticleData(props, prevUrl, state) {
+    const {
       match: {
         params: {
           url: nextUrl = '',
         },
       },
-    } = this.props;
-    if (state === constants.INITIAL_STATE || url !== nextUrl) {
-      this.props.fetchArticleData({
+      article: {
+        _id: postId,
+      },
+      commentState
+    } = props;
+    if (state === constants.INITIAL_STATE || prevUrl !== nextUrl) {
+      props.fetchArticleData({
         url: nextUrl,
       });
     } else if (state === constants.SUCCESS_STATE) {
       console.log('isomorphism fetch article data');
     }
-  }
-  componentWillReceiveProps(nextProps) {
-    const {
-      match: {
-        params: {
-          url: nextUrl = '',
-        },
-      },
-    } = nextProps;
-    const {
-      match: {
-        params: {
-          url = '',
-        },
-      },
-    } = this.props;
-    if (url !== nextUrl) {
-      this.props.fetchArticleData({
-        url: nextUrl,
+    if (postId && commentState === constants.INITIAL_STATE) {
+      props.fetchCommentData({
+        postId,
       });
     }
   }
@@ -84,6 +98,10 @@ class Article extends Component {
 
     }
   }
+  addComment = (options) => {
+    options.postId = this.props.article._id;
+    this.props.addComment(options);
+  }
 
   render() {
     const {
@@ -91,7 +109,8 @@ class Article extends Component {
         index = [],
         content,
       }, state,
-      addComment,
+      commentState,
+      commentsData,
     } = this.props;
     switch (state) {
     case constants.INITIAL_STATE:
@@ -104,7 +123,7 @@ class Article extends Component {
         <hr />
         <div className="article-wrapper markdown-body" dangerouslySetInnerHTML={{ __html: content }} />
         <hr />
-        <MessageBoard submit={addComment} />
+        <MessageBoard submit={this.addComment} state={commentState} comments={commentsData} />
       </div>;
     default:
       return <section>something error on page, please fresh!</section>;

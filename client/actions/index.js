@@ -103,7 +103,9 @@ export const fetchCommentData = (options) => {
       type: actionTypes.LOADING_COMMENT,
     });
     try {
-      const res = await axios.get('/api/comment');
+      const res = await axios.get('/api/comment', {
+        params: options,
+      });
       if (res.status === 200) {
         dispatch({
           type: actionTypes.LOADING_COMMENT_SUCCESS,
@@ -128,7 +130,9 @@ export const addComment =  (options) => {
     try {
       const res = await axios.post('/api/comment', options);
       if (res.status === 200 && res.data.code === 0) {
-        fetchCommentData();
+        dispatch(fetchCommentData({
+          postId: options.postId,
+        }));
       }
       return res.data;
     } catch (e) {

@@ -9,6 +9,7 @@ class ArticleController extends Controller {
       url,
       content: data[0].content,
       index: data[0].index,
+      _id: data[0]._id,
     };
     ctx.type = 'json';
     ctx.status = 200;

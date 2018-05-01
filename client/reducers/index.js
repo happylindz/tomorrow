@@ -12,6 +12,9 @@ import {
   LOADING_ARCHIVES,
   LOADING_ARCHIVES_SUCCESS,
   LOADING_ARCHIVES_FAILURE,
+  LOADING_COMMENT,
+  LOADING_COMMENT_SUCCESS,
+  LOADING_COMMENT_FAILURE,
 } from '../actionTypes';
 import {
   INITIAL_STATE,
@@ -84,19 +87,19 @@ export const archives = (state = { state: INITIAL_STATE, postsData: [] }, action
   }
 });
 
-export const comment = (state = { state: INITIAL_STATE, commentData: [] }, action) => produce(state, (draft) => {
+export const comment = (state = { commentState: INITIAL_STATE, commentsData: [] }, action) => produce(state, (draft) => {
   switch (action.type) {
-  case LOADING_ARCHIVES:
-    draft.state = LOADING_STATE;
+  case LOADING_COMMENT:
+    draft.commentState = LOADING_STATE;
     break;
-  case LOADING_ARCHIVES_SUCCESS:
-    draft.state = SUCCESS_STATE;
+  case LOADING_COMMENT_SUCCESS:
+    draft.commentState = SUCCESS_STATE;
     Object.keys(action.payload).forEach((key) => {
       draft[key] = action.payload[key];
     });
     break;
-  case LOADING_ARCHIVES_FAILURE:
-    draft.state = FAILURE_STATE;
+  case LOADING_COMMENT_FAILURE:
+    draft.commentState = FAILURE_STATE;
     break;
   }
 });
