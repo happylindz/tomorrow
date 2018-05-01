@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Pagination from 'rc-pagination';
 // import 'rc-pagination/assets/index.css';
-import actions from '../../actions';
+import {
+  fetchPostsData,
+} from '../../actions';
 import * as constants from '../../constants';
 import { query } from '../../util';
 
@@ -16,7 +18,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchPostsData: (options) => {
-      dispatch(actions.fetchPostsData(options));
+      dispatch(fetchPostsData(options));
     },
   };
 };

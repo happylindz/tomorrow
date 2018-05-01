@@ -83,3 +83,20 @@ export const archives = (state = { state: INITIAL_STATE, postsData: [] }, action
     break;
   }
 });
+
+export const comment = (state = { state: INITIAL_STATE, commentData: [] }, action) => produce(state, (draft) => {
+  switch (action.type) {
+  case LOADING_ARCHIVES:
+    draft.state = LOADING_STATE;
+    break;
+  case LOADING_ARCHIVES_SUCCESS:
+    draft.state = SUCCESS_STATE;
+    Object.keys(action.payload).forEach((key) => {
+      draft[key] = action.payload[key];
+    });
+    break;
+  case LOADING_ARCHIVES_FAILURE:
+    draft.state = FAILURE_STATE;
+    break;
+  }
+});

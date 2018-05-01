@@ -1,12 +1,16 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import actions from '../../actions';
+import {
+  fetchArticleData,
+  addComment,
+} from '../../actions';
 import * as constants from '../../constants';
 import scroll from '../../util/scroll';
 import './github-gist.min.css';
 import './github-markdown.min.css';
 import './index.scss';
+import MessageBoard from '@/components/MessageBoard';
 
 const mapStateToProps = (state) => {
   return {
@@ -17,7 +21,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchArticleData: (options) => {
-      dispatch(actions.fetchArticleData(options));
+      dispatch(fetchArticleData(options));
+    },
+    addComment: (options) => {
+      console.log(options);
+      dispatch(addComment(options));
     },
   };
 };
@@ -83,6 +91,7 @@ class Article extends Component {
         index = [],
         content,
       }, state,
+      addComment,
     } = this.props;
     switch (state) {
     case constants.INITIAL_STATE:
@@ -94,6 +103,8 @@ class Article extends Component {
         {index && index.length !== 0 ? <ul onClickCapture={this.scrollToContent}>{index.map(({ anchor, content }) => (<li key={anchor}><a href={`#${anchor}`}>{content}</a></li>))}</ul> : null}
         <hr />
         <div className="article-wrapper markdown-body" dangerouslySetInnerHTML={{ __html: content }} />
+        <hr />
+        <MessageBoard submit={addComment} />
       </div>;
     default:
       return <section>something error on page, please fresh!</section>;

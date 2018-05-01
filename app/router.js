@@ -5,6 +5,7 @@ module.exports = (app) => {
   app.resources('project', '/api/project', 'project');
   app.resources('article', '/api/article', 'article');
   app.resources('archives', '/api/archives', 'archives');
+  app.resources('comment', '/api/comment', 'comment');
 
   router.get('', controller.index.home);
   router.get('/project', controller.index.project);

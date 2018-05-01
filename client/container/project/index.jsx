@@ -1,7 +1,9 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import actions from '../../actions';
+import {
+  fetchProjectData,
+} from '../../actions';
 import * as constants from '../../constants';
 
 const mapStateToProps = (state) => {
@@ -12,7 +14,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchProjectData: () => {
-      dispatch(actions.fetchProjectData());
+      dispatch(fetchProjectData());
     },
   };
 };

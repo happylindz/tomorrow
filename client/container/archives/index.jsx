@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import actions from '../../actions';
+import {
+  fetchArchivesData,
+} from '../../actions';
 import * as constants from '../../constants';
 import { query } from '../../util/index.js';
 import Tags from './tags';
@@ -55,7 +57,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchArchivesData: (options) => {
-      dispatch(actions.fetchArchivesData(options));
+      dispatch(fetchArchivesData(options));
     },
   };
 };
