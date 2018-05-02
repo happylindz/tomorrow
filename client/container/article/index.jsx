@@ -100,6 +100,7 @@ class Article extends Component {
   }
   addComment = (options) => {
     options.postId = this.props.article._id;
+    options.createdTime = Date.now();
     this.props.addComment(options);
   }
 

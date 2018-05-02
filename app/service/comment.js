@@ -10,7 +10,7 @@ module.exports = (app) => {
     }
 
     queryByArticle(query, postId) {
-      return this.ctx.model.Comment.find({ postId }, query).sort({ createdTime: -1 });
+      return this.ctx.model.Comment.find({ postId }, query).sort({ createdTime: 1 });
     }
 
     add(data) {

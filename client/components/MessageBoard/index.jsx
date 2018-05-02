@@ -1,46 +1,30 @@
 import React, { PureComponent } from 'react';
-import Comment from '@/components/Comment';
+import Comment from '@/components/Comments';
 import constants from '../../constants';
+import Message from '@/components/Message';
 
 export default class extends PureComponent {
   state = {
-    name: '',
-    email: '',
-    content: '',
     record: null,
   }
-  handleName = (e) => {
+
+  replyMessage = (record) => {
     this.setState({
-      name: e.target.value,
+      record,
     });
   }
 
-  handleEmail = (e) => {
+  cancelReply = () => {
     this.setState({
-      email: e.target.value,
+      record: null,
     });
   }
 
-  handleContent = (e) => {
-    this.setState({
-      content: e.target.value,
-    });
-  }
-
-  handleSubmit = () => {
-    this.props.submit({
-      name: this.state.name,
-      email: this.state.email,
-      content: this.state.content,
-    });
-    this.reset();
-  }
-  reset = () => {
-    this.setState({
-      name: '',
-      email: '',
-      content: '',
-    });
+  submitMessage = (options) => {
+    if (this.state.record) {
+      options['ref'] = this.state.record._id;
+    }
+    this.props.submit(options);
   }
 
   render() {
@@ -48,21 +32,13 @@ export default class extends PureComponent {
       state,
       comments,
     } = this.props;
+    const {
+      record,
+    } = this.state;
+
     return (<section className="message-board-wrap">
-      {state === constants.SUCCESS_STATE && <Comment comments={comments} />}
-      <div className="message-submit-wrap">
-        <div>
-          <label htmlFor="messageName">昵称<input name="messageName" onChange={this.handleName} /></label>
-        </div>
-        <div>
-          <label htmlFor="messageEmail">邮箱 <input name="messageEmail" onChange={this.handleEmail} /></label>
-        </div>
-        <div>
-          <label htmlFor="content">留言</label>
-          <textarea name="content" onChange={this.handleContent} cols="30" rows="10"></textarea>
-        </div>
-        <button onClick={this.handleSubmit}> 提交</button>
-      </div>
+      {state === constants.SUCCESS_STATE && <Comment replyMessage={this.replyMessage} comments={comments} />}
+      <Message record={record} cancelReply={this.cancelReply} submit={this.submitMessage} />
     </section>);
   }
 }

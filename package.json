@@ -20,6 +20,7 @@
     "egg": "^2.6.1",
     "egg-bin": "^4.6.3",
     "happypack": "^4.0.1",
+    "nodemailer": "^4.6.4",
     "prop-types": "^15.6.1",
     "react": "^16.3.1",
     "react-addons-css-transition-group": "^15.6.2",

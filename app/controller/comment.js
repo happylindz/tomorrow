@@ -4,15 +4,27 @@ const moment = require('moment');
 
 class CommentController extends Controller {
   async index(ctx) {
-    const commentsData = await ctx.service.comment.queryByArticle('name createdTime content postId', ctx.query.postId);
+    const commentsData = await ctx.service.comment.queryByArticle('name createdTime content ref postId', ctx.query.postId);
+    for (let i = 0, len = commentsData.length; i < len; i++) {
+      commentsData[i] = {
+        name: commentsData[i].name,
+        createdTime: moment(commentsData[i].createdTime).format('YYYY-MM-DD HH:mm:ss'),
+        content: commentsData[i].content,
+        refTo: commentsData[i].ref,
+        postId: commentsData[i].postId,
+        _id: commentsData[i]._id,
+      };
+    }
     for (let i = 0, len = commentsData.length; i < len; i++) {
       const comment = commentsData[i];
-      commentsData[i] = {
-        name: comment.name,
-        createdTime: moment(comment.createdTime).format('YYYY-MM-DD'),
-        content: comment.content,
-        postId: comment.postId,
-      };
+      if (comment.refTo) {
+        const selected = commentsData.filter((item) => {
+          return item._id.toString() === comment.refTo.toString();
+        });
+        if (selected.length === 1) {
+          comment.refTo = selected[0];
+        }
+      }
     }
     const data = {
       commentsData,

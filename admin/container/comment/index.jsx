@@ -48,6 +48,7 @@ export default class extends PureComponent {
         ...values,
         ref: comment._id,
         postId: comment.postId,
+        createdTime: Date.now(),
       };
       const res = await this.props.dispatch({
         type: 'comment/add',
