@@ -47,7 +47,7 @@ export default class extends PureComponent {
       email,
       content,
     } = this.state;
-    return <div className="message-submit-wrap">
+    return <div className="message-submit-wrap" id="message-submit-wrap">
       <div>
         {record && <label htmlFor="messageName">正在回复: {record.name} <button onClick={this.reset}>取消回复</button></label>}
       </div>

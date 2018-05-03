@@ -9,7 +9,6 @@ let transporter = nodemailer.createTransport({
   secureConnection: true,
   auth: {
     user: 'info@lindongzhou.com',
-    pass: 'Ldz123456',
   }
 });
 

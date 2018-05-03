@@ -2,13 +2,14 @@ import React, { PureComponent } from 'react';
 import Comment from '@/components/Comments';
 import constants from '../../constants';
 import Message from '@/components/Message';
-
+import scroll from '../../util/scroll';
 export default class extends PureComponent {
   state = {
     record: null,
   }
 
   replyMessage = (record) => {
+    scroll.call(this, document.getElementById('message-submit-wrap'), 500);
     this.setState({
       record,
     });
