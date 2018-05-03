@@ -22,7 +22,7 @@ export default class extends Component {
         </FormItem>
         <FormItem label="邮箱" {...formItemLayout}>
           {getFieldDecorator('email', {
-            initialValue: 'lindongzhou95@gmail.com',
+            initialValue: 'me@lindongzhou.com',
           })(
             <Input disabled />
           )}

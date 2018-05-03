@@ -1,6 +1,7 @@
 
 const { Controller } = require('egg');
 const moment = require('moment');
+const fromConfig = require('../../secret/config.json').fromConfig;
 
 class CommentController extends Controller {
   async index(ctx) {
@@ -33,9 +34,30 @@ class CommentController extends Controller {
     ctx.type = 'json';
     ctx.status = 200;
   }
+
   async create(ctx) {
     const data = ctx.request.body;
     await ctx.service.comment.add(data);
+    let from = null;
+    const href = (await ctx.service.post.queryArticleById(data.postId, 'url')).url;
+    if (data.ref) {
+      const fromData = await ctx.service.comment.queryById('name content email', data.ref);
+      from = {
+        name: fromData[0].name,
+        content: fromData[0].content,
+        email: fromData[0].email,
+      };
+    } else {
+      from = fromConfig;
+    }
+    await ctx.service.comment.sendEmail({
+      to: {
+        name: data.name,
+        content: data.content,
+      },
+      from,
+      href: `http://localhost:9001/article/${href}`,
+    }, from.email);
     ctx.body = {
       message: '评论成功',
       code: 0,

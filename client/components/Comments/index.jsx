@@ -2,7 +2,8 @@ import React from 'react';
 import './index.scss';
 
 const Comment = ({ name, createdTime, content, postId, refTo, index, replyMessage, _id }) => {
-  return <div className="comment">
+
+  return <div className="comment" id={index + 1 ? _id.slice(-4) : null}>
     <p>{name} {!isNaN(index + 1) && <span>{index + 1} 楼</span>}</p>
     <p>{createdTime}</p>
     <p>{content}</p>
