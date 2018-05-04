@@ -1,0 +1,27 @@
+.archives-nav {
+  padding: 0px 20px;
+  .tag {
+    margin: 0 4px;
+    margin-bottom: 8px;
+    display: inline-block;
+    text-decoration: none;
+    color: gray;
+    font-size: 14px;
+    border: 1px solid #eee;
+    line-height: 26px;
+    background: #fff;
+    padding: 0 14px;
+    border-radius: 999em;
+    &:hover {
+      // color: #1abc9c;
+      background: #eee;
+    }
+    &.active {
+      color: rgba(0, 0, 0, .8);
+      font-weight: bold;
+      &:hover {
+        color: #000;
+      }
+    }
+  }
+}

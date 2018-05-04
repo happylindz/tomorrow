@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import {
   fetchArchivesData,
 } from '../../actions';
 import * as constants from '../../constants';
 import { query } from '../../util/index.js';
-import Tags from './tags';
+import Tags from '@/components/tags';
+import Banner from '@/components/banner';
+import Archives from '@/components/archives';
+import './index.scss';
 
 const mapStateToProps = (state, ownProps) => {
   const { postsData } = state.archives;
@@ -62,7 +64,8 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-class Archives extends Component {
+@connect(mapStateToProps, mapDispatchToProps)
+export default class extends Component {
   componentDidMount() {
     document.title = 'Hello Archives';
     const {
@@ -80,34 +83,18 @@ class Archives extends Component {
     const { posts, state, tags, topic } = this.props;
     switch (state) {
     case constants.INITIAL_STATE:
-      return <section>initial state</section>;
     case constants.LOADING_STATE:
-      return <section>loading state</section>;
+      return <section>loading</section>;
     case constants.SUCCESS_STATE:
-      return (<section>{
-        <Tags tags={tags} topic={topic} />
-      }
-      <hr />
-      {
-        Object.keys(posts).map(year => { return parseInt(year, 10) }).sort((a, b) => {
-          return b - a;
-        }).map((year) => {
-          return <div key={year}>
-            {year}
-            {posts[year].map((post) => {
-              return (<section key={post._id}>
-                <h2>{post.time}<Link to={`/article/${post.url}`}>{post.title}</Link></h2>
-              </section>);
-            })}
-            <hr />
-          </div>;
-        })
-
-      }</section>);
+      return [
+        <Banner key="banner" />,
+        <div key="archives-body" className="archives-body">
+          <Tags tags={tags} topic={topic} />
+          <Archives posts={posts} />
+        </div>];
     default:
       return <section>something error on page, please fresh!</section>;
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Archives);

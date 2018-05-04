@@ -37,7 +37,7 @@ class CommentController extends Controller {
 
   async create(ctx) {
     const data = ctx.request.body;
-    await ctx.service.comment.add(data);
+    const res = await ctx.service.comment.add(data);
     let from = null;
     const href = (await ctx.service.post.queryArticleById(data.postId, 'url')).url;
     if (data.ref) {
@@ -56,7 +56,7 @@ class CommentController extends Controller {
         content: data.content,
       },
       from,
-      href: `http://localhost:9001/article/${href}`,
+      href: `http://localhost:9001/article/${href}#${String(res._id).slice(-4)}`,
     }, from.email);
     ctx.body = {
       message: '评论成功',

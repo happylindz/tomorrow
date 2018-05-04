@@ -73,6 +73,11 @@ module.exports = webpackMerge(baseConfig, {
       append: false,
       files: 'admin.html',
     }),
+    new HtmlIncludeAssetsPlugin({
+      assets: ['css/reset.min.css'],
+      append: false,
+      files: 'index.html',
+    }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new UglifyJSPlugin({
       uglifyOptions: {

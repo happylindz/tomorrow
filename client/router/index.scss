@@ -32,3 +32,12 @@
   position: absolute;
   background: #fff;
 }
+.body-wrap {
+  padding-top: 61px;
+  min-height: 100%;
+  margin-bottom: -20px;
+  box-sizing: border-box;
+  .push {
+    height: 20px;
+  }
+}

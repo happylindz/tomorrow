@@ -1,10 +1,31 @@
 #container .rc-pagination-item:focus {
   outline: none;
 }
+
 #container .rc-pagination {
-  float: right;
-  // min-width: 320px;
+  float: right; // min-width: 320px;
 }
+
 #container .rc-pagination-options {
   margin-left: 0;
+}
+
+.clearfix:after {
+  content: "020";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.clearfix {
+  /* 触发 hasLayout */
+  zoom: 1;
+}
+html, body, #root {
+  height: 100%;
+}
+body {
+  font-family: -apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,"PingFang SC","Hiragino Sans GB",STHeiti,"Microsoft YaHei","Microsoft JhengHei","Source Han Sans SC","Noto Sans CJK SC","Source Han Sans CN","Noto Sans SC","Source Han Sans TC","Noto Sans CJK TC","WenQuanYi Micro Hei",SimSun,sans-serif;
+  min-width: 320px;
 }

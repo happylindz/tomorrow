@@ -1,7 +1,9 @@
 import React from 'react';
-import { BrowserRouter, Route, NavLink, Switch, StaticRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, StaticRouter } from 'react-router-dom';
 // import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import asyncComponent from './async';
+import Header from '@/components/header';
+import Footer from '@/components/footer';
 // import {
 //   Home,
 //   Archives,
@@ -17,10 +19,6 @@ const Archives = asyncComponent(() => import('../container/archives'));
 const Project = asyncComponent(() => import('../container/project'));
 const About = asyncComponent(() => import('../container/about'));
 const Article = asyncComponent(() => import('../container/article'));
-const activeStyle = {
-  fontWeight: 'bold',
-  color: 'red'
-};
 
 export const preloadComponent = (url) => {
   if (process.env.__CLIENT__ !== 'client') {
@@ -43,25 +41,9 @@ export const preloadComponent = (url) => {
 export default (props) => (
   <Router {...props}>
     <Route
-      render={({ location }) => (
-        <div>
-          <ul>
-            <li>
-              <NavLink exact to="/" activeStyle={activeStyle}>首页</NavLink>
-            </li>
-            <li>
-              <NavLink to="/project" activeStyle={activeStyle}>项目</NavLink>
-            </li>
-            <li>
-              <NavLink to="/about" activeStyle={activeStyle}>关于</NavLink>
-            </li>
-            <li>
-              <NavLink to="/archives" activeStyle={activeStyle}>归档</NavLink>
-            </li>
-          </ul>
-          <hr />
-          {/* <TransitionGroup className="content">
-            <CSSTransition key={location.key} classNames="fade" timeout={250}> */}
+      render={({ location }) => [
+        <Header key="header" />,
+        <div key="body" className="body-wrap">
           <Switch location={location}>
             <Route exact path="/" component={Home} />
             <Route path="/project" component={Project} />
@@ -69,10 +51,10 @@ export default (props) => (
             <Route path="/archives" component={Archives} />
             <Route path="/article/:url" component={Article} />
           </Switch>
-          {/* </CSSTransition>
-          </TransitionGroup> */}
-        </div>
-      )}
+          <div className="push"></div>
+        </div>,
+        <Footer key="footer" />
+      ]}
     />
   </Router>
 );

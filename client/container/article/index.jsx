@@ -11,7 +11,7 @@ import scroll from '../../util/scroll';
 import './github-gist.min.css';
 import './github-markdown.min.css';
 import './index.scss';
-import MessageBoard from '@/components/MessageBoard';
+import MessageBoard from '@/components/message-board';
 
 const mapStateToProps = (state) => {
   return {
