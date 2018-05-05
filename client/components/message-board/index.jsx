@@ -3,24 +3,36 @@ import Comment from '@/components/comments';
 import constants from '../../constants';
 import Message from '@/components/message';
 import scroll from '../../util/scroll';
+import eventUtil from '../../util/eventUtil';
+
 export default class extends PureComponent {
   state = {
     record: null,
   }
   componentDidMount() {
+    this.handleHashChange();
+    eventUtil.addHandler(window, 'hashchange', this.handleHashChange);
+  }
+  componentWillUnmount() {
+    eventUtil.removeHandler(window, 'hashchange', this.handleHashChange);
+  }
+
+  handleHashChange = (e) => {
+    e && e.preventDefault();
     const hash = location.hash.slice(1);
     if (hash.length === 4) {
       let count = 0;
       const id = setInterval(() => {
         count++;
         if (document.getElementById(hash)) {
-          window.location = location.hash;
+          scroll.call(this, document.getElementById(hash), 500);
           clearInterval(id);
         } else if (count === 10) {
           clearInterval(id);
         }
-      }, 100);
+      }, 1000);
     }
+    return false;
   }
 
   replyMessage = (record) => {

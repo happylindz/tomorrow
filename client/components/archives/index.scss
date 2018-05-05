@@ -1,0 +1,45 @@
+.archives-main {
+  padding: 10px 20px;
+  .archives {
+    margin-bottom: 20px;
+    & > .year {
+      width: 100px;
+      border-bottom: 1px solid #ccc;
+      color: #999;
+      font-size: 20px;
+      line-height: 24px;
+      margin-bottom: 20px;
+      text-indent: 8px;
+    }
+    .archives-item {
+      display: flex;
+      margin-bottom: 20px;
+      font-size: 16px;
+      padding-left: 52px;
+      & > .time {
+        margin-right: 30px;
+        min-width: 45px;
+        line-height: 18px;
+        color: #999;
+      }
+      & > a {
+        text-decoration: none;
+        color: #4a4a4a;
+        transition: color .4s;
+        line-height: 18px;
+        &:hover {
+          color: orange;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .archives-main {
+    .archives {
+      .archives-item {
+        padding-left: 40px;
+      }
+    }
+  }
+}

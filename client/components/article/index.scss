@@ -19,7 +19,7 @@
       a {
         color: #7594b3;
         transition: all 0.2s ease-out;
-        margin-right: 6px;
+        margin-right: 8px;
         text-decoration: none;
         &:last-child {
           margin-right: 0;
@@ -37,7 +37,7 @@
     code {
       max-width: 100%;
       overflow: auto;
-      display: inline-block;
+      display: inline;
       vertical-align: middle;
     }
     ul li {
@@ -69,8 +69,12 @@
 }
 @media screen and (max-width: 768px) {
   .article-wrapper {
+    padding: 20px;
     & > h1 {
       font-size: 20px;
+    }
+    .article {
+
     }
   }
 }

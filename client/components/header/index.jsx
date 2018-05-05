@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import { throttle } from 'lodash';
+import eventUtil from '../../util/eventUtil';
 import './index.scss';
 let width = null;
 
 @withRouter
 export default class extends Component {
+  constructor(...args) {
+    super(...args);
+    this.handleResize = throttle(this.handleResize, 10);
+  }
+
   state = {
     menuVisible: false,
   }
@@ -13,13 +19,12 @@ export default class extends Component {
 
   componentDidMount() {
     this.handleResize();
-    window.onresize = throttle(this.handleResize, 10);
+    eventUtil.addHandler(window, 'resize', this.handleResize);
   }
 
   componentWillUnmount() {
-    window.onresize = null;
+    eventUtil.removeHandler(window, 'resize', this.handleResize);
   }
-
 
   toggleMenu = () => {
     const menuVisible = this.state.menuVisible;
