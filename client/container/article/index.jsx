@@ -12,6 +12,7 @@ import './github-gist.min.css';
 import './github-markdown.min.css';
 import './index.scss';
 import MessageBoard from '@/components/message-board';
+import Article from '@/components/article';
 
 const mapStateToProps = (state) => {
   return {
@@ -35,7 +36,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   };
 };
 
-class Article extends Component {
+@connect(mapStateToProps, mapDispatchToProps)
+export default class extends Component {
   componentDidMount() {
     document.title = 'Hello Detail';
     const {
@@ -106,29 +108,22 @@ class Article extends Component {
 
   render() {
     const {
-      article: {
-        index = [],
-        content,
-      }, state,
+      article,
+      state,
       commentState,
       commentsData,
     } = this.props;
     switch (state) {
     case constants.INITIAL_STATE:
-      return <section>initial state</section>;
     case constants.LOADING_STATE:
       return <section>loading state</section>;
     case constants.SUCCESS_STATE:
-      return <div>
-        {index && index.length !== 0 ? <ul onClickCapture={this.scrollToContent}>{index.map(({ anchor, content }) => (<li key={anchor}><a href={`#${anchor}`}>{content}</a></li>))}</ul> : null}
-        <hr />
-        <div className="article-wrapper markdown-body" dangerouslySetInnerHTML={{ __html: content }} />
-        <hr />
-        <MessageBoard submit={this.addComment} state={commentState} comments={commentsData} />
-      </div>;
+      return [
+        <Article key="article" {...article} scrollToContent={this.scrollToContent} />,
+        <MessageBoard key="message-board" submit={this.addComment} state={commentState} comments={commentsData} />
+      ];
     default:
       return <section>something error on page, please fresh!</section>;
     }
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Article);

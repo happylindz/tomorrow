@@ -18,7 +18,7 @@ module.exports = (app) => {
     }
 
     queryArticle(url) {
-      return this.ctx.model.Post.find({ url }, 'content index').limit(1);
+      return this.ctx.model.Post.find({ url }, 'content index createdTime tags title').limit(1);
     }
 
     queryArticleById(_id, query) {
