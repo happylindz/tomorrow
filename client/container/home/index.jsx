@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Pagination from 'rc-pagination';
 // import 'rc-pagination/assets/index.css';
+import './index.scss';
 import {
   fetchPostsData,
 } from '../../actions';

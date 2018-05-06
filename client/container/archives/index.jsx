@@ -8,6 +8,7 @@ import { query } from '../../util/index.js';
 import Tags from '@/components/tags';
 import Banner from '@/components/banner';
 import Archives from '@/components/archives';
+// import Skeleton from '@/components/skeleton-archives';
 import './index.scss';
 
 const mapStateToProps = (state, ownProps) => {
@@ -84,7 +85,8 @@ export default class extends Component {
     switch (state) {
     case constants.INITIAL_STATE:
     case constants.LOADING_STATE:
-      return <section>loading</section>;
+      // return <Skeleton />;
+      return null;
     case constants.SUCCESS_STATE:
       return [
         <Banner key="banner" />,

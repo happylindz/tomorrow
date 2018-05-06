@@ -1,0 +1,17 @@
+.skeleton-tags {
+  margin: 20px auto;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 768px;
+  .skeleton-tag-item {
+    width: 25%;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    height: 24px;
+    padding: 0 20px;
+    .animated-background {
+      border-radius: 4px;
+
+    }
+  }
+}

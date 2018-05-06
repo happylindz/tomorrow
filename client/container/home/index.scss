@@ -1,0 +1,11 @@
+#container .rc-pagination-item:focus {
+  outline: none;
+}
+
+#container .rc-pagination {
+  float: right; // min-width: 320px;
+}
+
+#container .rc-pagination-options {
+  margin-left: 0;
+}
