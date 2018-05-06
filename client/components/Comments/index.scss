@@ -1,5 +1,5 @@
 .comments-wrap {
-  padding: 20px 12px;
+  padding: 20px 12px 0;
   .no-posts {
     text-align: center;
     line-height: 100px;
@@ -7,8 +7,8 @@
     font-size: 15px;
   }
   .comment {
-    margin-bottom: 10px;
-    border-bottom: 1px dashed #eee;
+    margin: 0 12px 10px;
+    border-bottom: 1px dashed #ddd;
     & > .title {
       display: flex;
       align-items: baseline;
@@ -16,9 +16,9 @@
         font-size: 16px;
         color: #288ce4;
         line-height: 18px;
-        margin-right: 16px;
+        margin-right: 8px;
         font-weight: 500;
-        margin-left: 16px;
+        margin-left: 8px;
         text-decoration: none;
         transition: .4s color;
         cursor: pointer;
@@ -30,6 +30,9 @@
         font-size: 13px;
         color: #999;
       }
+      .time {
+        font-size: 12px;
+      }
       .reply {
         transition: color .4s;
         cursor: pointer;
@@ -38,7 +41,6 @@
         }
       }
       .floor {
-        margin-right: 14px;
         margin-left: 8px;
         width: 31px;
       }
@@ -56,7 +58,7 @@
   .subcomment {
     margin: 10px 30px;
     margin-right: 50px;
-    background-color: #f8f8f8;
+    background-color: #ddd;
     margin-bottom: 0;
     & > .title {
       padding: 10px;

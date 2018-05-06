@@ -1,0 +1,54 @@
+.message-submit-wrap {
+  margin: 20px;
+  .comment-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .replying {
+    padding: 8px;
+    font-size: 16px;
+    color: #777;
+    .username {
+      color: black;
+    }
+    .cancel {
+      color: #e54e53;
+      font-size: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  .annotation {
+    font-size: 12px;
+    color: #333;
+    margin-bottom: 6px;
+  }
+  .required {
+    color: red;
+    vertical-align: -2px;
+    padding: 1px;
+  }
+  .message-item {
+    padding: 8px;
+    & > label {
+      line-height: 18px;
+      font-size: 14px;
+      display: inline-block;
+    }
+    &.error {
+      .ant-input {
+        border-color: red;
+        box-shadow: none;
+      }
+      span.error {
+        font-size: 12px;
+        color: red;
+        line-height: 16px;
+      }
+    }
+  }
+}

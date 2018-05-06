@@ -1,9 +1,12 @@
 .message-board-wrap {
   max-width: 768px;
   margin: 20px auto;
+  background-color: #f6f6f6;
   & > h2 {
     border-bottom: 2px solid #e7e9ee;
     height: 39px;
+    margin: 0 16px;
+    padding-top: 4px;
     .commens-title {
       text-decoration: none;
       color: #2a2e2e;
@@ -19,6 +22,7 @@
 }
 @media screen and (max-width: 768px) {
   .message-board-wrap {
+    margin: 20px;
     & > h2 {
       margin: 0 16px;
     }

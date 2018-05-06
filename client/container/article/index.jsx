@@ -117,17 +117,21 @@ export default class extends Component {
       commentState,
       commentsData,
     } = this.props;
+    let elem = null;
     switch (state) {
     case constants.INITIAL_STATE:
     case constants.LOADING_STATE:
-      return <section>loading state</section>;
+      elem = (<section style={{ minHeight: 9999 }}>loading state</section>);
+      break;
     case constants.SUCCESS_STATE:
-      return [
-        <Article key="article" {...article} scrollToContent={this.scrollToContent} />,
-        <MessageBoard key="message-board" submit={this.addComment} state={commentState} comments={commentsData} />
-      ];
+      elem = (<Article key="article" {...article} scrollToContent={this.scrollToContent} />);
+      break;
     default:
       return <section>something error on page, please fresh!</section>;
     }
+    return [
+      elem,
+      <MessageBoard key="message-board" submit={this.addComment} state={commentState} comments={commentsData} />
+    ];
   }
 }
