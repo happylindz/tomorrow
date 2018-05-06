@@ -27,6 +27,7 @@ export const project = (state = { state: INITIAL_STATE, projectData: [] }, actio
   switch (action.type) {
   case LOADING_PROJECT:
     draft.state = LOADING_STATE;
+    draft.projectData = [];
     break;
   case LOADING_PROJECT_SUCCESS:
     draft.state = SUCCESS_STATE;
@@ -34,6 +35,7 @@ export const project = (state = { state: INITIAL_STATE, projectData: [] }, actio
     break;
   case LOADING_PROJECT_FAILURE:
     draft.state = FAILURE_STATE;
+    draft.projectData = [];
     break;
   }
 });
@@ -42,6 +44,7 @@ export const posts = (state = { state: INITIAL_STATE, postsData: [] }, action) =
   switch (action.type) {
   case LOADING_POSTS:
     draft.state = LOADING_STATE;
+    draft.postsData = [];
     break;
   case LOADING_POSTS_SUCCESS:
     draft.state = SUCCESS_STATE;
@@ -51,14 +54,16 @@ export const posts = (state = { state: INITIAL_STATE, postsData: [] }, action) =
     break;
   case LOADING_POSTS_FAILURE:
     draft.state = FAILURE_STATE;
+    draft.postsData = [];
     break;
   }
 });
 
-export const article = (state = { state: INITIAL_STATE, article: { url: '', content: '', index: [] }}, action) => produce(state, (draft) => {
+export const article = (state = { state: INITIAL_STATE, article: {}}, action) => produce(state, (draft) => {
   switch (action.type) {
   case LOADING_ARTICLE:
     draft.state = LOADING_STATE;
+    draft.article = {};
     break;
   case LOADING_ARTICLE_SUCCESS:
     draft.state = SUCCESS_STATE;
@@ -66,6 +71,7 @@ export const article = (state = { state: INITIAL_STATE, article: { url: '', cont
     break;
   case LOADING_ARTICLE_FAILURE:
     draft.state = FAILURE_STATE;
+    draft.article = {};
     break;
   }
 });
@@ -74,6 +80,7 @@ export const archives = (state = { state: INITIAL_STATE, postsData: [] }, action
   switch (action.type) {
   case LOADING_ARCHIVES:
     draft.state = LOADING_STATE;
+    draft.postsData = [];
     break;
   case LOADING_ARCHIVES_SUCCESS:
     draft.state = SUCCESS_STATE;
@@ -83,6 +90,7 @@ export const archives = (state = { state: INITIAL_STATE, postsData: [] }, action
     break;
   case LOADING_ARCHIVES_FAILURE:
     draft.state = FAILURE_STATE;
+    draft.postsData = [];
     break;
   }
 });
@@ -91,6 +99,7 @@ export const comment = (state = { commentState: INITIAL_STATE, commentsData: [] 
   switch (action.type) {
   case LOADING_COMMENT:
     draft.commentState = LOADING_STATE;
+    draft.commentsData = [];
     break;
   case LOADING_COMMENT_SUCCESS:
     draft.commentState = SUCCESS_STATE;
@@ -100,6 +109,7 @@ export const comment = (state = { commentState: INITIAL_STATE, commentsData: [] 
     break;
   case LOADING_COMMENT_FAILURE:
     draft.commentState = FAILURE_STATE;
+    draft.commentsData = [];
     break;
   }
 });

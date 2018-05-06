@@ -1,0 +1,26 @@
+.message-board-wrap {
+  max-width: 768px;
+  margin: 20px auto;
+  & > h2 {
+    border-bottom: 2px solid #e7e9ee;
+    height: 39px;
+    .commens-title {
+      text-decoration: none;
+      color: #2a2e2e;
+      font-size: 15px;
+      padding: 12px 6px;
+      font-weight: 700;
+      line-height: 1;
+      display: inline-block;
+      border-bottom: 2px solid #288ce4;
+      position: relative;
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .message-board-wrap {
+    & > h2 {
+      margin: 0 16px;
+    }
+  }
+}

@@ -1,6 +1,77 @@
 .comments-wrap {
+  padding: 20px 12px;
+  .no-posts {
+    text-align: center;
+    line-height: 100px;
+    color: #2a2e2e;
+    font-size: 15px;
+  }
   .comment {
-    border: 1px solid black;
-    margin: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #eee;
+    & > .title {
+      display: flex;
+      align-items: baseline;
+      .username {
+        font-size: 16px;
+        color: #288ce4;
+        line-height: 18px;
+        margin-right: 16px;
+        font-weight: 500;
+        margin-left: 16px;
+        text-decoration: none;
+        transition: .4s color;
+        cursor: pointer;
+        &:hover {
+          color: #264E86;
+        }
+      }
+      .time, .floor, .reply {
+        font-size: 13px;
+        color: #999;
+      }
+      .reply {
+        transition: color .4s;
+        cursor: pointer;
+        &:hover {
+          color: orange;
+        }
+      }
+      .floor {
+        margin-right: 14px;
+        margin-left: 8px;
+        width: 31px;
+      }
+      .time {
+        flex: 1;
+      }
+    }
+    & > .content {
+      padding: 14px 20px 20px;
+      white-space: pre-line;
+      word-break: break-all;
+      word-wrap: break-word;
+    }
+  }
+  .subcomment {
+    margin: 10px 30px;
+    margin-right: 50px;
+    background-color: #f8f8f8;
+    margin-bottom: 0;
+    & > .title {
+      padding: 10px;
+      font-size: 14px; 
+      .username {
+        color: #0074E4;
+        text-decoration: none;
+      }
+    }
+    & > .content {
+      font-size: 13px;
+      padding: 2px 16px 16px;
+      white-space: pre-line;
+      word-break: break-all;
+      word-wrap: break-word;
+    }
   }
 }

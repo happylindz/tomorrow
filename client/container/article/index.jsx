@@ -5,6 +5,7 @@ import {
   fetchArticleData,
   addComment,
   fetchCommentData,
+  resetComment,
 } from '../../actions';
 import * as constants from '../../constants';
 import scroll from '../../util/scroll';
@@ -31,7 +32,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     fetchCommentData: (options) => {
       dispatch(fetchCommentData(options));
-
+    },
+    resetComment: () => {
+      dispatch(resetComment());
     }
   };
 };
@@ -80,10 +83,11 @@ export default class extends Component {
       props.fetchArticleData({
         url: nextUrl,
       });
+      props.resetComment();
     } else if (state === constants.SUCCESS_STATE) {
       console.log('isomorphism fetch article data');
     }
-    if (postId && commentState === constants.INITIAL_STATE) {
+    if (postId && (commentState === constants.INITIAL_STATE || commentState === constants.FAILURE_STATE)) {
       props.fetchCommentData({
         postId,
       });

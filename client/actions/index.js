@@ -142,3 +142,9 @@ export const addComment =  (options) => {
     }
   };
 };
+
+export const resetComment = () => {
+  return {
+    type: actionTypes.LOADING_COMMENT_FAILURE,
+  };
+};

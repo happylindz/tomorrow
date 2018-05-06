@@ -4,6 +4,7 @@ import constants from '../../constants';
 import Message from '@/components/message';
 import scroll from '../../util/scroll';
 import eventUtil from '../../util/eventUtil';
+import './index.scss';
 
 export default class extends PureComponent {
   state = {
@@ -35,8 +36,9 @@ export default class extends PureComponent {
     return false;
   }
 
-  replyMessage = (record) => {
-    scroll.call(this, document.getElementById('message-submit-wrap'), 500);
+  replyMessage = (e, record) => {
+    e.preventDefault();
+    scroll.call(this, document.getElementsByClassName('message-submit-wrap')[0], 500);
     this.setState({
       record,
     });
@@ -65,6 +67,7 @@ export default class extends PureComponent {
     } = this.state;
 
     return (<section className="message-board-wrap">
+      <h2><a className="commens-title">{comments.length} 条评论</a></h2>
       {state === constants.SUCCESS_STATE && <Comment replyMessage={this.replyMessage} comments={comments} />}
       <Message record={record} cancelReply={this.cancelReply} submit={this.submitMessage} />
     </section>);
