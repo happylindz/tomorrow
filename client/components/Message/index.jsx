@@ -58,6 +58,9 @@ export default class extends PureComponent {
     if (this.state.name === '') {
       isValidated = false;
       error.nameError = '请输入你的昵称';
+    } else if (this.state.name === '博主') {
+      isValidated = false;
+      error.nameError = '昵称不合法';
     } else {
       error.nameError = null;
     }

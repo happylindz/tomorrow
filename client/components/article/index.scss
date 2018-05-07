@@ -1,25 +1,26 @@
+@import '../../common/px2rem.scss';
 .article-wrapper {
   max-width: 768px;
   margin: auto;
   font-family: Lato, "Microsoft Jhenghei", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  padding: 30px;
+  padding: px2rem(15px);
   & > h1 {
-    font-size: 28px;
+    font-size: px2rem(16px);
     color: #444;
-    margin-bottom: 13px;
+    margin-bottom: px2rem(6px);
     font-weight: 200;
   }
   .subtitle {
-    font-size: 12px;
+    font-size: px2rem(6px);
     .time {
       color: #aaa;
-      margin-right: 10px;
+      margin-right: px2rem(5px);
     }
     .tags {
       a {
         color: #7594b3;
         transition: all 0.2s ease-out;
-        margin-right: 8px;
+        margin-right: px2rem(4px);
         text-decoration: none;
         &:last-child {
           margin-right: 0;
@@ -31,6 +32,7 @@
     }
   }
   .article {
+    font-size: px2rem(8px);
     img {
       width: 100%;
     }
@@ -50,12 +52,54 @@
       margin-top: 0;
     }
   }
+  .pager {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    margin-top: px2rem(10px);
+    .placeholder {
+      flex: 1;
+    }
+    .previous, .next {
+      box-sizing: border-box;
+      width: 48%;
+    }
+    .previous, .next {
+      & > a {
+        border: 1px solid #ddd;
+        padding: px2rem(7px) px2rem(12px);
+        display: block;
+        color: #ccc;
+        text-decoration: none;
+        font-size: px2rem(6px);
+        text-align: center;
+        transition: all .4s;
+        & > span {
+          font-weight: 700;
+          display: block;
+          color: #404040;
+          line-height: 18px;
+          padding-bottom: px2rem(2px);
+          font-size: px2rem(7px);
+        }
+      }
+      &:hover {
+        a {
+          border: 1px solid #0085a1;
+          background-color:#0085a1; 
+          color: #fff;
+          & > span {
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
 }
 @media screen and (max-width: 768px) {
   .article-wrapper {
-    padding: 20px;
     & > h1 {
-      font-size: 20px;
+      // font-size: 20px;
     }
     .article {
 

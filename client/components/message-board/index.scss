@@ -1,19 +1,21 @@
+@import '../../common/px2rem.scss';
 .message-board-wrap {
   max-width: 768px;
-  margin: 20px auto;
+  margin: px2rem(10px) auto;
   background-color: #f6f6f6;
+  margin: px2rem(10px) auto;
   & > h2 {
     border-bottom: 2px solid #e7e9ee;
-    height: 39px;
-    margin: 0 16px;
-    padding-top: 4px;
+    height: 36px;
+    margin: 0 px2rem(8px);
+    padding-top: px2rem(2px);
     .commens-title {
       text-decoration: none;
       color: #2a2e2e;
-      font-size: 15px;
-      padding: 12px 6px;
+      font-size: px2rem(7px);
+      padding: 0 px2rem(3px);
       font-weight: 700;
-      line-height: 1;
+      line-height: 36px;
       display: inline-block;
       border-bottom: 2px solid #288ce4;
       position: relative;
@@ -22,9 +24,17 @@
 }
 @media screen and (max-width: 768px) {
   .message-board-wrap {
-    margin: 20px;
+    margin: px2rem(10px);
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 375px) {
+  .message-board-wrap {
     & > h2 {
-      margin: 0 16px;
+      height: 32px;
+      .commens-title {
+        line-height: 32px;
+      }
     }
   }
 }
+

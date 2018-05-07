@@ -13,6 +13,13 @@ module.exports = (app) => {
       return this.ctx.model.Post.find({}, query).sort({ createdTime: -1 });
     }
 
+    queryNext(createdTime, query) {
+      return this.ctx.model.Post.find({ createdTime: { $lt: createdTime }}, query).sort({ createdTime: -1 }).limit(1);
+    }
+    queryPrevious(createdTime, query) {
+      return this.ctx.model.Post.find({ createdTime: { $gt: createdTime }}, query).sort({ createdTime: 1 }).limit(1);
+    }
+
     count() {
       return this.ctx.model.Post.count();
     }

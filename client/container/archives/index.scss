@@ -1,5 +1,6 @@
+@import '../../common/px2rem.scss';
 .archives-body {
   max-width: 768px;
   margin: auto;
-  margin-top: 20px;
+  margin-top: px2rem(10px);
 }

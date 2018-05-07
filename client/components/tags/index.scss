@@ -1,27 +1,36 @@
+@import '../../common/px2rem.scss';
 .archives-nav {
-  padding: 0px 20px;
+  padding: 0px px2rem(10px);
   .tag {
-    margin: 0 4px;
-    margin-bottom: 8px;
+    margin: 0 px2rem(2px);
+    margin-bottom: px2rem(4px);
     display: inline-block;
     text-decoration: none;
     color: gray;
-    font-size: 14px;
+    font-size: px2rem(7px);
     border: 1px solid #eee;
     line-height: 26px;
     background: #fff;
-    padding: 0 14px;
-    border-radius: 999em;
+    padding: 0 px2rem(8px);
+    border-radius: 13px;
     &:hover {
-      // color: #1abc9c;
       background: #eee;
     }
     &.active {
       color: rgba(0, 0, 0, .8);
-      font-weight: bold;
+      font-weight: 700;
       &:hover {
         color: #000;
       }
+    }
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 375px) {
+  .archives-nav {
+    .tag {
+      line-height: 24px;
+      border-radius: 12px;
     }
   }
 }

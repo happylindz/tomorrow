@@ -1,4 +1,5 @@
-$height: 220px;
+@import '../../common/px2rem.scss';
+$height: px2rem(180px);
 .banner-wrap {
   .banner {
     background-repeat: no-repeat;
@@ -12,7 +13,7 @@ $height: 220px;
     & > h1 {
       color: #fff;
       line-height: $height;
-      font-size: 48px;
+      font-size: px2rem(30px);
       text-align: center;
       user-select: none;
     }

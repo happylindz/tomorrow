@@ -131,7 +131,7 @@ export default class extends Component {
     }
     return [
       elem,
-      <MessageBoard key="message-board" submit={this.addComment} state={commentState} comments={commentsData} />
+      <MessageBoard key="message-board" submit={this.addComment} state={commentState} comments={commentsData} />,
     ];
   }
 }

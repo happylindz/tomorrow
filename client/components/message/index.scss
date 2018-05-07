@@ -1,20 +1,21 @@
+@import '../../common/px2rem.scss';
 .message-submit-wrap {
-  margin: 20px;
+  margin: px2rem(10px);
   .comment-title {
-    font-size: 18px;
+    font-size: px2rem(9px);
     font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: px2rem(4px);
   }
   .replying {
-    padding: 8px;
-    font-size: 16px;
+    padding: px2rem(4px);
+    font-size: px2rem(7px);
     color: #777;
     .username {
       color: black;
     }
     .cancel {
       color: #e54e53;
-      font-size: 12px;
+      font-size: 90%;
       cursor: pointer;
       text-decoration: none;
       &:hover {
@@ -23,20 +24,20 @@
     }
   }
   .annotation {
-    font-size: 12px;
+    font-size: px2rem(6px);
     color: #333;
-    margin-bottom: 6px;
+    margin-bottom: px2rem(3px);
   }
   .required {
     color: red;
-    vertical-align: -2px;
-    padding: 1px;
+    vertical-align: px2rem(-2px);
+    padding: px2rem(1px);
   }
   .message-item {
-    padding: 8px;
+    padding: px2rem(4px);
     & > label {
       line-height: 18px;
-      font-size: 14px;
+      font-size: px2rem(7px);
       display: inline-block;
     }
     &.error {
@@ -45,7 +46,7 @@
         box-shadow: none;
       }
       span.error {
-        font-size: 12px;
+        font-size: px2rem(5px);
         color: red;
         line-height: 16px;
       }

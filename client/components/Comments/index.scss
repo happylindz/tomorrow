@@ -1,24 +1,26 @@
+@import '../../common/px2rem.scss';
 .comments-wrap {
-  padding: 20px 12px 0;
+  padding: px2rem(10px) px2rem(6px) 0;
   .no-posts {
     text-align: center;
     line-height: 100px;
     color: #2a2e2e;
-    font-size: 15px;
+    font-size: px2rem(14px);
   }
   .comment {
-    margin: 0 12px 10px;
+    margin: 0 px2rem(6px) px2rem(3px);
     border-bottom: 1px dashed #ddd;
     & > .title {
       display: flex;
       align-items: baseline;
+      padding-top: px2rem(3px);
       .username {
-        font-size: 16px;
+        font-size: px2rem(8px);
         color: #288ce4;
         line-height: 18px;
-        margin-right: 8px;
+        margin-right: px2rem(4px);
         font-weight: 500;
-        margin-left: 8px;
+        margin-left: px2rem(2px);
         text-decoration: none;
         transition: .4s color;
         cursor: pointer;
@@ -27,11 +29,11 @@
         }
       }
       .time, .floor, .reply {
-        font-size: 13px;
+        font-size: px2rem(7px);
         color: #999;
       }
       .time {
-        font-size: 12px;
+        font-size: px2rem(6px);
       }
       .reply {
         transition: color .4s;
@@ -41,39 +43,46 @@
         }
       }
       .floor {
-        margin-left: 8px;
-        width: 31px;
+        margin-left: px2rem(4px);
+        min-width: 28px;
       }
       .time {
         flex: 1;
       }
     }
     & > .content {
-      padding: 14px 20px 20px;
+      padding: px2rem(7px) px2rem(10px) px2rem(10px);
+      font-size: px2rem(7px);
       white-space: pre-line;
       word-break: break-all;
       word-wrap: break-word;
     }
   }
   .subcomment {
-    margin: 10px 30px;
-    margin-right: 50px;
+    margin: px2rem(5px) px2rem(15px);
+    margin-right: px2rem(20px);
     background-color: #ddd;
     margin-bottom: 0;
     & > .title {
-      padding: 10px;
-      font-size: 14px; 
+      padding: px2rem(5px);
+      font-size: px2rem(7px); 
       .username {
         color: #0074E4;
         text-decoration: none;
       }
     }
     & > .content {
-      font-size: 13px;
-      padding: 2px 16px 16px;
+      font-size: px2rem(6px);
+      padding: px2rem(1px) px2rem(8px) px2rem(6px);
       white-space: pre-line;
       word-break: break-all;
       word-wrap: break-word;
     }
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 375) {
+  .no-posts {
+    line-height: 80px;
   }
 }

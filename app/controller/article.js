@@ -6,7 +6,7 @@ class ArticleController extends Controller {
   async index(ctx) {
     const { url } = ctx.query;
     const data = await ctx.service.post.queryArticle(url);
-    ctx.body = {
+    const res = {
       url,
       content: data[0].content,
       index: data[0].index,
@@ -15,6 +15,9 @@ class ArticleController extends Controller {
       title: data[0].title,
       tags: data[0].tags,
     };
+    res.previous = (await ctx.service.post.queryPrevious(data[0].createdTime, 'title url createdTime'))[0];
+    res.next = (await ctx.service.post.queryNext(data[0].createdTime, 'title url createdTime'))[0];
+    ctx.body = res;
     ctx.type = 'json';
     ctx.status = 200;
   }

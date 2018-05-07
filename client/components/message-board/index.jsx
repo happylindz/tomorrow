@@ -19,19 +19,23 @@ export default class extends PureComponent {
   }
 
   handleHashChange = (e) => {
-    e && e.preventDefault();
+    e = eventUtil.getEvent(e);
+    if (e) {
+      eventUtil.preventDefault(e);
+    }
     const hash = location.hash.slice(1);
     if (hash.length === 4) {
       let count = 0;
       const id = setInterval(() => {
         count++;
-        if (document.getElementById(hash)) {
-          scroll.call(this, document.getElementById(hash), 500);
+        const elem = document.getElementById(hash);
+        if (elem) {
+          window.scrollTo(0, elem.offsetTop - 61);
           clearInterval(id);
         } else if (count === 10) {
           clearInterval(id);
         }
-      }, 1000);
+      }, 100);
     }
     return false;
   }
