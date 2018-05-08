@@ -1,7 +1,8 @@
+@import '../../common/px2rem.scss';
 .footer {
   text-align: center;
-  font-size: 14px;
+  font-size: px2rem(6px);
   height: 20px;
   line-height: 20px;
-  color: #333;  
+  color: #888;  
 }

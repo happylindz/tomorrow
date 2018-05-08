@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import { throttle } from 'lodash';
+import classNames from 'classnames';
 import eventUtil from '../../util/eventUtil';
 import './index.scss';
 let width = null;
@@ -28,6 +29,11 @@ export default class extends Component {
 
   toggleMenu = () => {
     const menuVisible = this.state.menuVisible;
+    if (!menuVisible) {
+      document.getElementById('root').style.overflow = 'hidden';
+    } else {
+      document.getElementById('root').style.overflow = 'auto';
+    }
     this.setState((state) => {
       return {
         menuVisible: !menuVisible,
@@ -52,6 +58,7 @@ export default class extends Component {
       this.setState({
         menuVisible: false,
       });
+      document.getElementById('root').style.overflow = 'auto';
     }
   }
 
@@ -60,20 +67,29 @@ export default class extends Component {
       menuVisible,
     } = this.state;
     return <div className="header-wrap">
-      <header className="header clearfix">
-        <div className="toggle-menu" onClick={this.toggleMenu}><span className="menu-icon"></span></div>
-        <ul className="header-nav" style={{ 'display': menuVisible === true ? 'block' : 'none' }}>
+      <header className="header">
+        <div className="logo"></div>
+        <div className="toggle-menu" onClick={this.toggleMenu}>
+          <span className={classNames({
+            'menu-icon': true,
+            'active': menuVisible,
+          })}></span>
+        </div>
+        <ul className={classNames({
+          'header-nav': true,
+          'active': menuVisible === true,
+        })}>
           <li>
-            <NavLink exact onClick={this.handleNav} to="/" activeClassName="active">首页</NavLink>
+            <NavLink exact onClick={this.handleNav} to="/" activeClassName="active"><i className="iconfont icon-home" />首页</NavLink>
           </li>
           <li>
-            <NavLink onClick={this.handleNav} to="/project" activeClassName="active">项目</NavLink>
+            <NavLink onClick={this.handleNav} to="/project" activeClassName="active"><i className="iconfont icon-project" />项目</NavLink>
           </li>
           <li>
-            <NavLink onClick={this.handleNav} to="/about" activeClassName="active">关于</NavLink>
+            <NavLink onClick={this.handleNav} to="/about" activeClassName="active"><i className="iconfont icon-me" />关于</NavLink>
           </li>
           <li>
-            <NavLink onClick={this.handleNav} to="/archives" activeClassName="active">归档</NavLink>
+            <NavLink onClick={this.handleNav} to="/archives" activeClassName="active"><i className="iconfont icon-tag" />归档</NavLink>
           </li>
         </ul>
       </header>
