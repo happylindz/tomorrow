@@ -7,12 +7,11 @@
     display: inline-block;
     text-decoration: none;
     color: gray;
-    font-size: px2rem(7px);
     border: 1px solid #eee;
-    line-height: 26px;
+    line-height: 1.8;
     background: #fff;
-    padding: 0 px2rem(8px);
-    border-radius: 13px;
+    padding: 0 16px;
+    border-radius: 999px;
     &:hover {
       background: #eee;
     }
@@ -26,11 +25,26 @@
   }
 }
 
+@media screen and (min-width: 768px) {
+  .archives-nav {
+    .tag {
+      font-size: 14px;
+    }
+  }
+}
+
+@media screen and (min-width: 414px) and (max-width: 768) {
+  .archives-nav {
+    .tag {
+      font-size: 14px;
+    }
+  }
+}
+
 @media screen and (min-width: 320px) and (max-width: 375px) {
   .archives-nav {
     .tag {
-      line-height: 24px;
-      border-radius: 12px;
+      font-size: 13px;
     }
   }
 }

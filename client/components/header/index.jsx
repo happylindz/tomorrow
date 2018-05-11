@@ -6,6 +6,7 @@ import eventUtil from '../../util/eventUtil';
 import './index.scss';
 let width = null;
 
+
 @withRouter
 export default class extends Component {
   constructor(...args) {
@@ -14,9 +15,8 @@ export default class extends Component {
   }
 
   state = {
-    menuVisible: false,
+    menuVisible: null,
   }
-
 
   componentDidMount() {
     this.handleResize();
@@ -29,10 +29,10 @@ export default class extends Component {
 
   toggleMenu = () => {
     const menuVisible = this.state.menuVisible;
-    if (!menuVisible) {
-      document.getElementById('root').style.overflow = 'hidden';
+    if (!menuVisible && document.body.clientWidth <= 768) {
+      document.body.style.overflow = 'hidden';
     } else {
-      document.getElementById('root').style.overflow = 'auto';
+      document.body.style.overflow = 'auto';
     }
     this.setState((state) => {
       return {
@@ -42,30 +42,38 @@ export default class extends Component {
   }
   handleResize = () => {
     const clientWidth = document.body.clientWidth;
-    if (clientWidth > 768 && width < 768) {
+    if (clientWidth > 768 && width <= 768) {
       this.setState({
         menuVisible: true,
       });
-    } else if (width > 768 && clientWidth < 768) {
+      document.body.style.overflow = 'auto';
+    } else if (width >= 768 && clientWidth < 768) {
       this.setState({
-        menuVisible: false,
+        menuVisible: null,
       });
     }
     width = clientWidth;
   }
-  handleNav = (key) => {
-    if (document.body.clientWidth < 768) {
+  handleNav = (e, path) => {
+    e.stopPropagation();
+    if (document.body.clientWidth <= 768 && this.props.location.pathname !== path) {
       this.setState({
         menuVisible: false,
       });
-      document.getElementById('root').style.overflow = 'auto';
+      document.body.style.overflow = 'auto';
+      window.scrollTo(0, 0);
     }
+  }
+  goBack = (e) => {
+    e.preventDefault();
+    this.props.history.goBack();
   }
 
   render() {
     const {
       menuVisible,
     } = this.state;
+
     return <div className="header-wrap">
       <header className="header">
         <div className="logo"></div>
@@ -77,19 +85,20 @@ export default class extends Component {
         </div>
         <ul className={classNames({
           'header-nav': true,
-          'active': menuVisible === true,
-        })}>
+          'active': menuVisible,
+          'unactive': menuVisible !== null && !menuVisible,
+        })} onClick={this.toggleMenu}>
           <li>
-            <NavLink exact onClick={this.handleNav} to="/" activeClassName="active"><i className="iconfont icon-home" />首页</NavLink>
+            <NavLink exact onClick={(e) => this.handleNav(e, '/')} to="/" activeClassName="active"><i className="iconfont icon-home" />首页</NavLink>
           </li>
           <li>
-            <NavLink onClick={this.handleNav} to="/project" activeClassName="active"><i className="iconfont icon-project" />项目</NavLink>
+            <NavLink onClick={(e) => this.handleNav(e, '/project')} to="/project" activeClassName="active"><i className="iconfont icon-project" />项目</NavLink>
           </li>
           <li>
-            <NavLink onClick={this.handleNav} to="/about" activeClassName="active"><i className="iconfont icon-me" />关于</NavLink>
+            <NavLink onClick={(e) => this.handleNav(e, '/about')} to="/about" activeClassName="active"><i className="iconfont icon-me" />关于</NavLink>
           </li>
           <li>
-            <NavLink onClick={this.handleNav} to="/archives" activeClassName="active"><i className="iconfont icon-tag" />归档</NavLink>
+            <NavLink oonClick={(e) => this.handleNav(e, '/archives')} to="/archives" activeClassName="active"><i className="iconfont icon-tag" />归档</NavLink>
           </li>
         </ul>
       </header>

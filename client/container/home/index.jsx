@@ -1,15 +1,17 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Pagination from 'rc-pagination';
-// import 'rc-pagination/assets/index.css';
-import './index.scss';
+import Home from '@/components/home';
 import {
   fetchPostsData,
 } from '../../actions';
+import {
+  throttle,
+} from 'lodash';
 import * as constants from '../../constants';
-import { query } from '../../util';
+import eventUtil from '../../util/eventUtil';
+import './index.scss';
+
 
 const mapStateToProps = (state) => {
   return {
@@ -24,71 +26,59 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-class Home extends Component {
+@connect(mapStateToProps, mapDispatchToProps)
+export default class extends Component {
+  constructor(...args) {
+    super(...args);
+    this.fetchPostsData = throttle(this.fetchPostsData, 100);
+  }
   componentDidMount() {
-    document.title = 'Hello Posts';
-    const {
-      state,
-      location,
-    } = this.props;
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    });
+    const { state } = this.props;
     if (state === constants.INITIAL_STATE || state === constants.FAILURE_STATE) {
-      this.props.fetchPostsData({
-        type: constants.PART_POSTS,
-        page: query(location.search).page || 1,
-      });
+      this.props.fetchPostsData();
     } else if (state === constants.SUCCESS_STATE) {
       console.log('isomorphism fetch posts data');
     }
+    eventUtil.addHandler(window, 'scroll', this.fetchPostsData);
   }
 
-  componentWillReceiveProps(nextProps) {
-    const nextPage = query(nextProps.location.search).page || 1;
-    const thisPage = query(this.props.location.search).page || 1;
-    if (nextPage !== thisPage) {
-      this.props.fetchPostsData({
-        type: constants.PART_POSTS,
-        page: nextPage,
-      });
+  componentWillUnmount() {
+    eventUtil.removeHandler(window, 'scroll', this.fetchPostsData);
+  }
+
+  fetchPostsData = () => {
+    const {
+      postsData: posts,
+      end,
+      loading,
+    } = this.props;
+    const len = posts.length;
+    if (!end && !loading) {
+      const options =  {
+        time: posts[len - 1].createdTime,
+      };
+      const cHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+      const main = document.getElementById('posts-main');
+      if (main.getBoundingClientRect().bottom < cHeight) {
+        this.props.fetchPostsData(options);
+      }
     }
   }
 
-  onChangePagination = (page) => {
-    const {
-      match,
-      history,
-    } = this.props;
-    history.push(`${match.path}?page=${page}`);
-  }
-
   render() {
-    const { postsData, state, page, total } = this.props;
+    const { postsData, state, end, loading } = this.props;
     switch (state) {
     case constants.INITIAL_STATE:
-      return <section>initial state</section>;
     case constants.LOADING_STATE:
       return <section>loading state</section>;
     case constants.SUCCESS_STATE:
-      return (<section>{
-        postsData.length > 0 ? postsData.map((item) => {
-          return (<section key={item._id}>
-            <h2><Link to={`/article/${item.url}`}>{item.title}</Link></h2>
-            <div>{item.createdTime}</div>
-            <div>{item.desc}</div>
-          </section>);
-        }) : '暂无博文'
-      } {
-        total > 10 && <Pagination
-          showLessItems
-          showQuickJumper
-          onChange={this.onChangePagination}
-          current={page}
-          total={total}
-        />
-      }</section>);
+      return <Home postsData={postsData} end={end} loading={loading} state={state} />;
     default:
       return <section>something error on page, please fresh!</section>;
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);

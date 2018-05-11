@@ -34,7 +34,6 @@ export default class extends Component {
         </FormItem>
         <FormItem label="封面地址" {...formItemLayout}>
           {getFieldDecorator('cover', {
-            rules: [{ required: true, message: '请输入有效的封面连接' }],
           })(<Input placeholder="请输入有效的封面连接" />)}
         </FormItem>
         <FormItem label="创建日期" {...formItemLayout}>

@@ -5,6 +5,9 @@ module.exports = (app) => {
     count() {
       return this.ctx.model.Comment.count();
     }
+    queryCountByArticle(postId) {
+      return this.ctx.model.Comment.find({ postId }).count();
+    }
 
     query(query, page, size = 10) {
       return this.ctx.model.Comment.find({}, query).sort({ createdTime: -1 }).skip((parseInt(page, 10) - 1) * size).limit(parseInt(size, 10));

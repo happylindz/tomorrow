@@ -61,7 +61,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchArchivesData: (options) => {
       dispatch(fetchArchivesData(options));
-    },
+    }
   };
 };
 

@@ -1,18 +1,15 @@
 @import '../../common/px2rem.scss';
-$base: 18px;
-$add: 20px;
+$base: 16px;
+$add: 16px;
 .article-index {
   border: 1px solid #aaa;
   background-color: #edf6ff;
   width: auto;
   display: table;
-  padding: px2rem(5px);
   max-width: 768px;
-  margin: px2rem(6px) px2rem(3px);
   & > .title {
     text-align: center;
     font-weight: 500;
-    font-size: px2rem(7px);
     & > span {
       font-weight: 400;
       font-size: 90%;
@@ -25,8 +22,6 @@ $add: 20px;
   }
   .article-index-main {
     display: none;
-    margin-top: px2rem(5px);
-    font-size: px2rem(7px);
     &.active {
       display: block;
     }
@@ -36,19 +31,55 @@ $add: 20px;
         text-decoration: none;
         color: #e54e53;
         display: block;
-        font-size: px2rem(6px);
-        padding: px2rem(2px) px2rem(3px);
       }
     }
     @for $i from 2 through 5
     {
       .tag-h#{$i} {
-        padding-left: px2rem(($base + ($i - 2) * $add) / 2);
+        padding-left: $base + ($i - 2) * $add;
         &::after {
           content: '-';
-          left: px2rem(($base + ($i - 2) * $add - 6px) / 2);
+          left: $base + ($i - 2) * $add - 6px;
           position: absolute;
-          top: px2rem(1px);
+          top: 2px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .article-index {
+    padding: 10px;
+    margin: 12px 6px;
+    & > .title {
+      font-size: 16px;
+    }
+    .article-index-main {
+      margin-top: 10px;
+      font-size: 14px;
+      & > li {
+        & > a {
+          padding: 4px 6px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .article-index {
+    padding: px2rem(5px);
+    margin: px2rem(6px) px2rem(3px);
+    & > .title {
+      font-size: 15px;
+    }
+    .article-index-main {
+      margin-top: px2rem(5px);
+      font-size: 13px;
+      & > li {
+        & > a {
+          padding: 4px 6px;
         }
       }
     }

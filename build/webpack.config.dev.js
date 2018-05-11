@@ -25,6 +25,7 @@ module.exports = webpackMerge(baseConfig, {
   devServer: {
     open: true,
     contentBase: constants.publicPath,
+    host: '0.0.0.0',
     port: 9001,
     historyApiFallback: {
       rewrites: [

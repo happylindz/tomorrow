@@ -1,39 +1,42 @@
 @import '../../common/px2rem.scss';
 .comments-wrap {
-  padding: px2rem(10px) px2rem(6px) 0;
+  padding: 20px 12px 0;
   .no-posts {
     text-align: center;
     line-height: 100px;
     color: #2a2e2e;
-    font-size: px2rem(14px);
+    font-size: 24x;
   }
   .comment {
-    margin: 0 px2rem(6px) px2rem(3px);
+    margin: 0 12px 6px;
     border-bottom: 1px dashed #ddd;
     & > .title {
       display: flex;
       align-items: baseline;
-      padding-top: px2rem(3px);
+      padding-top: 6px;
       .username {
-        font-size: px2rem(8px);
+        font-size: 16px;
         color: #288ce4;
         line-height: 18px;
-        margin-right: px2rem(4px);
+        margin-right: 8px;
         font-weight: 500;
-        margin-left: px2rem(2px);
+        margin-left: 4px;
         text-decoration: none;
         transition: .4s color;
+        &.active {
+          color: #FFA96A;
+        }
         cursor: pointer;
         &:hover {
           color: #264E86;
         }
       }
       .time, .floor, .reply {
-        font-size: px2rem(7px);
+        font-size: 14px;
         color: #999;
       }
       .time {
-        font-size: px2rem(6px);
+        font-size: 12px;
       }
       .reply {
         transition: color .4s;
@@ -43,7 +46,7 @@
         }
       }
       .floor {
-        margin-left: px2rem(4px);
+        margin-left: 8px;
         min-width: 28px;
       }
       .time {
@@ -51,29 +54,32 @@
       }
     }
     & > .content {
-      padding: px2rem(7px) px2rem(10px) px2rem(10px);
-      font-size: px2rem(7px);
+      padding: 14px 20px 20px;
+      font-size: 14px;
       white-space: pre-line;
       word-break: break-all;
       word-wrap: break-word;
     }
   }
   .subcomment {
-    margin: px2rem(5px) px2rem(15px);
-    margin-right: px2rem(20px);
+    margin: 10px 30px;
+    margin-right: 40px;
     background-color: #eee;
     margin-bottom: 0;
     & > .title {
-      padding: px2rem(5px);
-      font-size: px2rem(7px); 
+      padding: 10px;
+      font-size: 14px; 
       .username {
         color: #0074E4;
         text-decoration: none;
+        &.active {
+          color: #FFA96A;
+        }
       }
     }
     & > .content {
-      font-size: px2rem(6px);
-      padding: px2rem(1px) px2rem(8px) px2rem(6px);
+      font-size: 12px;
+      padding: 2px 16px 12px;
       white-space: pre-line;
       word-break: break-all;
       word-wrap: break-word;
@@ -81,8 +87,15 @@
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 375) {
-  .no-posts {
-    line-height: 80px;
+@media screen  and (max-width: 768px) {
+  .comments-wrap {
+    padding: px2rem(10px) px2rem(6px) 0;
+    .no-posts {
+      line-height: 80px;
+    }
+    .comment {
+      margin: 0 px2rem(6px) px2rem(3px);
+
+    }
   }
 }

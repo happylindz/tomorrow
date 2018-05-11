@@ -15,7 +15,7 @@ export default class extends Component {
       <Form layout={'horizontal'}>
         <FormItem label="回复人" {...formItemLayout}>
           {getFieldDecorator('name', {
-            initialValue: '有酒',
+            initialValue: '博主',
           })(
             <Input disabled />
           )}

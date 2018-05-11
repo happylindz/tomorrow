@@ -24,19 +24,17 @@ export default class extends PureComponent {
       eventUtil.preventDefault(e);
     }
     const hash = location.hash.slice(1);
-    if (hash.length === 4) {
-      let count = 0;
-      const id = setInterval(() => {
-        count++;
-        const elem = document.getElementById(hash);
-        if (elem) {
-          window.scrollTo(0, elem.offsetTop - 61);
-          clearInterval(id);
-        } else if (count === 10) {
-          clearInterval(id);
-        }
-      }, 100);
-    }
+    let count = 0;
+    const id = setInterval(() => {
+      count++;
+      const elem = document.getElementById(hash);
+      if (elem) {
+        window.scrollTo(0, elem.offsetTop - 61);
+        clearInterval(id);
+      } else if (count === 10) {
+        clearInterval(id);
+      }
+    }, 100);
     return false;
   }
 
@@ -71,7 +69,7 @@ export default class extends PureComponent {
     } = this.state;
 
     return (<section className="message-board-wrap">
-      <h2><a className="commens-title">{comments.length} 条评论</a></h2>
+      <h2 id="comments"><a className="commens-title">{comments.length} 条评论</a></h2>
       {state === constants.SUCCESS_STATE && <Comment replyMessage={this.replyMessage} comments={comments} />}
       <Message record={record} cancelReply={this.cancelReply} submit={this.submitMessage} />
     </section>);

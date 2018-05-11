@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch, StaticRouter } from 'react-router-dom';
 import asyncComponent from './async';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
+import Toolbar from '@/components/toolbar';
 // import {
 //   Home,
 //   Archives,
@@ -53,6 +54,7 @@ export default (props) => (
           </Switch>
           <div className="push"></div>
         </div>,
+        <Toolbar key="toolbar" />,
         <Footer key="footer" />
       ]}
     />

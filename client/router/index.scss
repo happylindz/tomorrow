@@ -25,13 +25,7 @@
   transition: opacity 250ms ease-in;
 }
 
-.content {
-  position: relative;
-}
-.content > * {
-  position: absolute;
-  background: #fff;
-}
+
 .body-wrap {
   padding-top: 61px;
   min-height: 100%;

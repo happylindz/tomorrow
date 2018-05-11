@@ -9,10 +9,10 @@ export default ({ posts }) => {
       return b - a;
     }).map((year) => {
       return <div className="archives" key={year}>
-        <p className="year">{year}</p>
+        <p className="year">{year}年</p>
         {posts[year].map((post) => {
           return (<section className="archives-item" key={post._id}>
-            <span className="time">{post.time}</span><Link to={`/article/${post.url}`}>{post.title}</Link>
+            <span className="time">{post.time}</span><Link onClick={() => { window.scrollTo(0, 0) }} to={`/article/${post.url}`}>{post.title}</Link>
           </section>);
         })}
       </div>;

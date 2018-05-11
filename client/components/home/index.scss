@@ -1,0 +1,290 @@
+@import '../../common/px2rem.scss';
+.home-wrapper {
+  max-width: 768px;
+  margin: auto;
+  .posts-main {
+    background-color: #fff;
+    .post-item {
+      border-bottom: 1px solid #ddd;
+      border-bottom: .5px solid #ddd;
+      .title {
+        font-weight: 600;
+        & > a {
+          text-decoration: none;
+          color: #1a1a1a;
+        }
+      }
+      .subtitle {
+        .iconfont {
+          color: #aaa;
+        }
+        .time {
+          color: #aaa;
+        }
+        .tags {
+          a {
+            color: #7594b3;
+            transition: all 0.2s ease-out;
+            text-decoration: none;
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+        }
+      }
+      & > .content {
+        display: flex;
+        flex-wrap: nowrap;
+        text-decoration: none;
+        color: #555;
+        align-items: center;
+        .cover {
+          border-radius: 2px;
+          position: relative;
+          overflow: hidden;
+          & > img {
+            width: 100%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 100%;
+            transform: translate(-50%, -50%);
+          }
+        }
+        & > .desc {
+          flex: 1;
+          line-height: 1.5;
+        }
+      }
+      & > .footer {
+        text-align: right;
+        & > span {
+          color: #888;
+        }
+        & > a {
+          color: #888;
+          text-decoration: none;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+  .no-more-posts {
+    display: none;
+    font-size: 14px;
+    text-align: center;
+    line-height: 2;
+    color: #888;
+    &.active {
+      display: block;
+    }
+  }
+  .loading {
+    display: none;
+    font-size: 14px;
+    text-align: center;
+    line-height: 2;
+    color: #888;
+    &.active {
+      display: block;
+    }
+  }
+}
+
+
+@media screen and (min-width: 768px) {
+  .home-wrapper {
+    .posts-main {
+      .post-item {
+        padding: 18px 30px 10px;
+        &:hover {
+          background-color: rgba(0,0,0,.01);
+          box-shadow: 0 1px 3px rgba(0,0,0,.13);
+        }
+        .title {
+          font-size: 18px;
+          margin-bottom: 10px;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        .subtitle {
+          font-size: 14px;
+          margin-bottom: 6px;
+          .iconfont {
+            font-size: 14px;
+            margin-right: 2px;
+          }
+          .time {
+            margin-right: 10px;
+          }
+          .tags {
+            a {
+              margin-right: 6px;
+              &:hover {
+                color: #45617d;
+              }
+            }
+          }
+        }
+        & > .content {
+          .cover {
+            width: 200px;
+            height: 100px;
+            margin: 10px;
+          }
+          & > .desc {
+            margin: 10px 12px;
+            font-size: 15px;
+          }
+        }
+        & > .footer {
+          & > span {
+            margin-right: 16px;
+          }
+          font-size: 14px;
+        }
+      }
+      .no-more-posts {
+        font-size: 14px;
+      }
+      .loading {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .home-wrapper {
+    .posts-main {
+      margin: 0 px2rem(14px);
+      .post-item {
+        padding: px2rem(12px) px2rem(9px) px2rem(5px);
+        .title {
+          font-size: 17px;
+          margin-bottom: px2rem(6px);
+        }
+        .subtitle {
+          font-size: 13px;
+          .iconfont {
+            font-size: 13px;
+            margin-right: px2rem(1px);
+          }
+          .time {
+            margin-right: px2rem(4px);
+          }
+          .tags {
+            a {
+              margin-right: px2rem(3px);
+            }
+          }
+        }
+        & > .content {
+          .cover {
+            width: px2rem(100px);
+            height: px2rem(50px);
+            margin: px2rem(5px);
+          }
+          & > .desc {
+            margin: px2rem(5px) px2rem(6px);
+            overflow: hidden;
+            max-height: 63px;
+            & > .text {
+              font-size: 14px;
+              float: right;
+              margin-left: -5px;
+              width: 100%;
+              word-break: break-all;
+            }
+            &::before {
+              float: left;
+              width: 5px;
+              content: '';
+              height: 63px;
+            }
+            &::after {
+              float: right;
+              content: "...";
+              height: 21px;
+              line-height: 21px;
+              padding-right: 5px;
+              text-align: right;
+              width: 3em;
+              margin-left: -3em;
+              position: relative;
+              left: 100%;
+              top: -21px;
+              padding-right: 5px;
+              /* 显示更好的效果 */
+              background: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0)), to(white), color-stop(50%, white));
+              background: -moz-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+              background: -o-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+              background: -ms-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+              background: linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+            }
+            
+          }
+        }
+        & > .footer {
+          & > span {
+            margin-right: px2rem(8px);
+          }
+          font-size: 13px;
+        }
+      }
+    }
+    .no-more-posts {
+      font-size: 13px;
+    }
+    .loading {
+      font-size: 13px;
+    }
+  }
+}
+
+@media screen and (max-width: 442px) {
+  .home-wrapper {
+    .posts-main {
+      .post-item {
+        .title {
+          font-size: 16px;
+        }
+        .subtitle {
+          font-size: 12px;
+          .iconfont {
+            font-size: 12px;
+          }
+        }
+        & > .content {
+          display: block;
+          .cover {
+            width: 100%;
+            height: 0;
+            margin: px2rem(10px) 0;
+            padding: 0 px2rem(5px);
+            box-sizing: border-box;
+            padding-bottom: 30%;
+          }
+          .desc {
+            max-height: 42px;
+            &::before {
+              height: 42px;
+            }
+          }
+        }
+        & > .footer {
+          font-size: 12px;
+        }
+      }
+    }
+    .no-more-posts {
+      font-size: 12px;
+    }
+    .loading {
+      font-size: 12px;
+    }
+  }
+}

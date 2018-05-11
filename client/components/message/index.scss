@@ -2,13 +2,13 @@
 .message-submit-wrap {
   margin: px2rem(10px);
   .comment-title {
-    font-size: px2rem(9px);
+    font-size: 16px;
     font-weight: 700;
     margin-bottom: px2rem(4px);
   }
   .replying {
     padding: px2rem(4px);
-    font-size: px2rem(7px);
+    font-size: 14px;
     color: #777;
     .username {
       color: black;
@@ -24,7 +24,7 @@
     }
   }
   .annotation {
-    font-size: px2rem(6px);
+    font-size: 13px;
     color: #333;
     margin-bottom: px2rem(3px);
   }
@@ -37,7 +37,7 @@
     padding: px2rem(4px);
     & > label {
       line-height: 18px;
-      font-size: px2rem(7px);
+      font-size: 14px;
       display: inline-block;
     }
     &.error {
@@ -46,7 +46,7 @@
         box-shadow: none;
       }
       span.error {
-        font-size: px2rem(5px);
+        font-size: 12px;
         color: red;
         line-height: 16px;
       }

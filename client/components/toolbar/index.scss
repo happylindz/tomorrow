@@ -1,0 +1,46 @@
+@import '../../common/px2rem.scss';
+.returnTop {
+  position: fixed;
+  right: px2rem(20px);
+  bottom: px2rem(24px);
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  background-color: #ddd;
+  line-height: 18px;
+  padding: 2px 0;
+  box-sizing: border-box;
+  visibility: hidden;
+  opacity: 0;
+  transition: 3s opacity ease;
+  right: 20%;
+  &:hover {
+    background-color: #ccc;
+  }
+  &:active {
+    background-color: #ccc;
+  }
+  .iconfont {
+    font-size: 14px;
+  }
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .returnTop {
+    width: 32px;
+    height: 32px;
+    line-height: 14px;
+    right: px2rem(16px);
+    font-size: 12px;
+    .iconfont {
+      font-size: 12px;
+    }
+  }
+}

@@ -9,6 +9,14 @@ module.exports = (app) => {
       return this.ctx.model.Post.find({}, query).sort({ createdTime: -1 }).skip((page - 1) * size).limit(size);
     }
 
+    queryByTime(query, time, size) {
+      if (time) {
+        return this.ctx.model.Post.find({ createdTime: { $lt: time }}).sort({ createdTime: -1 }).limit(size);
+      } else {
+        return this.ctx.model.Post.find({}, query).sort({ createdTime: -1 }).limit(size);
+      }
+    }
+
     queryAll(query) {
       return this.ctx.model.Post.find({}, query).sort({ createdTime: -1 });
     }
@@ -24,8 +32,16 @@ module.exports = (app) => {
       return this.ctx.model.Post.count();
     }
 
-    queryArticle(url) {
-      return this.ctx.model.Post.find({ url }, 'content index createdTime tags title').limit(1);
+    async addCount(url) {
+      const data = await this.ctx.model.Post.find({ url }, '_id count').limit(1);
+      const count = data[0].count || 0;
+      const _id = data[0]._id;
+      return this.ctx.model.Post.update({ _id }, { count: count + 1 });
+    }
+
+    async queryArticle(url) {
+      await this.addCount(url);
+      return this.ctx.model.Post.find({ url }, 'content index createdTime tags title count').limit(1);
     }
 
     queryArticleById(_id, query) {

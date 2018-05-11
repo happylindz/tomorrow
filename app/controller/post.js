@@ -1,13 +1,11 @@
 
 const { Controller } = require('egg');
 const moment = require('moment');
-
+const pageSize = 10;
 class PostController extends Controller {
   async index(ctx) {
-    const {
-      page,
-    } = ctx.query;
-    const postsData = await ctx.service.post.query('title cover tags url createdTime desc', page || 1);
+    const time = ctx.query.time;
+    const postsData = await ctx.service.post.queryByTime('title cover tags url createdTime desc count', time, pageSize);
     for (let i = 0; i < postsData.length; i++) {
       const post = postsData[i];
       postsData[i] = {
@@ -16,14 +14,15 @@ class PostController extends Controller {
         cover: post.cover,
         tags: post.tags.split(','),
         url: post.url,
-        createdTime: moment(post.createdTime).format('YYYY-MM-DD'),
+        createdTime: moment(post.createdTime).format('YYYY-MM-DD HH:mm:ss'),
         desc: post.desc,
+        comment: (await ctx.service.comment.queryCountByArticle(post._id)),
+        count: post.count,
       };
     }
     const data = {
       postsData,
-      total: await ctx.service.post.count(),
-      page,
+      end: postsData.length < pageSize,
     };
     ctx.body = data;
     ctx.type = 'json';

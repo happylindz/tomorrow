@@ -6,6 +6,8 @@ import {
   LOADING_POSTS,
   LOADING_POSTS_SUCCESS,
   LOADING_POSTS_FAILURE,
+  LOADING_POSTS_MORE,
+  LOADING_POSTS_MORE_SUCCESS,
   LOADING_ARTICLE,
   LOADING_ARTICLE_SUCCESS,
   LOADING_ARTICLE_FAILURE,
@@ -40,7 +42,7 @@ export const project = (state = { state: INITIAL_STATE, projectData: [] }, actio
   }
 });
 
-export const posts = (state = { state: INITIAL_STATE, postsData: [] }, action) => produce(state, (draft) => {
+export const posts = (state = { state: INITIAL_STATE, postsData: [], loading: false, end: false }, action) => produce(state, (draft) => {
   switch (action.type) {
   case LOADING_POSTS:
     draft.state = LOADING_STATE;
@@ -55,6 +57,14 @@ export const posts = (state = { state: INITIAL_STATE, postsData: [] }, action) =
   case LOADING_POSTS_FAILURE:
     draft.state = FAILURE_STATE;
     draft.postsData = [];
+    break;
+  case LOADING_POSTS_MORE:
+    draft.loading = true;
+    break;
+  case LOADING_POSTS_MORE_SUCCESS:
+    draft.end = action.payload.end;
+    draft.postsData = draft.postsData.concat(action.payload.postsData);
+    draft.loading = false;
     break;
   }
 });

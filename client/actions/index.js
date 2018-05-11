@@ -26,18 +26,33 @@ export const fetchProjectData = () => {
 
 export const fetchPostsData = (options) => {
   return async (dispatch) => {
-    dispatch({
-      type: actionTypes.LOADING_POSTS,
-    });
+    if (options && options.time) {
+      dispatch({
+        type: actionTypes.LOADING_POSTS_MORE,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.LOADING_POSTS,
+      });
+    }
+
     try {
       const res = await axios.get('/api/post', {
         params: options,
       });
       if (res.status === 200) {
-        dispatch({
-          type: actionTypes.LOADING_POSTS_SUCCESS,
-          payload: res.data,
-        });
+        if (options && options.time) {
+          dispatch({
+            type: actionTypes.LOADING_POSTS_MORE_SUCCESS,
+            payload: res.data,
+          });
+        } else {
+          dispatch({
+            type: actionTypes.LOADING_POSTS_SUCCESS,
+            payload: res.data,
+          });
+        }
+
       } else {
         throw new Error('获取数据失败');
       }
