@@ -149,6 +149,9 @@ export const addComment =  (options) => {
           postId: options.postId,
         }));
       }
+      dispatch({
+        type: actionTypes.ADD_COMMENT_SUCCESS,
+      });
       return res.data;
     } catch (e) {
       dispatch({
@@ -161,5 +164,75 @@ export const addComment =  (options) => {
 export const resetComment = () => {
   return {
     type: actionTypes.LOADING_COMMENT_FAILURE,
+  };
+};
+
+export const fetchAboutData = (options) => {
+  return async (dispatch) => {
+    dispatch({
+      type: actionTypes.LOADING_ABOUT,
+    });
+    try {
+      const res = await axios.get('/api/info', {
+        params: options,
+      });
+      if (res.status === 200) {
+        dispatch({
+          type: actionTypes.LOADING_ABOUT_SUCCESS,
+          payload: res.data,
+        });
+      } else {
+        throw new Error('获取数据失败');
+      }
+    } catch (e) {
+      dispatch({
+        type: actionTypes.LOADING_ABOUT_FAILURE,
+      });
+    }
+  };
+};
+
+export const fetchMessageData = () => {
+  return async (dispatch) => {
+    dispatch({
+      type: actionTypes.LOADING_MESSAGE,
+    });
+    try {
+      const res = await axios.get('/api/message');
+      if (res.status === 200) {
+        dispatch({
+          type: actionTypes.LOADING_MESSAGE_SUCCESS,
+          payload: res.data,
+        });
+      } else {
+        throw new Error('获取数据失败');
+      }
+    } catch (e) {
+      dispatch({
+        type: actionTypes.LOADING_MESSAGE_FAILURE,
+      });
+    }
+  };
+};
+
+export const addMessage =  (options) => {
+  return async (dispatch) => {
+    dispatch({
+      type: actionTypes.ADD_MESSAGE,
+    });
+    try {
+      const res = await axios.post('/api/message', options);
+      if (res.status === 200 && res.data.code === 0) {
+        dispatch(fetchMessageData());
+      }
+      dispatch({
+        type: actionTypes.ADD_MESSAGE_SUCCESS,
+      });
+      return res.data;
+    } catch (e) {
+      dispatch({
+        type: actionTypes.ADD_MESSAGE_FAILURE,
+      });
+    }
   };
 };

@@ -62,6 +62,9 @@ export default class extends Component {
       });
       document.body.style.overflow = 'auto';
       window.scrollTo(0, 0);
+    } else if (this.props.location.pathname !== path) {
+      window.scrollTo(0, 0);
+
     }
   }
   goBack = (e) => {

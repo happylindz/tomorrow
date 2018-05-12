@@ -9,8 +9,8 @@ import {
 } from '../../actions';
 import * as constants from '../../constants';
 import scroll from '../../util/scroll';
-import './github-gist.min.css';
-import './github-markdown.min.css';
+import '../../common/github-gist.min.css';
+import '../../common/github-markdown.min.css';
 import './index.scss';
 import MessageBoard from '@/components/message-board';
 import Article from '@/components/article';
@@ -104,6 +104,7 @@ export default class extends Component {
 
     }
   }
+
   addComment = (options) => {
     options.postId = this.props.article._id;
     options.createdTime = Date.now();

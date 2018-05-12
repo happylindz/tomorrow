@@ -1,9 +1,8 @@
-.font(@font-size){
-  font-size: @font-size;
-  [data-dpr="2"] & {
-      font-size: @font-size;
-  }
-  [data-dpr="3"] & {
-      font-size: @font-size * 3;
+@mixin font($font-size) {
+  font-size: $font-size;
+  @media screen and (max-width: 414px) {
+    & {
+      font-size: $font-size - 1px;
+    }
   }
 }

@@ -25,30 +25,6 @@
       }
     }
   }
-  .article {
-    img {
-      width: 100%;
-    }
-    code {
-      max-width: 100%;
-      overflow: auto;
-      display: inline;
-      vertical-align: middle;
-    }
-    ul li {
-      list-style-type: disc;
-    }
-    ol li {
-      list-style-type: decimal;
-    }
-    h1,h2,h3,h4,h5,h6 {
-      margin-top: 0;
-      margin-bottom: px2rem(8px);
-    }
-    blockquote, dl, ol, p, pre, table, ul {
-      margin-bottom: px2rem(8px);
-    }
-  }
   .pager {
     display: flex;
     flex-wrap: nowrap;

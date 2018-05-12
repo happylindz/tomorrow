@@ -7,6 +7,7 @@ import Post from './container/post';
 import Project from './container/project';
 import Comment from './container/comment';
 import Info from './container/info';
+import Message from './container/message';
 
 const IndexPage = () => (
   <Layout>
@@ -15,6 +16,7 @@ const IndexPage = () => (
       <Route path="/admin/comment" component={Comment} />
       <Route path="/admin/project" component={Project} />
       <Route path="/admin/post" component={Post} />
+      <Route path="/admin/message" component={Message} />
       <Redirect to="/admin/info" />
     </Switch>
   </Layout>

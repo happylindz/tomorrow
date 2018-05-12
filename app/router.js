@@ -6,6 +6,9 @@ module.exports = (app) => {
   app.resources('article', '/api/article', 'article');
   app.resources('archives', '/api/archives', 'archives');
   app.resources('comment', '/api/comment', 'comment');
+  app.resources('message', '/api/message', 'message');
+  app.resources('info', '/api/info', 'info');
+
 
   router.get('', controller.index.home);
   router.get('/project', controller.index.project);
@@ -16,6 +19,7 @@ module.exports = (app) => {
   app.resources('admin_post', '/admin/api/post', 'adminPost');
   app.resources('admin_project', '/admin/api/project', 'adminProject');
   app.resources('admin_comment', '/admin/api/comment', 'adminComment');
+  app.resources('admin_message', '/admin/api/message', 'adminMessage');
   app.resources('admin_info', '/admin/api/info', 'adminInfo');
 
   router.get('/admin/login', controller.admin.login);

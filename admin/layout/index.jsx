@@ -48,6 +48,11 @@ export default class extends Component {
         menu: '评论管理',
       };
       break;
+    case '/admin/message':
+      data = {
+        menu: '留言板管理',
+      };
+      break;
     default:
       data = {
         menu: '',
@@ -90,8 +95,12 @@ export default class extends Component {
               <span>项目管理</span>
             </Menu.Item>
             <Menu.Item className={pathname === '/admin/comment' && 'ant-menu-item-selected'} key="/admin/comment">
-              <Icon type="message" />
+              <Icon type="exception" />
               <span>评论管理</span>
+            </Menu.Item>
+            <Menu.Item className={pathname === '/admin/message' && 'ant-menu-item-selected'} key="/admin/message">
+              <Icon type="message" />
+              <span>留言板管理</span>
             </Menu.Item>
           </Menu>
         </Sider>

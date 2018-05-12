@@ -89,7 +89,7 @@ export default class extends Component {
       return null;
     case constants.SUCCESS_STATE:
       return [
-        <Banner key="banner" />,
+        <Banner title="Archives" key="banner" cover="http://images.lindongzhou.com/website/archives-banner.jpg" />,
         <div key="archives-body" className="archives-body">
           <Tags tags={tags} topic={topic} />
           <Archives posts={posts} />

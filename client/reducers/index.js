@@ -17,6 +17,12 @@ import {
   LOADING_COMMENT,
   LOADING_COMMENT_SUCCESS,
   LOADING_COMMENT_FAILURE,
+  LOADING_ABOUT,
+  LOADING_ABOUT_SUCCESS,
+  LOADING_ABOUT_FAILURE,
+  LOADING_MESSAGE,
+  LOADING_MESSAGE_SUCCESS,
+  LOADING_MESSAGE_FAILURE,
 } from '../actionTypes';
 import {
   INITIAL_STATE,
@@ -120,6 +126,44 @@ export const comment = (state = { commentState: INITIAL_STATE, commentsData: [] 
   case LOADING_COMMENT_FAILURE:
     draft.commentState = FAILURE_STATE;
     draft.commentsData = [];
+    break;
+  }
+});
+
+export const message = (state = { messageState: INITIAL_STATE, messagesData: [] }, action) => produce(state, (draft) => {
+  switch (action.type) {
+  case LOADING_MESSAGE:
+    draft.messageState = LOADING_STATE;
+    draft.messagesData = [];
+    break;
+  case LOADING_MESSAGE_SUCCESS:
+    draft.messageState = SUCCESS_STATE;
+    Object.keys(action.payload).forEach((key) => {
+      draft[key] = action.payload[key];
+    });
+    break;
+  case LOADING_MESSAGE_FAILURE:
+    draft.messageState = FAILURE_STATE;
+    draft.messagesData = [];
+    break;
+  }
+});
+
+export const about = (state = { state: INITIAL_STATE, html: '' }, action) => produce(state, (draft) => {
+  switch (action.type) {
+  case LOADING_ABOUT:
+    draft.state = LOADING_STATE;
+    draft.html = '';
+    break;
+  case LOADING_ABOUT_SUCCESS:
+    draft.state = SUCCESS_STATE;
+    Object.keys(action.payload).forEach((key) => {
+      draft[key] = action.payload[key];
+    });
+    break;
+  case LOADING_ABOUT_FAILURE:
+    draft.state = FAILURE_STATE;
+    draft.html = '';
     break;
   }
 });

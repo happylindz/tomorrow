@@ -1,0 +1,21 @@
+@import '../../common/px2rem.scss';
+@import '../../common/font.scss';
+.about {
+  max-width: 768px;
+  word-break: break-all;
+}
+
+@media screen and (min-width: 768px) {
+  .about {
+    font-size: 16px;
+    padding: 20px;
+    margin: 10px auto;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .about {
+    @include font(16px);
+    padding: px2rem(14px);
+  }
+}
