@@ -5,7 +5,7 @@ class PostConnector {
     this.ctx = ctx;
   }
 
-  async queryPostByUrl(url) {
+  async queryByUrl(url) {
     const post = await this.ctx.service.post.queryArticle(url);
     const res = {
       url,
@@ -19,11 +19,11 @@ class PostConnector {
     };
     res.previous = await this.ctx.service.post.queryPrevious(post.createdTime, 'title url');
     res.next = await this.ctx.service.post.queryNext(post.createdTime, 'title url');
-    res.comments = await this.ctx.connector.comment.queryCommentsByPostId(post._id);
+    res.comments = await this.ctx.connector.comment.queryAllCommentsByPostId(post._id);
     return res;
   }
 
-  async queryPostsByTime(time) {
+  async queryByTime(time) {
     const pageSize = 10;
     const posts = await this.ctx.service.post.queryByTime('title cover tags url createdTime desc count', time, pageSize);
     for (let i = 0; i < posts.length; i++) {
@@ -47,7 +47,7 @@ class PostConnector {
     return data;
   }
 
-  async queryPosts(page = 1, size = 10) {
+  async query(page = 1, size = 10) {
     page = parseInt(page, 10);
     size = parseInt(size, 10);
     const data = {

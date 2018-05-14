@@ -1,0 +1,15 @@
+type Project {
+  _id: ID!
+  title: String!
+  href: String!
+  content: String
+  createdTime: String
+  contentType: String
+  html: String
+}
+
+type Projects {
+  projects: [Project]
+  total: Int
+  page: Int
+}

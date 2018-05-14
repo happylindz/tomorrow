@@ -2,4 +2,7 @@ type Query {
   post(url: String): Post
   posts(time: String, page: Int, size: Int): Posts
   info: Info
+  projects(page: Int): Projects
+  comments(page: Int!, size: Int): Comments
+  messages(page: Int!, size: Int): Messages
 }

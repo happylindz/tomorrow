@@ -17,6 +17,7 @@ type Post {
   cover: String!
   tags: String!
   createdTime: String!
+  day: String
   year: String
   time: String
   content: String!

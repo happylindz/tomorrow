@@ -6,4 +6,17 @@ type Comment {
   content: String!
   refTo: Comment
   postId: ID
+  title: String
+}
+
+type Comments {
+  comments: [Comment]
+  total: Int
+  page: Int
+}
+
+type Messages {
+  comments: [Comment]
+  total: Int
+  page: Int
 }

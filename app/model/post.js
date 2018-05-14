@@ -18,5 +18,13 @@ module.exports = (app) => {
   day.get(function () {
     return moment(this.createdTime).format('YYYY-MM-DD');
   });
+  const year = PostSchema.virtual('year');
+  year.get(function() {
+    return moment(this.createdTime).format('YYYY');
+  });
+  const time = PostSchema.virtual('time');
+  time.get(function() {
+    return moment(this.createdTime).format('MM-DD');
+  });
   return mongoose.model('Post', PostSchema);
 };
