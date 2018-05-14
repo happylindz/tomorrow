@@ -1,3 +1,4 @@
+@import '../../../common/px2rem.scss';
 .skeleton-tags {
   margin: 20px auto;
   display: flex;
@@ -8,10 +9,18 @@
     box-sizing: border-box;
     margin-bottom: 16px;
     height: 24px;
-    padding: 0 20px;
+    padding: 0 10px;
     .animated-background {
       border-radius: 4px;
-
     }
   }
 }
+@media screen and (max-width: 768px) {
+  .skeleton-tags {
+    margin: px2rem(10px) auto;
+    .skeleton-tag-item {
+      margin-bottom: px2rem(8px);
+    }
+  }
+}
+

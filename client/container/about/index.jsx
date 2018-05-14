@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import Banner from '@/components/banner';
 import MessageBoard from '@/components/message-board';
 import constants from '@/constants';
+import SkeletonAbout from '@/components/skeleton-about';
 import { fetchAboutData, fetchMessageData, addMessage } from '@/actions';
-import '@/common/github-gist.min.css';
-import '@/common/github-markdown.min.css';
 import './index.scss';
 
 const mapStateToProps = (state) => {
@@ -35,13 +34,9 @@ export default class extends Component {
     const { state, messageState } = this.props;
     if (state === constants.INITIAL_STATE || state === constants.FAILURE_STATE) {
       this.props.fetchAboutData();
-    } else if (state === constants.SUCCESS_STATE) {
-      console.log('isomorphism fetch about data');
     }
     if (messageState === constants.INITIAL_STATE || messageState === constants.FAILURE_STATE) {
       this.props.fetchMessageData();
-    } else if (state === constants.SUCCESS_STATE) {
-      console.log('isomorphosm fetch message data');
     }
   }
 
@@ -55,8 +50,7 @@ export default class extends Component {
     switch (state) {
     case constants.INITIAL_STATE:
     case constants.LOADING_STATE:
-      // return <Skeleton />;
-      return null;
+      return <SkeletonAbout />;
     case constants.SUCCESS_STATE:
       return [
         <Banner key="banner" title="About me" cover="http://images.lindongzhou.com/website/about-banner.jpeg" />,

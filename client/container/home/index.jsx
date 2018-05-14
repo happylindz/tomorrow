@@ -1,13 +1,11 @@
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Home from '@/components/home';
 import {
   fetchPostsData,
 } from '../../actions';
-import {
-  throttle,
-} from 'lodash';
+import throttle from '../../util/throttle';
 import * as constants from '../../constants';
 import eventUtil from '../../util/eventUtil';
 import './index.scss';
@@ -27,7 +25,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 @connect(mapStateToProps, mapDispatchToProps)
-export default class extends Component {
+export default class extends PureComponent {
   constructor(...args) {
     super(...args);
     this.fetchPostsData = throttle(this.fetchPostsData, 100);
@@ -39,8 +37,6 @@ export default class extends Component {
     const { state } = this.props;
     if (state === constants.INITIAL_STATE || state === constants.FAILURE_STATE) {
       this.props.fetchPostsData();
-    } else if (state === constants.SUCCESS_STATE) {
-      console.log('isomorphism fetch posts data');
     }
     eventUtil.addHandler(window, 'scroll', this.fetchPostsData);
   }

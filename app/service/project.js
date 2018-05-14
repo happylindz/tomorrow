@@ -4,7 +4,7 @@ const { parse2 } = require('../util/parse.js');
 module.exports = (app) => {
   class Project extends app.Service {
     queryAll() {
-      return this.ctx.model.Project.find({}).sort({ _id: -1 });
+      return this.ctx.model.Project.find({}).sort({ createdTime: -1 });
     }
 
     count() {
@@ -12,7 +12,7 @@ module.exports = (app) => {
     }
 
     query(query, page, size = 10) {
-      return this.ctx.model.Project.find({}, query).sort({ _id: -1 }).skip((parseInt(page, 10) - 1) * size).limit(parseInt(size, 10));
+      return this.ctx.model.Project.find({}, query).sort({ createdTime: -1 }).skip((parseInt(page, 10) - 1) * size).limit(parseInt(size, 10));
     }
 
     add(data) {
@@ -30,7 +30,7 @@ module.exports = (app) => {
       } else if (data.contentType === 'normal') {
         data.html = data.content;
       }
-      return this.ctx.model.Project.update({ _id }, data);
+      return this.ctx.model.Project.findOneAndUpdate({ _id }, data);
     }
 
     delete(_id) {

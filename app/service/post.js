@@ -4,28 +4,31 @@ const { parse } = require('../util/parse.js');
 module.exports = (app) => {
   class Post extends app.Service {
     query(query, page, size = 10) {
-      page = parseInt(page, 10);
-      size = parseInt(size, 10);
       return this.ctx.model.Post.find({}, query).sort({ createdTime: -1 }).skip((page - 1) * size).limit(size);
     }
 
     queryByTime(query, time, size) {
-      if (time) {
+      if (time && time !== '0') {
         return this.ctx.model.Post.find({ createdTime: { $lt: time }}).sort({ createdTime: -1 }).limit(size);
       } else {
         return this.ctx.model.Post.find({}, query).sort({ createdTime: -1 }).limit(size);
       }
+    }
+    queryIdByUrl(url) {
+      return this.ctx.model.Post.findOne({ url }, '_id');
     }
 
     queryAll(query) {
       return this.ctx.model.Post.find({}, query).sort({ createdTime: -1 });
     }
 
-    queryNext(createdTime, query) {
-      return this.ctx.model.Post.find({ createdTime: { $lt: createdTime }}, query).sort({ createdTime: -1 }).limit(1);
+    async queryNext(createdTime, query) {
+      const data = await this.ctx.model.Post.find({ createdTime: { $lt: createdTime }}, query).sort({ createdTime: -1 }).limit(1);
+      return data[0];
     }
-    queryPrevious(createdTime, query) {
-      return this.ctx.model.Post.find({ createdTime: { $gt: createdTime }}, query).sort({ createdTime: 1 }).limit(1);
+    async queryPrevious(createdTime, query) {
+      const data = await this.ctx.model.Post.find({ createdTime: { $gt: createdTime }}, query).sort({ createdTime: 1 }).limit(1);
+      return data[0];
     }
 
     count() {
@@ -41,7 +44,7 @@ module.exports = (app) => {
 
     async queryArticle(url) {
       await this.addCount(url);
-      return this.ctx.model.Post.find({ url }, 'content index createdTime tags title count').limit(1);
+      return this.ctx.model.Post.findOne({ url });
     }
 
     queryArticleById(_id, query) {

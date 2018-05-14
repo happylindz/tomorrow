@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { throttle } from 'lodash';
+import throttle from '../../util/throttle';
 import './index.scss';
 import scroll from '../../util/scroll';
 import eventUtil from '../../util/eventUtil';

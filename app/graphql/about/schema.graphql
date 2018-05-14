@@ -1,0 +1,8 @@
+type Info {
+  id: ID!
+  name: String!
+  info: String!
+  html: String!
+  infoType: String!
+  comments: [Comment]
+}

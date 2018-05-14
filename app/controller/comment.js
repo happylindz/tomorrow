@@ -5,7 +5,7 @@ const fromConfig = require('../../secret/config.json').fromConfig;
 
 class CommentController extends Controller {
   async index(ctx) {
-    const commentsData = await ctx.service.comment.queryByArticle('name createdTime content ref postId', ctx.query.postId);
+    const commentsData = await ctx.service.comment.queryByPostId('name createdTime content ref postId', ctx.query.postId);
     for (let i = 0, len = commentsData.length; i < len; i++) {
       commentsData[i] = {
         name: commentsData[i].name,

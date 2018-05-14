@@ -5,18 +5,18 @@ const moment = require('moment');
 class ArticleController extends Controller {
   async index(ctx) {
     const { url } = ctx.query;
-    const data = await ctx.service.post.queryArticle(url);
+    const article = await ctx.service.post.queryArticle(url);
     const res = {
       url,
-      content: data[0].content,
-      index: data[0].index,
-      _id: data[0]._id,
-      createdTime: moment(data[0].createdTime).format('YYYY-MM-DD'),
-      title: data[0].title,
-      tags: data[0].tags,
+      content: article.content,
+      index: article.index,
+      _id: article._id,
+      createdTime: moment(article.createdTime).format('YYYY-MM-DD'),
+      title: article.title,
+      tags: article.tags,
     };
-    res.previous = (await ctx.service.post.queryPrevious(data[0].createdTime, 'title url createdTime'))[0];
-    res.next = (await ctx.service.post.queryNext(data[0].createdTime, 'title url createdTime'))[0];
+    res.previous = await ctx.service.post.queryPrevious(article.createdTime, 'title url createdTime');
+    res.next = await ctx.service.post.queryNext(article.createdTime, 'title url createdTime');
     ctx.body = res;
     ctx.type = 'json';
     ctx.status = 200;

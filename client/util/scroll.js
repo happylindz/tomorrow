@@ -7,7 +7,7 @@ function intval(v)
 // 获取元素信息
 function getPos(e) {
   let l = 0;
-  let t  = -61;
+  let t  = -65;
   let w = intval(e.style.width);
   let h = intval(e.style.height);
   let wb = e.offsetWidth;

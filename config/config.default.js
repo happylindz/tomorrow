@@ -2,7 +2,7 @@
 const path = require('path');
 
 exports.keys = 'private key';
-exports.middleware = ['errorHandler', 'login'];
+exports.middleware = ['errorHandler', 'login', 'graphql'];
 // exports.middleware = ['errorHandler'];
 exports.errorHandler = {
   match: '/api',
@@ -42,4 +42,12 @@ exports.view = {
   },
   defaultExtension: '.html',
   root: `${path.resolve(__dirname, '../app/public')},${path.resolve(__dirname, '../app/view')}`,
+};
+
+
+exports.graphql = {
+  router: '/graphql',
+  app: true,
+  agent: false,
+  graphiql: true,
 };

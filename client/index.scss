@@ -1,3 +1,5 @@
+@import './common/github-gist.min.css';
+@import './common/github-markdown.min.css';
 html,
 body,
 #root {
@@ -8,6 +10,7 @@ body {
   font-family: Monospaced Number,Chinese Quote,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Helvetica Neue,Helvetica,Arial,sans-serif;
   min-width: 320px;
   font-size: 16px;
+  position: relative;
 }
 
 // 清除浮动
@@ -158,10 +161,10 @@ textarea.ant-input {
     display: inline;
     vertical-align: middle;
   }
-  ul li {
+  ul > li {
     list-style-type: disc;
   }
-  ol li {
+  ol > li {
     list-style-type: decimal;
   }
   h1,h2,h3,h4,h5,h6 {
@@ -171,4 +174,17 @@ textarea.ant-input {
   blockquote, dl, ol, p, pre, table, ul {
     margin-bottom: px2rem(8px);
   }
+}
+.animated-background {
+//    animation-duration: 3s;
+//    animation-fill-mode: forwards;
+//    animation-iteration-count: infinite;
+//    animation-name: placeHolderShimmer;
+//    animation-timing-function: linear;
+   background: #f6f7f8;
+//    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+   background-size: cover;
+   position: relative;
+   width: 100%;
+   height: 100%;
 }

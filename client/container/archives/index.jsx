@@ -8,7 +8,7 @@ import { query } from '../../util/index.js';
 import Tags from '@/components/tags';
 import Banner from '@/components/banner';
 import Archives from '@/components/archives';
-// import Skeleton from '@/components/skeleton-archives';
+import SkeletonArchives from '@/components/skeleton-archives';
 import './index.scss';
 
 const mapStateToProps = (state, ownProps) => {
@@ -25,7 +25,7 @@ const mapStateToProps = (state, ownProps) => {
   postsData.forEach((post) => {
     try {
       const tags = post.tags;
-      if (topic === '') {
+      if (topic === '' || topic === 'undefined') {
         const year = post.year;
         if (!posts[year]) {
           posts[year] = [];
@@ -74,8 +74,6 @@ export default class extends Component {
     } = this.props;
     if (state === constants.INITIAL_STATE || state === constants.FAILURE_STATE) {
       this.props.fetchArchivesData();
-    } else if (state === constants.SUCCESS_STATE) {
-      console.log('isomorphism fetch archives data');
     }
   }
 
@@ -85,8 +83,7 @@ export default class extends Component {
     switch (state) {
     case constants.INITIAL_STATE:
     case constants.LOADING_STATE:
-      // return <Skeleton />;
-      return null;
+      return <SkeletonArchives />;
     case constants.SUCCESS_STATE:
       return [
         <Banner title="Archives" key="banner" cover="http://images.lindongzhou.com/website/archives-banner.jpg" />,

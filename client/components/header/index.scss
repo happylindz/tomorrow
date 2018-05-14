@@ -176,6 +176,7 @@
         padding-bottom: 9999px;
         flex-wrap: wrap;
         min-width: 320px;
+        transform: translate3d(0, 0, 0);
         &.active {
           display: flex;
           animation: showMenu .4s forwards;

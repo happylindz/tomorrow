@@ -1,4 +1,3 @@
-'use strict';
 
 exports.validate = {
   enable: true,
@@ -13,4 +12,9 @@ exports.mongoose = {
 exports.ejs = {
   enable: true,
   package: 'egg-view-ejs',
+};
+
+exports.graphql = {
+  enable: true,
+  package: 'egg-graphql',
 };

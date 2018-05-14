@@ -16,7 +16,7 @@ class PostController extends Controller {
         url: post.url,
         createdTime: moment(post.createdTime).format('YYYY-MM-DD HH:mm:ss'),
         desc: post.desc,
-        comment: (await ctx.service.comment.queryCountByArticle(post._id)),
+        comment: (await ctx.service.comment.queryCountByPostId(post._id)),
         count: post.count,
       };
     }

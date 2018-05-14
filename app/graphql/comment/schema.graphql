@@ -1,0 +1,9 @@
+type Comment {
+  _id: ID!
+  name: String!
+  createdTime: String!
+  email: String!
+  content: String!
+  refTo: Comment
+  postId: ID
+}

@@ -29,7 +29,7 @@ export default class extends PureComponent {
       count++;
       const elem = document.getElementById(hash);
       if (elem) {
-        window.scrollTo(0, elem.offsetTop - 61);
+        window.scrollTo(0, elem.offsetTop - 65);
         clearInterval(id);
       } else if (count === 10) {
         clearInterval(id);

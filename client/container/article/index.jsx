@@ -9,8 +9,6 @@ import {
 } from '../../actions';
 import * as constants from '../../constants';
 import scroll from '../../util/scroll';
-import '../../common/github-gist.min.css';
-import '../../common/github-markdown.min.css';
 import './index.scss';
 import MessageBoard from '@/components/message-board';
 import Article from '@/components/article';
@@ -84,8 +82,6 @@ export default class extends Component {
         url: nextUrl,
       });
       props.resetComment();
-    } else if (state === constants.SUCCESS_STATE) {
-      console.log('isomorphism fetch article data');
     }
     if (postId && (commentState === constants.INITIAL_STATE || commentState === constants.FAILURE_STATE)) {
       props.fetchCommentData({

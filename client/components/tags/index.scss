@@ -17,6 +17,7 @@
     }
     &.active {
       color: rgba(0, 0, 0, .8);
+      background: #eee;
       font-weight: 700;
       &:hover {
         color: #000;

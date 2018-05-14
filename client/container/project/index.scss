@@ -1,0 +1,73 @@
+@import '../../common/px2rem.scss';
+.project-wrapper {
+  max-width: 768px;
+  word-break: break-all;
+  margin: 0 auto;
+  .project-item {
+    border-bottom: .5px solid #ddd;
+    & > a {
+      text-decoration: none;
+      color: #555;
+      .title {
+        display: inline-block;
+        line-height: 1.5;
+        color: #113A5D;
+        position: relative;
+      }
+      & > span {
+        color: #e54e53;
+        font-size: 12px;
+      }
+    }
+  }
+}
+@media screen and (min-width: 768px) {
+  .project-wrapper {
+    .project-item {
+      padding: 10px 100px;
+      border-radius: 4px;
+      &:hover {
+        background-color: rgba(0, 0, 0, .01);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, .13);
+        & > a {
+          .title {
+            color: #062743;
+          }
+          .content {
+            color: #333;
+          }
+        }
+      }
+      & > a {
+        .title {
+          font-size: 24px;
+          margin-right: 6px;
+        }
+        .content {
+          font-size: 14px;
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .project-wrapper {
+    .project-item {
+      padding: px2rem(6px) px2rem(10px);
+      margin: 0 px2rem(12px);
+      & > a {
+        .title {
+          font-size: 20px;
+          margin-right: px2rem(4px);
+          // margin-bottom: px2rem(6px);
+        }
+        .content {
+          font-size: 14px;
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}

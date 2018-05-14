@@ -3,7 +3,8 @@ const { Controller } = require('egg');
 
 class InfoController extends Controller {
   async index(ctx) {
-    ctx.body = (await ctx.service.info.query('html'))[0];
+    const data  = await ctx.service.info.query('html');
+    ctx.body = data;
     ctx.type = 'json';
     ctx.status = 200;
   }
