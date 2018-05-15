@@ -1,5 +1,3 @@
-const mail = require('../util/mail');
-
 module.exports = (app) => {
   class Comment extends app.Service {
     count() {
@@ -32,15 +30,6 @@ module.exports = (app) => {
 
     delete(_id) {
       return this.ctx.model.Comment.remove({ _id });
-    }
-
-    async sendEmail(renderOptions, email) {
-      const tpl = await this.ctx.renderView('email', renderOptions);
-      const mailOptions = {
-        to: email,
-        html: tpl,
-      };
-      mail(mailOptions);
     }
   }
   return Comment;

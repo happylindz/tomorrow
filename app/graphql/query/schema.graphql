@@ -4,5 +4,5 @@ type Query {
   info: Info
   projects(page: Int, size: Int): Projects
   comments(page: Int!, size: Int): Comments
-  messages(page: Int!, size: Int): Messages
+  message(page: Int!, size: Int): Message
 }

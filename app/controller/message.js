@@ -1,42 +1,39 @@
-const { Controller } = require('egg');
-const fromConfig = require('../../secret/config.json').fromConfig;
 
-class CommentController extends Controller {
+const { Controller } = require('egg');
+
+class MessageController extends Controller {
   async create(ctx) {
     const data = ctx.request.body;
     const res = await ctx.service.message.add(data);
-    let from = null;
-    if (data.ref) {
-      const fromData = await ctx.service.message.queryById('name content email', data.ref);
-      from = {
-        name: fromData.name,
-        content: fromData.content,
-        email: fromData.email,
-      };
-    } else {
-      from = fromConfig;
+    const from = {
+      ...this.app.config.mailOptions
+    };
+    if (data.refTo) {
+      const fromData = await ctx.service.message.queryById(data.refTo);
+      from.name = fromData.name;
+      from.content = fromData.content;
+      from.email = fromData.email;
     }
-    await ctx.service.message.sendEmail({
+    await ctx.service.mail.sendMail({
+      from,
       to: {
         name: data.name,
         content: data.content,
       },
-      from,
-      href: `http://localhost:9001/about#${String(res._id).slice(-4)}`,
-    }, from.email);
+      href: `${this.app.config.baseUrl}/about$#${String(res._id).slice(-4)}`,
+    }, { to: from.email });
     ctx.body = {
-      message: '评论成功',
+      message: '留言成功',
       code: 0,
     };
     ctx.type = 'json';
     ctx.status = 200;
   }
-
   async destroy(ctx) {
     const { id } = ctx.params;
     await ctx.service.message.delete(id);
     ctx.body = {
-      message: '成功删除评论',
+      message: '成功删除留言',
       code: 0,
     };
     ctx.type = 'json';
@@ -44,4 +41,4 @@ class CommentController extends Controller {
   }
 }
 
-module.exports = CommentController;
+module.exports = MessageController;

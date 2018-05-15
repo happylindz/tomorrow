@@ -88,7 +88,7 @@ export default class extends PureComponent {
   render() {
     const {
       message: {
-        messagesData,
+        comments,
         total,
         page,
       }
@@ -126,7 +126,7 @@ export default class extends PureComponent {
       },
     }];
     return (<Row>
-      <Row style={marginBottom}><Table rowKey="_id" columns={columns} dataSource={messagesData} pagination={false} /></Row>
+      <Row style={marginBottom}><Table rowKey="_id" columns={columns} dataSource={comments} pagination={false} /></Row>
       <Row style={{ 'float': 'right' }}><Pagination onChange={this.changePageIndex} hideOnSinglePage showQuickJumper current={page} defaultCurrent={1} total={total} /></Row>
       <Dialog
         type="回复评论"

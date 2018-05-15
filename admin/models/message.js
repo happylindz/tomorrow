@@ -3,7 +3,7 @@ import * as services from '../services/message';
 export default {
   namespace: 'message',
   state: {
-    messagesData: [],
+    comments: [],
     page: 1,
     total: 1,
   },
@@ -18,17 +18,17 @@ export default {
   effects: {
     * fetch({ payload: { page = 1 }}, { call, put, select }) {
       const res = yield call(services.query, { page });
-      if (res.status === 200) {
+      if (res.status === 200 && res.data && res.data.data && res.data.data.message) {
         yield put({
           type: 'save',
           payload: {
-            ...res.data,
+            ...res.data.data.message,
           },
         });
       }
     },
     * reload(_, { call, put, select }) {
-      const page = yield select(state => state.comment.page);
+      const page = yield select(state => state.message.page);
       yield put({ type: 'fetch', payload: { page }});
     },
     * add({ payload }, { call, put }) {

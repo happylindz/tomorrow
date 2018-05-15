@@ -1,33 +1,28 @@
 
 const { Controller } = require('egg');
-const fromConfig = require('../../secret/config.json').fromConfig;
 
 class CommentController extends Controller {
   async create(ctx) {
     const data = ctx.request.body;
-    console.log(data);
-    console.log(this.app.config.baseUrl);
     const res = await ctx.service.comment.add(data);
-    let from = null;
-    const href = (await ctx.service.post.queryPostById(data.postId)).url;
-    if (data.ref) {
-      const fromData = await ctx.service.comment.queryById('name content email', data.ref);
-      from = {
-        name: fromData.name,
-        content: fromData.content,
-        email: fromData.email,
-      };
-    } else {
-      from = fromConfig;
+    const from = {
+      ...this.app.config.mailOptions
+    };
+    if (data.refTo) {
+      const fromData = await ctx.service.comment.queryById(data.refTo);
+      from.name = fromData.name;
+      from.content = fromData.content;
+      from.email = fromData.email;
     }
-    await ctx.service.comment.sendEmail({
+    const url = (await ctx.service.post.queryPostById(data.postId)).url;
+    await ctx.service.mail.sendMail({
+      from,
       to: {
         name: data.name,
         content: data.content,
       },
-      from,
-      href: `http://localhost:9001/article/${href}#${String(res._id).slice(-4)}`,
-    }, from.email);
+      href: `${this.app.config.baseUrl}/article/${url}#${String(res._id).slice(-4)}`,
+    }, { to: from.email });
     ctx.body = {
       message: '评论成功',
       code: 0,
