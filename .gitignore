@@ -9,4 +9,4 @@ run
 jsconfig.json
 webpack_cache/
 secret/
-mail.js
+config/

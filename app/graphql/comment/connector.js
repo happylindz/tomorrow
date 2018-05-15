@@ -1,5 +1,3 @@
-const moment = require('moment');
-
 class CommentConnector {
   constructor(ctx) {
     this.ctx = ctx;
@@ -9,23 +7,13 @@ class CommentConnector {
     page = parseInt(page, 10);
     size = parseInt(size, 10);
     const data = {
-      comments: await this.ctx.service.comment.query('name createdTime email content ref postId', page, size),
+      comments: await this.ctx.service.comment.query(page, size),
       total: await this.ctx.service.comment.count(),
-      page: parseInt(page, 10),
+      page,
     };
     for (let i = 0; i < data.comments.length; i++) {
       const comment = data.comments[i];
-      const postId = comment.postId;
-      data.comments[i] = {
-        _id: comment._id,
-        createdTime: comment.createdTime,
-        ref: comment.ref,
-        postId: comment.postId,
-        content: comment.content,
-        email: comment.email,
-        name: comment.name,
-        title: (await this.ctx.service.post.queryArticleById(postId, 'title')).title
-      };
+      data.comments[i].title = (await this.ctx.service.post.queryPostById(comment.postId)).title;
     }
     return data;
   }
@@ -34,7 +22,7 @@ class CommentConnector {
     page = parseInt(page, 10);
     size = parseInt(size, 10);
     const data = {
-      comments: await this.ctx.service.message.query('name createdTime email content ref', page, size),
+      comments: await this.ctx.service.message.query(page, size),
       total: await this.ctx.service.message.count(),
       page,
     };
@@ -42,28 +30,16 @@ class CommentConnector {
   }
 
   async queryAllMessages() {
-    const comments = await this.ctx.service.message.queryAll('name createdTime content ref');
+    const comments = await this.ctx.service.message.queryAll();
     return this.processComments(comments);
   }
 
   async queryAllCommentsByPostId(postId) {
-    const comments = await this.ctx.service.comment.queryByPostId('name createdTime content ref', postId);
+    const comments = await this.ctx.service.comment.queryByPostId(postId);
     return this.processComments(comments, postId);
   }
 
   processComments(comments, postId) {
-    for (let i = 0, len = comments.length; i < len; i++) {
-      comments[i] = {
-        name: comments[i].name,
-        createdTime: moment(comments[i].createdTime).format('YYYY-MM-DD HH:mm:ss'),
-        content: comments[i].content,
-        refTo: comments[i].ref,
-        _id: comments[i]._id,
-      };
-      if (postId) {
-        comments[i].postId = postId;
-      }
-    }
     for (let i = 0, len = comments.length; i < len; i++) {
       const comment = comments[i];
       if (comment.refTo) {

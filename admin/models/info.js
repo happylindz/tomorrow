@@ -19,11 +19,11 @@ export default {
   effects: {
     * query(_, { call, put }) {
       const res = yield call(services.query);
-      if (res.status === 200 && res.data.length === 1) {
+      if (res.status === 200 && res.data && res.data.data && res.data.data.info) {
         yield put({
           type: 'save',
           payload: {
-            ...res.data[0],
+            ...res.data.data.info,
           },
         });
       }

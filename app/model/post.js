@@ -12,19 +12,34 @@ module.exports = (app) => {
     content: { type: String, required: true },
     desc: { type: String, required: true },
     index: [{ _id: false, tag: String, content: String, anchor: String }],
-    count: { type: Number, default: 0 },
+    readCount: { type: Number, default: 0 },
   });
-  const day = PostSchema.virtual('day');
-  day.get(function () {
+  const date = PostSchema.virtual('date');
+  date.get(function () {
     return moment(this.createdTime).format('YYYY-MM-DD');
   });
+
+  const time = PostSchema.virtual('time');
+  time.get(function() {
+    return moment(this.createdTime).format('YYYY-MM-DD HH:mm:ss');
+  });
+
   const year = PostSchema.virtual('year');
   year.get(function() {
     return moment(this.createdTime).format('YYYY');
   });
-  const time = PostSchema.virtual('time');
-  time.get(function() {
+
+  const day = PostSchema.virtual('day');
+  day.get(function() {
     return moment(this.createdTime).format('MM-DD');
   });
+  PostSchema.pre('save', function(next) {
+    if (!this.createdTime) {
+      this.createdTime = Date.now();
+      console.log('没传时间');
+    }
+    next();
+  });
+
   return mongoose.model('Post', PostSchema);
 };

@@ -1,30 +1,42 @@
 
+const streamToPromise = require('stream-to-promise');
 const { Controller } = require('egg');
-const moment = require('moment');
-const pageSize = 10;
+
 class PostController extends Controller {
-  async index(ctx) {
-    const time = ctx.query.time;
-    const postsData = await ctx.service.post.queryByTime('title cover tags url createdTime desc count', time, pageSize);
-    for (let i = 0; i < postsData.length; i++) {
-      const post = postsData[i];
-      postsData[i] = {
-        _id: post._id,
-        title: post.title,
-        cover: post.cover,
-        tags: post.tags.split(','),
-        url: post.url,
-        createdTime: moment(post.createdTime).format('YYYY-MM-DD HH:mm:ss'),
-        desc: post.desc,
-        comment: (await ctx.service.comment.queryCountByPostId(post._id)),
-        count: post.count,
-      };
-    }
-    const data = {
-      postsData,
-      end: postsData.length < pageSize,
+  async create(ctx) {
+    const stream = await ctx.getFileStream();
+    const data = stream.fields;
+    data.url = stream.filename.replace(/.md/g, '');
+    data.content = (await streamToPromise(stream)).toString();
+    await ctx.service.post.add(data);
+    ctx.body = {
+      message: '成功新增博文',
+      code: 0,
     };
-    ctx.body = data;
+    ctx.type = 'json';
+    ctx.status = 200;
+  }
+
+  async update(ctx) {
+    const stream = await ctx.getFileStream();
+    const data = stream.fields;
+    data.url = stream.filename.replace(/.md/g, '');
+    data.content = (await streamToPromise(stream)).toString();
+    await ctx.service.post.update(ctx.params.id, data);
+    ctx.body = {
+      message: '成功修改博文',
+      code: 0,
+    };
+    ctx.type = 'json';
+    ctx.status = 200;
+  }
+
+  async destroy(ctx) {
+    await ctx.service.post.delete(ctx.params.id);
+    ctx.body = {
+      message: '成功删除博文',
+      code: 0,
+    };
     ctx.type = 'json';
     ctx.status = 200;
   }

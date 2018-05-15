@@ -34,7 +34,7 @@ module.exports = webpackMerge(baseConfig, {
       ]
     },
     proxy: [{
-      context: ['/admin/api', '/api'],
+      context: ['/api', '/graphql'],
       target: 'http://localhost:7001',
     }]
   },

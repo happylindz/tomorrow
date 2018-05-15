@@ -46,7 +46,7 @@ export default class extends PureComponent {
       const comment = this.state.comment;
       const commentData = {
         ...values,
-        ref: comment._id,
+        refTo: comment._id,
         postId: comment.postId,
         createdTime: Date.now(),
       };
@@ -90,7 +90,7 @@ export default class extends PureComponent {
   render() {
     const {
       comment: {
-        commentsData,
+        comments,
         total,
         page,
       }
@@ -132,7 +132,7 @@ export default class extends PureComponent {
       },
     }];
     return (<Row>
-      <Row style={marginBottom}><Table rowKey="_id" columns={columns} dataSource={commentsData} pagination={false} /></Row>
+      <Row style={marginBottom}><Table rowKey="_id" columns={columns} dataSource={comments} pagination={false} /></Row>
       <Row style={{ 'float': 'right' }}><Pagination onChange={this.changePageIndex} hideOnSinglePage showQuickJumper current={page} defaultCurrent={1} total={total} /></Row>
       <Dialog
         type="回复评论"

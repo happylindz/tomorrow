@@ -7,7 +7,7 @@ class ProjectConnector {
     page = parseInt(page, 10);
     size = parseInt(size, 10);
     const data = {
-      projects: await this.ctx.service.project.query('title href content contentType', page, size),
+      projects: await this.ctx.service.project.query(page, size),
       total: await this.ctx.service.project.count(),
       page
     };

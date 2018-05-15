@@ -46,9 +46,7 @@ export default class extends PureComponent {
       data.append('cover', values.cover);
       data.append('tags', values.tags.join(','));
       data.append('upload', values.upload[0]);
-      if (values.createdTime) {
-        data.append('createdTime', values.createdTime);
-      }
+      data.append('createdTime', values.createdTime);
       let res = null;
       if (this.state.postId === '') {
         res = await this.props.dispatch({
@@ -129,13 +127,13 @@ export default class extends PureComponent {
   render() {
     const {
       post: {
-        postsData,
+        posts,
         total,
         page,
       }
     } = this.props;
     const tagsData = new Set();
-    postsData.forEach((post) => {
+    posts.forEach((post) => {
       post.tags.split(',').forEach((tag) => {
         tagsData.add(tag);
       });
@@ -177,7 +175,7 @@ export default class extends PureComponent {
     }];
     return (<Row>
       <Row style={marginBottom}><Button onClick={this.showCreateModal}>新增博文</Button></Row>
-      <Row style={marginBottom}><Table rowKey="_id" columns={columns} dataSource={postsData} pagination={false} /></Row>
+      <Row style={marginBottom}><Table rowKey="_id" columns={columns} dataSource={posts} pagination={false} /></Row>
       <Row style={{ 'float': 'right' }}><Pagination onChange={this.changePageIndex} hideOnSinglePage showQuickJumper current={page} defaultCurrent={1} total={total} /></Row>
       <Dialog
         type={this.state.postId === '' ? '新增博文' : '修改博文'}

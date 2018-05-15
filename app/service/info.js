@@ -3,8 +3,8 @@ const { parse2 } = require('../util/parse.js');
 
 module.exports = (app) => {
   class Info extends app.Service {
-    query(query) {
-      return this.ctx.model.Info.findOne({}, query).limit(1);
+    query() {
+      return this.ctx.model.Info.findOne({});
     }
 
     add(data) {

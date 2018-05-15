@@ -4,18 +4,31 @@ import {
 } from '../constants';
 
 export const query = ({ page }) => {
-  return axios.get('/admin/api/comment', {
+  return axios.get('/graphql', {
     params: {
-      page,
-      size: PAGE_SIZE,
+      query: `{
+        comments(page: ${page}, size: ${PAGE_SIZE}) {
+          comments {
+            _id
+            title
+            name
+            createdTime
+            email
+            content
+            postId
+          }
+          total
+          page
+        }
+      }`
     },
   });
 };
 
 export const remove = ({ id }) => {
-  return axios.delete(`/admin/api/comment/${id}`);
+  return axios.delete(`/api/comment/${id}`);
 };
 
 export const add = (data) => {
-  return axios.post('/admin/api/comment', data);
+  return axios.post('/api/comment', data);
 };

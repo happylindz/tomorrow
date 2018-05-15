@@ -3,7 +3,7 @@ import * as services from '../services/post';
 export default {
   namespace: 'post',
   state: {
-    postsData: [],
+    posts: [],
     page: 1,
     total: 1,
   },
@@ -18,11 +18,11 @@ export default {
   effects: {
     * fetch({ payload: { page = 1 }}, { call, put, select }) {
       const res = yield call(services.query, { page });
-      if (res.status === 200) {
+      if (res.status === 200 && res.data && res.data.data && res.data.data.posts) {
         yield put({
           type: 'save',
           payload: {
-            ...res.data,
+            ...res.data.data.posts,
           },
         });
       }

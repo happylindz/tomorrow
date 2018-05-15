@@ -11,8 +11,8 @@ module.exports = (app) => {
       return this.ctx.model.Project.count();
     }
 
-    query(query, page, size = 10) {
-      return this.ctx.model.Project.find({}, query).sort({ createdTime: -1 }).skip((parseInt(page, 10) - 1) * size).limit(parseInt(size, 10));
+    query(page, size = 10) {
+      return this.ctx.model.Project.find({}).sort({ createdTime: -1 }).skip((parseInt(page, 10) - 1) * size).limit(parseInt(size, 10));
     }
 
     add(data) {

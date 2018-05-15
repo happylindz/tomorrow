@@ -110,7 +110,7 @@ export default class extends PureComponent {
   render() {
     const {
       project: {
-        projectsData,
+        projects,
         total,
         page,
       }
@@ -138,7 +138,7 @@ export default class extends PureComponent {
     }];
     return (<Row>
       <Row style={marginBottom}><Button onClick={this.showCreateModal}>新增项目</Button></Row>
-      <Row style={marginBottom}><Table rowKey="_id" columns={columns} dataSource={projectsData} pagination={false} /></Row>
+      <Row style={marginBottom}><Table rowKey="_id" columns={columns} dataSource={projects} pagination={false} /></Row>
       <Row style={{ 'float': 'right' }}><Pagination onChange={this.changePageIndex} hideOnSinglePage showQuickJumper current={page} defaultCurrent={1} total={total} /></Row>
       <Dialog
         type={this.state.projectId === '' ? '新增项目' : '修改项目'}

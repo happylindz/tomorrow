@@ -2,8 +2,6 @@
 const path = require('path');
 
 exports.keys = 'private key';
-exports.middleware = ['errorHandler', 'login', 'graphql'];
-// exports.middleware = ['errorHandler'];
 exports.errorHandler = {
   match: '/api',
 };
@@ -21,12 +19,6 @@ exports.mongoose = {
 
 exports.multipart = {
   fileExtensions: ['.md'],
-};
-
-// 暂时
-exports.security = {
-  csrf: false,
-  ctoken: false,
 };
 
 exports.session = {
@@ -49,5 +41,5 @@ exports.graphql = {
   router: '/graphql',
   app: true,
   agent: false,
-  graphiql: true,
+  // graphiql: true,
 };

@@ -4,22 +4,33 @@ import {
 } from '../constants';
 
 export const query = ({ page }) => {
-  return axios.get('/admin/api/project', {
+  return axios.get('/graphql', {
     params: {
-      page,
-      size: PAGE_SIZE,
+      query: `{
+        projects(page: ${page}, size: ${PAGE_SIZE}) {
+          projects {
+            _id
+            title
+            contentType
+            content
+            href
+          }
+          total
+          page
+        }
+      }`
     },
   });
 };
 
 export const remove = ({ id }) => {
-  return axios.delete(`/admin/api/project/${id}`);
+  return axios.delete(`/api/project/${id}`);
 };
 
 export const add = (data) => {
-  return axios.post('/admin/api/project', data);
+  return axios.post('/api/project', data);
 };
 
 export const update = (id, values) => {
-  return axios.put(`/admin/api/project/${id}`, values);
+  return axios.put(`/api/project/${id}`, values);
 };

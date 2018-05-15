@@ -6,7 +6,7 @@ module.exports = (app) => {
     createdTime: { type: Date, default: Date.now() },
     email: { type: String, required: true },
     content: { type: String, required: true },
-    ref: { type: Schema.Types.ObjectId, ref: 'messages', default: null },
+    refTo: { type: Schema.Types.ObjectId, ref: 'messages', default: null },
   });
   return mongoose.model('Message', MessageSchema);
 };

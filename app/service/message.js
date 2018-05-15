@@ -5,16 +5,16 @@ module.exports = (app) => {
     count() {
       return this.ctx.model.Message.count();
     }
-    query(query, page, size = 10) {
-      return this.ctx.model.Message.find({}, query).sort({ createdTime: -1 }).skip((parseInt(page, 10) - 1) * size).limit(parseInt(size, 10));
+    query(page, size = 10) {
+      return this.ctx.model.Message.find({}).sort({ createdTime: -1 }).skip((parseInt(page, 10) - 1) * size).limit(parseInt(size, 10));
     }
 
-    queryAll(query) {
-      return this.ctx.model.Message.find({}, query).sort({ createdTime: -1 });
+    queryAll() {
+      return this.ctx.model.Message.find({}).sort({ createdTime: -1 });
     }
 
-    queryById(query, _id) {
-      return this.ctx.model.Message.find({ _id }, query);
+    queryById(_id) {
+      return this.ctx.model.Message.findOne({ _id });
     }
 
     add(data) {

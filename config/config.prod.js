@@ -1,3 +1,3 @@
-'use strict'; // eslint-disable-line
 
-module.exports = {};
+exports.base_url = 'https://lindongzhou.com';
+exports.middleware = ['errorHandler', 'login', 'graphql'];
