@@ -6197,6 +6197,10 @@ mongodb@2.2.34:
     mongodb-core "2.1.18"
     readable-stream "2.2.7"
 
+mongoose-lean-virtuals@^0.3.0:
+  version "0.3.0"
+  resolved "http://registry.npm.taobao.org/mongoose-lean-virtuals/download/mongoose-lean-virtuals-0.3.0.tgz#945a2a7f4d6b65753cad7c3035b03f72844eb336"
+
 mongoose@^4.8.6:
   version "4.13.12"
   resolved "http://registry.npm.taobao.org/mongoose/download/mongoose-4.13.12.tgz#8eb2bb9c820391cc524540950a8eb5f0992f1e8b"

@@ -2,10 +2,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  fetchArticleData,
+  fetchPostData,
   addComment,
-  fetchCommentData,
-  resetComment,
 } from '../../actions';
 import * as constants from '../../constants';
 import scroll from '../../util/scroll';
@@ -22,25 +20,18 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    fetchArticleData: (options) => {
-      dispatch(fetchArticleData(options));
+    fetchPostData: (options) => {
+      dispatch(fetchPostData(options));
     },
     addComment: (options) => {
       dispatch(addComment(options));
     },
-    fetchCommentData: (options) => {
-      dispatch(fetchCommentData(options));
-    },
-    resetComment: () => {
-      dispatch(resetComment());
-    }
   };
 };
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class extends Component {
   componentDidMount() {
-    document.title = 'Hello Detail';
     const {
       state,
       article: {
@@ -61,10 +52,6 @@ export default class extends Component {
     this.fetchArticleData(nextProps, prevUrl);
   }
 
-  fetchCommentData(options) {
-    this.props.fetchCommentData(options);
-  }
-
   fetchArticleData(props, prevUrl, state) {
     const {
       match: {
@@ -72,20 +59,10 @@ export default class extends Component {
           url: nextUrl = '',
         },
       },
-      article: {
-        _id: postId,
-      },
-      commentState
     } = props;
     if (state === constants.INITIAL_STATE || prevUrl !== nextUrl) {
-      props.fetchArticleData({
+      props.fetchPostData({
         url: nextUrl,
-      });
-      props.resetComment();
-    }
-    if (postId && (commentState === constants.INITIAL_STATE || commentState === constants.FAILURE_STATE)) {
-      props.fetchCommentData({
-        postId,
       });
     }
   }
@@ -111,24 +88,20 @@ export default class extends Component {
     const {
       article,
       state,
-      commentState,
-      commentsData,
+      comments,
     } = this.props;
-    let elem = null;
     switch (state) {
     case constants.INITIAL_STATE:
     case constants.LOADING_STATE:
-      elem = (<section style={{ minHeight: 9999 }}>loading state</section>);
-      break;
+      return <section style={{ minHeight: 9999 }}>loading state</section>;
     case constants.SUCCESS_STATE:
-      elem = (<Article key="article" {...article} scrollToContent={this.scrollToContent} />);
-      break;
+      return [
+        <Article key="article" {...article} scrollToContent={this.scrollToContent} />,
+        <MessageBoard key="message-board" submit={this.addComment} comments={comments} />,
+      ];
     default:
       return <section>something error on page, please fresh!</section>;
     }
-    return [
-      elem,
-      <MessageBoard key="message-board" submit={this.addComment} state={commentState} comments={commentsData} />,
-    ];
+
   }
 }

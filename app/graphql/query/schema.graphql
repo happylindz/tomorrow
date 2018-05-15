@@ -3,6 +3,6 @@ type Query {
   posts(time: String, page: Int, size: Int): Posts
   info: Info
   projects(page: Int, size: Int): Projects
-  comments(page: Int!, size: Int): Comments
-  message(page: Int!, size: Int): Message
+  comments(page: Int, size: Int, postId: String): Comments
+  message(page: Int, size: Int): Message
 }

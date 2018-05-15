@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import Comment from '@/components/comments';
-import constants from '../../constants';
 import Message from '@/components/message';
 import scroll from '../../util/scroll';
 import eventUtil from '../../util/eventUtil';
@@ -54,23 +53,17 @@ export default class extends PureComponent {
 
   submitMessage = (options) => {
     if (this.state.record) {
-      options['ref'] = this.state.record._id;
+      options['refTo'] = this.state.record._id;
     }
     this.props.submit(options);
   }
 
   render() {
-    const {
-      state,
-      comments,
-    } = this.props;
-    const {
-      record,
-    } = this.state;
-
+    const { comments } = this.props;
+    const { record } = this.state;
     return (<section className="message-board-wrap">
       <h2 id="comments"><a className="commens-title">{comments.length} 条评论</a></h2>
-      {state === constants.SUCCESS_STATE && <Comment replyMessage={this.replyMessage} comments={comments} />}
+      <Comment replyMessage={this.replyMessage} comments={comments} />
       <Message record={record} cancelReply={this.cancelReply} submit={this.submitMessage} />
     </section>);
   }

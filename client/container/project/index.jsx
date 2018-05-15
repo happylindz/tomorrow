@@ -30,14 +30,14 @@ export default class extends PureComponent {
   }
 
   render() {
-    const { projectData, state } = this.props;
+    const { projects, state } = this.props;
     switch (state) {
     case constants.INITIAL_STATE:
     case constants.LOADING_STATE:
       return <section>loading state</section>;
     case constants.SUCCESS_STATE:
       return (<section className="project-wrapper">{
-        projectData.map((item) => {
+        projects.map((item) => {
           return (<section className="project-item" key={item._id}>
             <a href={item.href}>
               <h2 className="title">{item.title}</h2><span>点击进入</span>

@@ -60,7 +60,7 @@ export default class extends PureComponent {
       error.nameError = '请输入你的昵称';
     } else if (this.state.name === '博主') {
       isValidated = false;
-      error.nameError = '昵称不合法';
+      error.nameError = '该昵称不可用';
     } else {
       error.nameError = null;
     }
@@ -70,6 +70,9 @@ export default class extends PureComponent {
     } else if (!emailReg.test(this.state.email)) {
       isValidated = false;
       error.emailError = '邮箱地址不合法';
+    } else if (this.state.email === 'me@lindongzhou.com') {
+      isValidated = false;
+      error.emailError = '该邮箱地址不可用';
     } else {
       error.emailError = null;
     }

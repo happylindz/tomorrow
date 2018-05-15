@@ -6,10 +6,8 @@ module.exports = {
     posts(root, { time, page, size }, ctx) {
       if (page) {
         return ctx.connector.post.query(page, size);
-      } else if (time) {
-        return ctx.connector.post.queryByTime(time);
       } else {
-        return ctx.connector.post.queryAll();
+        return ctx.connector.post.queryByTime(time, size);
       }
     }
   }

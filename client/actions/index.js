@@ -1,17 +1,18 @@
 import axios from 'axios';
 import * as actionTypes from '../actionTypes';
-
+import { queryPosts, queryArchives, queryProjects, queryInfo, queryPost, queryComments, queryMessage } from '../services';
+const pageSize = 10;
 export const fetchProjectData = () => {
   return async (dispatch) => {
     dispatch({
       type: actionTypes.LOADING_PROJECT,
     });
     try {
-      const res = await axios.get('/api/project');
-      if (res.status === 200) {
+      const res = await queryProjects();
+      if (res.status === 200 && res.data && res.data.data && res.data.data.projects) {
         dispatch({
           type: actionTypes.LOADING_PROJECT_SUCCESS,
-          payload: res.data,
+          payload: res.data.data.projects,
         });
       } else {
         throw new Error('获取数据失败');
@@ -24,6 +25,37 @@ export const fetchProjectData = () => {
   };
 };
 
+export const fetchInfoData = () => {
+  return async (dispatch) => {
+    dispatch({
+      type: actionTypes.LOADING_ABOUT,
+    });
+    try {
+      const res = await queryInfo();
+      if (res.status === 200 && res.data && res.data.data && res.data.data.info) {
+        dispatch({
+          type: actionTypes.LOADING_ABOUT_SUCCESS,
+          payload: res.data.data.info,
+        });
+        if (res.data.data.info.comments) {
+          dispatch({
+            type: actionTypes.LOADING_MESSAGE_SUCCESS,
+            payload: {
+              comments: res.data.data.info.comments,
+            },
+          });
+        }
+      } else {
+        throw new Error('获取数据失败');
+      }
+    } catch (e) {
+      dispatch({
+        type: actionTypes.LOADING_ABOUT_FAILURE,
+      });
+    }
+  };
+};
+
 export const fetchPostsData = (options) => {
   return async (dispatch) => {
     if (options && options.time) {
@@ -31,25 +63,25 @@ export const fetchPostsData = (options) => {
         type: actionTypes.LOADING_POSTS_MORE,
       });
     } else {
+      options = {};
       dispatch({
         type: actionTypes.LOADING_POSTS,
       });
     }
-
+    options.size = pageSize;
     try {
-      const res = await axios.get('/api/post', {
-        params: options,
-      });
-      if (res.status === 200) {
+      const res = await queryPosts(options);
+      if (res.status === 200 && res.data && res.data.data && res.data.data.posts) {
+        const payload = res.data.data.posts;
         if (options && options.time) {
           dispatch({
             type: actionTypes.LOADING_POSTS_MORE_SUCCESS,
-            payload: res.data,
+            payload,
           });
         } else {
           dispatch({
             type: actionTypes.LOADING_POSTS_SUCCESS,
-            payload: res.data,
+            payload,
           });
         }
 
@@ -64,42 +96,17 @@ export const fetchPostsData = (options) => {
   };
 };
 
-export const fetchArticleData = (options) => {
-  return async (dispatch) => {
-    dispatch({
-      type: actionTypes.LOADING_ARTICLE,
-    });
-    try {
-      const res = await axios.get('/api/article', {
-        params: options,
-      });
-      if (res.status === 200) {
-        dispatch({
-          type: actionTypes.LOADING_ARTICLE_SUCCESS,
-          payload: res.data,
-        });
-      } else {
-        throw new Error('获取数据失败');
-      }
-    } catch (e) {
-      dispatch({
-        type: actionTypes.LOADING_ARTICLE_FAILURE,
-      });
-    }
-  };
-};
-
-export const fetchArchivesData = (options) => {
+export const fetchArchivesData = () => {
   return async (dispatch) => {
     dispatch({
       type: actionTypes.LOADING_ARCHIVES,
     });
     try {
-      const res = await axios.get('/api/archives');
-      if (res.status === 200) {
+      const res = await queryArchives();
+      if (res.status === 200 && res.data && res.data.data && res.data.data.posts) {
         dispatch({
           type: actionTypes.LOADING_ARCHIVES_SUCCESS,
-          payload: res.data,
+          payload: res.data.data.posts,
         });
       } else {
         throw new Error('获取数据失败');
@@ -112,19 +119,50 @@ export const fetchArchivesData = (options) => {
   };
 };
 
+export const fetchPostData = (options) => {
+  return async (dispatch) => {
+    dispatch({
+      type: actionTypes.LOADING_ARTICLE,
+    });
+    try {
+      const res = await queryPost(options);
+      if (res.status === 200 && res.data && res.data.data && res.data.data.post) {
+        const comments = res.data.data.post.comments;
+        res.data.data.post.comments = null;
+        dispatch({
+          type: actionTypes.LOADING_ARTICLE_SUCCESS,
+          payload: res.data.data.post,
+        });
+        if (comments) {
+          dispatch({
+            type: actionTypes.LOADING_COMMENT_SUCCESS,
+            payload: {
+              comments: comments,
+            },
+          });
+        }
+      } else {
+        throw new Error('获取数据失败');
+      }
+    } catch (e) {
+      dispatch({
+        type: actionTypes.LOADING_ARTICLE_FAILURE,
+      });
+    }
+  };
+};
+
 export const fetchCommentData = (options) => {
   return async (dispatch) => {
     dispatch({
       type: actionTypes.LOADING_COMMENT,
     });
     try {
-      const res = await axios.get('/api/comment', {
-        params: options,
-      });
-      if (res.status === 200) {
+      const res = await queryComments(options);
+      if (res.status === 200 && res.data && res.data.data && res.data.data.comments) {
         dispatch({
           type: actionTypes.LOADING_COMMENT_SUCCESS,
-          payload: res.data,
+          payload: res.data.data.comments,
         });
       } else {
         throw new Error('获取数据失败');
@@ -139,9 +177,6 @@ export const fetchCommentData = (options) => {
 
 export const addComment =  (options) => {
   return async (dispatch) => {
-    dispatch({
-      type: actionTypes.ADD_COMMENT,
-    });
     try {
       const res = await axios.post('/api/comment', options);
       if (res.status === 200 && res.data.code === 0) {
@@ -149,44 +184,10 @@ export const addComment =  (options) => {
           postId: options.postId,
         }));
       }
-      dispatch({
-        type: actionTypes.ADD_COMMENT_SUCCESS,
-      });
       return res.data;
     } catch (e) {
       dispatch({
         type: actionTypes.ADD_COMMENT_FAILURE,
-      });
-    }
-  };
-};
-
-export const resetComment = () => {
-  return {
-    type: actionTypes.LOADING_COMMENT_FAILURE,
-  };
-};
-
-export const fetchAboutData = (options) => {
-  return async (dispatch) => {
-    dispatch({
-      type: actionTypes.LOADING_ABOUT,
-    });
-    try {
-      const res = await axios.get('/api/info', {
-        params: options,
-      });
-      if (res.status === 200) {
-        dispatch({
-          type: actionTypes.LOADING_ABOUT_SUCCESS,
-          payload: res.data,
-        });
-      } else {
-        throw new Error('获取数据失败');
-      }
-    } catch (e) {
-      dispatch({
-        type: actionTypes.LOADING_ABOUT_FAILURE,
       });
     }
   };
@@ -198,11 +199,11 @@ export const fetchMessageData = () => {
       type: actionTypes.LOADING_MESSAGE,
     });
     try {
-      const res = await axios.get('/api/message');
-      if (res.status === 200) {
+      const res = await queryMessage();
+      if (res.status === 200 && res.data && res.data.data && res.data.data.message) {
         dispatch({
           type: actionTypes.LOADING_MESSAGE_SUCCESS,
-          payload: res.data,
+          payload: res.data.data.message,
         });
       } else {
         throw new Error('获取数据失败');
@@ -217,17 +218,11 @@ export const fetchMessageData = () => {
 
 export const addMessage =  (options) => {
   return async (dispatch) => {
-    dispatch({
-      type: actionTypes.ADD_MESSAGE,
-    });
     try {
       const res = await axios.post('/api/message', options);
       if (res.status === 200 && res.data.code === 0) {
         dispatch(fetchMessageData());
       }
-      dispatch({
-        type: actionTypes.ADD_MESSAGE_SUCCESS,
-      });
       return res.data;
     } catch (e) {
       dispatch({

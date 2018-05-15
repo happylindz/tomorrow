@@ -12,14 +12,14 @@ const SubComment = ({ name, content, replyMessage, _id }) => {
   </div>;
 };
 
-const Comment = ({ name, createdTime, content, postId, refTo, index, replyMessage, _id }) => {
+const Comment = ({ name, time, content, postId, refTo, index, replyMessage, _id }) => {
   return <div className="comment" id={index + 1 ? _id.slice(-4) : null}>
     <p className="title">
       <a className={classNames({
         'username': true,
         'active': name === '博主',
       })} href="#" onClick={(e) => replyMessage(e, { _id, name })}>{name}</a>
-      <span className="time">{createdTime}</span>
+      <span className="time">{time}</span>
       <a className="reply" href="#" onClick={(e) => replyMessage(e, { _id, name })}>回复</a>
       <span className="floor">{index + 1}楼</span>
     </p>
@@ -32,9 +32,9 @@ export default ({ comments, replyMessage }) => {
 
   return <section className="comments-wrap">
     {
-      comments && comments.length === 0 ? <p className="no-posts">来做第一个留言的人吧！</p> : comments.map((comment, index) => {
+      comments && comments.length !== 0 ? comments.map((comment, index) => {
         return <Comment replyMessage={replyMessage} key={comment.postId} {...comment} index={index} />;
-      })
+      }) : <p className="no-posts">来做第一个留言的人吧！</p>
     }
   </section>;
 };

@@ -47,14 +47,14 @@ export default class extends PureComponent {
 
   fetchPostsData = () => {
     const {
-      postsData: posts,
+      posts,
       end,
       loading,
     } = this.props;
     const len = posts.length;
     if (!end && !loading) {
       const options =  {
-        time: posts[len - 1].createdTime,
+        time: posts[len - 1].time,
       };
       const cHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
       const main = document.getElementById('posts-main');
@@ -65,13 +65,13 @@ export default class extends PureComponent {
   }
 
   render() {
-    const { postsData, state, end, loading } = this.props;
+    const { posts, state, end, loading } = this.props;
     switch (state) {
     case constants.INITIAL_STATE:
     case constants.LOADING_STATE:
       return <section>loading state</section>;
     case constants.SUCCESS_STATE:
-      return <Home postsData={postsData} end={end} loading={loading} state={state} />;
+      return <Home posts={posts} end={end} loading={loading} state={state} />;
     default:
       return <section>something error on page, please fresh!</section>;
     }

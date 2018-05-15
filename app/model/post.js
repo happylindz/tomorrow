@@ -33,13 +33,5 @@ module.exports = (app) => {
   day.get(function() {
     return moment(this.createdTime).format('MM-DD');
   });
-  PostSchema.pre('save', function(next) {
-    if (!this.createdTime) {
-      this.createdTime = Date.now();
-      console.log('没传时间');
-    }
-    next();
-  });
-
   return mongoose.model('Post', PostSchema);
 };

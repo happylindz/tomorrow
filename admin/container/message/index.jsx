@@ -45,7 +45,7 @@ export default class extends PureComponent {
       }
       const messageData = {
         ...values,
-        ref: this.state.message._id,
+        refTo: this.state.message._id,
         createdTime: Date.now(),
       };
       const res = await this.props.dispatch({

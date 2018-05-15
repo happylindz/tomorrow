@@ -13,7 +13,7 @@ module.exports = (app) => {
     }
 
     queryByPostId(postId) {
-      return this.ctx.model.Comment.find({ postId }).sort({ createdTime: 1 });
+      return this.ctx.model.Comment.find({ postId }).sort({ createdTime: 1 }).lean({ virtuals: true });
     }
 
     queryById(_id) {

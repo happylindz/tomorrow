@@ -12,7 +12,7 @@ export default ({ posts }) => {
         <p className="year">{year}年</p>
         {posts[year].map((post) => {
           return (<section className="archives-item" key={post._id}>
-            <span className="time">{post.time}</span><Link onClick={() => { window.scrollTo(0, 0) }} to={`/article/${post.url}`}>{post.title}</Link>
+            <span className="time">{post.day}</span><Link onClick={() => { window.scrollTo(0, 0) }} to={`/article/${post.url}`}>{post.title}</Link>
           </section>);
         })}
       </div>;

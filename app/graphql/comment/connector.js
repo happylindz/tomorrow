@@ -39,7 +39,7 @@ class CommentConnector {
     return this.processComments(comments, postId);
   }
 
-  processComments(comments, postId) {
+  processComments(comments) {
     for (let i = 0, len = comments.length; i < len; i++) {
       const comment = comments[i];
       if (comment.refTo) {

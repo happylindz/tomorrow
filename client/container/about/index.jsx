@@ -4,7 +4,7 @@ import Banner from '@/components/banner';
 import MessageBoard from '@/components/message-board';
 import constants from '@/constants';
 import SkeletonAbout from '@/components/skeleton-about';
-import { fetchAboutData, fetchMessageData, addMessage } from '@/actions';
+import { fetchInfoData, addMessage } from '@/actions';
 import './index.scss';
 
 const mapStateToProps = (state) => {
@@ -15,11 +15,8 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchAboutData: () => {
-      return dispatch(fetchAboutData());
-    },
-    fetchMessageData: () => {
-      dispatch(fetchMessageData());
+    fetchInfoData: () => {
+      return dispatch(fetchInfoData());
     },
     addMessage: (options) => {
       dispatch(addMessage(options));
@@ -27,16 +24,12 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-
 @connect(mapStateToProps, mapDispatchToProps)
 export default class extends Component {
   componentDidMount() {
-    const { state, messageState } = this.props;
+    const { state } = this.props;
     if (state === constants.INITIAL_STATE || state === constants.FAILURE_STATE) {
-      this.props.fetchAboutData();
-    }
-    if (messageState === constants.INITIAL_STATE || messageState === constants.FAILURE_STATE) {
-      this.props.fetchMessageData();
+      this.props.fetchInfoData();
     }
   }
 
@@ -46,7 +39,7 @@ export default class extends Component {
   }
 
   render() {
-    const { html, state, messageState, messagesData } = this.props;
+    const { html, state, comments } = this.props;
     switch (state) {
     case constants.INITIAL_STATE:
     case constants.LOADING_STATE:
@@ -55,7 +48,7 @@ export default class extends Component {
       return [
         <Banner key="banner" title="About me" cover="http://images.lindongzhou.com/website/about-banner.jpeg" />,
         <article key="about" className="about markdown-body" dangerouslySetInnerHTML={{ __html: html }} />,
-        <MessageBoard key="message-board" submit={this.addMessage} state={messageState} comments={messagesData} />,
+        <MessageBoard key="message-board" submit={this.addMessage} comments={comments} />,
       ];
     default:
       return <section>something error on page, please fresh!</section>;

@@ -20,7 +20,7 @@ class MessageController extends Controller {
         name: data.name,
         content: data.content,
       },
-      href: `${this.app.config.baseUrl}/about$#${String(res._id).slice(-4)}`,
+      href: `${this.app.config.baseUrl}/about#${String(res._id).slice(-4)}`,
     }, { to: from.email });
     ctx.body = {
       message: '留言成功',

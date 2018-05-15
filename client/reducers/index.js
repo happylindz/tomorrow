@@ -31,28 +31,47 @@ import {
   FAILURE_STATE,
 } from '../constants';
 
-export const project = (state = { state: INITIAL_STATE, projectData: [] }, action) => produce(state, (draft) => {
+export const about = (state = { state: INITIAL_STATE, html: '' }, action) => produce(state, (draft) => {
   switch (action.type) {
-  case LOADING_PROJECT:
+  case LOADING_ABOUT:
     draft.state = LOADING_STATE;
-    draft.projectData = [];
+    draft.html = '';
     break;
-  case LOADING_PROJECT_SUCCESS:
+  case LOADING_ABOUT_SUCCESS:
     draft.state = SUCCESS_STATE;
-    draft.projectData = action.payload;
+    draft.html = action.payload.html;
     break;
-  case LOADING_PROJECT_FAILURE:
+  case LOADING_ABOUT_FAILURE:
     draft.state = FAILURE_STATE;
-    draft.projectData = [];
+    draft.html = '';
     break;
   }
 });
 
-export const posts = (state = { state: INITIAL_STATE, postsData: [], loading: false, end: false }, action) => produce(state, (draft) => {
+export const project = (state = { state: INITIAL_STATE, projects: [] }, action) => produce(state, (draft) => {
+  switch (action.type) {
+  case LOADING_PROJECT:
+    draft.state = LOADING_STATE;
+    draft.projects = [];
+    break;
+  case LOADING_PROJECT_SUCCESS:
+    draft.state = SUCCESS_STATE;
+    Object.keys(action.payload).forEach((key) => {
+      draft[key] = action.payload[key];
+    });
+    break;
+  case LOADING_PROJECT_FAILURE:
+    draft.state = FAILURE_STATE;
+    draft.projects = [];
+    break;
+  }
+});
+
+export const posts = (state = { state: INITIAL_STATE, posts: [], loading: false, end: false }, action) => produce(state, (draft) => {
   switch (action.type) {
   case LOADING_POSTS:
     draft.state = LOADING_STATE;
-    draft.postsData = [];
+    draft.posts = [];
     break;
   case LOADING_POSTS_SUCCESS:
     draft.state = SUCCESS_STATE;
@@ -62,14 +81,14 @@ export const posts = (state = { state: INITIAL_STATE, postsData: [], loading: fa
     break;
   case LOADING_POSTS_FAILURE:
     draft.state = FAILURE_STATE;
-    draft.postsData = [];
+    draft.posts = [];
     break;
   case LOADING_POSTS_MORE:
     draft.loading = true;
     break;
   case LOADING_POSTS_MORE_SUCCESS:
     draft.end = action.payload.end;
-    draft.postsData = draft.postsData.concat(action.payload.postsData);
+    draft.posts = draft.posts.concat(action.payload.posts);
     draft.loading = false;
     break;
   }
@@ -92,11 +111,11 @@ export const article = (state = { state: INITIAL_STATE, article: {}}, action) =>
   }
 });
 
-export const archives = (state = { state: INITIAL_STATE, postsData: [] }, action) => produce(state, (draft) => {
+export const archives = (state = { state: INITIAL_STATE, posts: [] }, action) => produce(state, (draft) => {
   switch (action.type) {
   case LOADING_ARCHIVES:
     draft.state = LOADING_STATE;
-    draft.postsData = [];
+    draft.posts = [];
     break;
   case LOADING_ARCHIVES_SUCCESS:
     draft.state = SUCCESS_STATE;
@@ -106,16 +125,16 @@ export const archives = (state = { state: INITIAL_STATE, postsData: [] }, action
     break;
   case LOADING_ARCHIVES_FAILURE:
     draft.state = FAILURE_STATE;
-    draft.postsData = [];
+    draft.posts = [];
     break;
   }
 });
 
-export const comment = (state = { commentState: INITIAL_STATE, commentsData: [] }, action) => produce(state, (draft) => {
+export const comment = (state = { commentState: INITIAL_STATE, comments: [] }, action) => produce(state, (draft) => {
   switch (action.type) {
   case LOADING_COMMENT:
     draft.commentState = LOADING_STATE;
-    draft.commentsData = [];
+    draft.comments = [];
     break;
   case LOADING_COMMENT_SUCCESS:
     draft.commentState = SUCCESS_STATE;
@@ -125,16 +144,16 @@ export const comment = (state = { commentState: INITIAL_STATE, commentsData: [] 
     break;
   case LOADING_COMMENT_FAILURE:
     draft.commentState = FAILURE_STATE;
-    draft.commentsData = [];
+    draft.comments = [];
     break;
   }
 });
 
-export const message = (state = { messageState: INITIAL_STATE, messagesData: [] }, action) => produce(state, (draft) => {
+export const message = (state = { messageState: INITIAL_STATE, comments: [] }, action) => produce(state, (draft) => {
   switch (action.type) {
   case LOADING_MESSAGE:
     draft.messageState = LOADING_STATE;
-    draft.messagesData = [];
+    draft.comments = [];
     break;
   case LOADING_MESSAGE_SUCCESS:
     draft.messageState = SUCCESS_STATE;
@@ -144,26 +163,7 @@ export const message = (state = { messageState: INITIAL_STATE, messagesData: [] 
     break;
   case LOADING_MESSAGE_FAILURE:
     draft.messageState = FAILURE_STATE;
-    draft.messagesData = [];
-    break;
-  }
-});
-
-export const about = (state = { state: INITIAL_STATE, html: '' }, action) => produce(state, (draft) => {
-  switch (action.type) {
-  case LOADING_ABOUT:
-    draft.state = LOADING_STATE;
-    draft.html = '';
-    break;
-  case LOADING_ABOUT_SUCCESS:
-    draft.state = SUCCESS_STATE;
-    Object.keys(action.payload).forEach((key) => {
-      draft[key] = action.payload[key];
-    });
-    break;
-  case LOADING_ABOUT_FAILURE:
-    draft.state = FAILURE_STATE;
-    draft.html = '';
+    draft.comments = [];
     break;
   }
 });

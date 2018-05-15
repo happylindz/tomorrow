@@ -8,7 +8,7 @@ module.exports = (app) => {
     }
 
     queryByTime(time, size) {
-      if (time && time !== '0') {
+      if (time) {
         return this.ctx.model.Post.find({ createdTime: { $lt: time }}).sort({ createdTime: -1 }).limit(size);
       } else {
         return this.ctx.model.Post.find({}).sort({ createdTime: -1 }).limit(size);
@@ -32,15 +32,15 @@ module.exports = (app) => {
       return this.ctx.model.Post.count();
     }
 
-    async addCommentCount(url) {
-      const post = await this.ctx.model.Post.findOne({ url }, 'commentCount');
-      const count = post.commentCount || 0;
+    async addReadCount(url) {
+      const post = await this.ctx.model.Post.findOne({ url });
+      const count = post.readCount || 0;
       const _id = post._id;
-      return this.ctx.model.Post.update({ _id }, { commentCount: count + 1 });
+      return this.ctx.model.Post.update({ _id }, { readCount: count + 1 });
     }
 
     async queryByUrl(url) {
-      await this.addCommentCount(url);
+      await this.addReadCount(url);
       return this.ctx.model.Post.findOne({ url });
     }
 

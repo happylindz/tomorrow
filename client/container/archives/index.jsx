@@ -12,7 +12,7 @@ import SkeletonArchives from '@/components/skeleton-archives';
 import './index.scss';
 
 const mapStateToProps = (state, ownProps) => {
-  const { postsData } = state.archives;
+  const { posts: postsData } = state.archives;
   const { search } = ownProps.location;
   const tagsRes = {
     'all': postsData.length,
@@ -24,7 +24,7 @@ const mapStateToProps = (state, ownProps) => {
   }
   postsData.forEach((post) => {
     try {
-      const tags = post.tags;
+      const tags = post.tags.split(',');
       if (topic === '' || topic === 'undefined') {
         const year = post.year;
         if (!posts[year]) {
@@ -47,7 +47,6 @@ const mapStateToProps = (state, ownProps) => {
         }
       }
     } catch (e) {
-
     }
   });
   return {

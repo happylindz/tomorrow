@@ -1,4 +1,3 @@
-const mail = require('../util/mail');
 
 module.exports = (app) => {
   class Message extends app.Service {
@@ -10,7 +9,7 @@ module.exports = (app) => {
     }
 
     queryAll() {
-      return this.ctx.model.Message.find({}).sort({ createdTime: -1 });
+      return this.ctx.model.Message.find({}).sort({ createdTime: 1 }).lean({ virtuals: true });
     }
 
     queryById(_id) {
@@ -27,15 +26,6 @@ module.exports = (app) => {
 
     delete(_id) {
       return this.ctx.model.Message.remove({ _id });
-    }
-
-    async sendEmail(renderOptions, email) {
-      const tpl = await this.ctx.renderView('email', renderOptions);
-      const mailOptions = {
-        to: email,
-        html: tpl,
-      };
-      mail(mailOptions);
     }
   }
   return Message;

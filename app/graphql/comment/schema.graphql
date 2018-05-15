@@ -2,6 +2,10 @@ type Comment {
   _id: ID!
   name: String!
   createdTime: String!
+  date: String!
+  time: String!
+  year: String!
+  day: String!
   email: String!
   content: String!
   refTo: Comment
