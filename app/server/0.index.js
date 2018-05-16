@@ -135,7 +135,6 @@ var _default = (_dec = Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["connect
   _createClass(_default, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      document.title = 'Hello Archives';
       var state = this.props.state;
 
       if (state === __WEBPACK_IMPORTED_MODULE_3__constants__["INITIAL_STATE"] || state === __WEBPACK_IMPORTED_MODULE_3__constants__["FAILURE_STATE"]) {

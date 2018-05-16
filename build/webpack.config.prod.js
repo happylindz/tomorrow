@@ -14,7 +14,7 @@ module.exports = webpackMerge(baseConfig, {
   output: {
     path: constants.distPath,
     filename: 'js/[name].[chunkhash:8].js',
-    publicPath: '/public/',
+    publicPath: 'http://cdn.lindongzhou.com/',
     chunkFilename: 'js/[name].[chunkhash:8].js',
   },
   module: {
