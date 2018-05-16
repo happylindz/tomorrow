@@ -4,12 +4,14 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "server": "cross-env EGG_SERVER_ENV=prod node index.js",
-    "server:dev": "egg-bin dev",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --inline --progress --config ./build/webpack.config.dev.js",
-    "build": "cross-env NODE_ENV=production webpack --config ./build/webpack.config.prod.js",
-    "dll": "cross-env NODE_ENV=production webpack --config ./build/dll.config.js",
-    "build:server": "cross-env webpack --config ./build/webpack.config.server.js"
+    "dev": "egg-bin dev",
+    "start": "egg-scripts start --daemon",
+    "stop": "egg-scripts stop",
+    "dev:client": "cross-env NODE_ENV=development webpack-dev-server --hot --inline --progress --config ./build/webpack.config.dev.js",
+    "build:client": "cross-env NODE_ENV=production webpack --config ./build/webpack.config.prod.js",
+    "build:server": "cross-env webpack --config ./build/webpack.config.server.js",
+    "build": "yarn run build:client && yarn run build:server",
+    "dll": "cross-env NODE_ENV=production webpack --config ./build/dll.config.js"
   },
   "dependencies": {
     "antd": "^3.4.1",
@@ -20,6 +22,7 @@
     "egg": "^2.6.1",
     "egg-bin": "^4.6.3",
     "egg-graphql": "^2.1.0",
+    "egg-scripts": "^2.6.0",
     "happypack": "^4.0.1",
     "lodash": "^4.17.10",
     "mongoose-lean-virtuals": "^0.3.0",

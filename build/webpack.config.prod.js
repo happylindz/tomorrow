@@ -1,9 +1,9 @@
-const path = require('path');
+// const path = require('path');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const HtmlIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 const constants = require('./constants');
@@ -33,11 +33,11 @@ module.exports = webpackMerge(baseConfig, {
     ]
   },
   plugins: [
-    new CopyWebpackPlugin([{
-      from: path.resolve(__dirname, '../public/**/*'),
-      to: path.resolve(__dirname, '../app'),
-      force: true,
-    }]),
+    // new CopyWebpackPlugin([{
+    //   from: path.resolve(__dirname, '../public/**/*'),
+    //   to: path.resolve(__dirname, '../app'),
+    //   force: true,
+    // }]),
     new ExtractTextPlugin({
       filename: 'css/[name].[chunkhash:8].css',
       allChunks: true,

@@ -10,4 +10,6 @@ jsconfig.json
 webpack_cache/
 secret/
 config/
-app/public/
+app/view/js/**/*
+app/view/css/**/*
+dist/

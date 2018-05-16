@@ -5,7 +5,7 @@ const resolveRoot = relativePath => path.resolve(rootDirectory, relativePath);
 module.exports = {
   publicPath: resolveRoot('./public'),
   appPath: resolveRoot('./app'),
-  distPath: resolveRoot('./app/public'),
+  distPath: resolveRoot('./app/view'),
   viewPath: resolveRoot('./app/view'),
   clientPath: resolveRoot('./client'),
   adminPath: resolveRoot('./admin'),
