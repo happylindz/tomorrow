@@ -9,8 +9,16 @@
     <meta name="description" content="记录生活、技术,林东洲的博客">
     <meta name="keywords" content="前端开发,程序员,移动互联网"/>
     <meta name="mobile-web-app-capable" content="yes">
+    <script>
+      var htmlDom = document.getElementsByTagName('html')[0];
+      var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth;
+      if (htmlWidth > 768) {
+        htmlWidth = 768;
+      }
+      htmlDom.style.fontSize = (htmlWidth / 10) + 'px';
+    </script>
     <link rel="manifest" href="<%= htmlWebpackPlugin.options.publicPath %>/manifest.json">
-    <link rel="shortcut icon" href="<%= htmlWebpackPlugin.options.publicPath %>/favicon.ico">
+    <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="//at.alicdn.com/t/font_656686_c3j4j1cjhr5rvn29.css">
     <!-- <script src="http://cdn.lindongzhou.com/js/vconsole.min.js"></script>  
     <script>

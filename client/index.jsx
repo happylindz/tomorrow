@@ -18,15 +18,11 @@ if (module.hot && process.env.NODE_ENV === 'development') {
   });
 }
 
-const htmlDom = document.getElementsByTagName('html')[0];
-const resizeFontSize = () => {
+eventUtil.addHandler(window, 'resize', () => {
+  const htmlDom = document.getElementsByTagName('html')[0];
   let htmlWidth = document.documentElement.clientWidth || document.body.clientWidth;
   if (htmlWidth > 768) {
     htmlWidth = 768;
   }
   htmlDom.style.fontSize = (htmlWidth / 10) + 'px';
-};
-resizeFontSize();
-eventUtil.addHandler(window, 'resize', (e) => {
-  resizeFontSize();
 });

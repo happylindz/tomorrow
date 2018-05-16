@@ -38,7 +38,9 @@ export default class extends Component {
         url: prevUrl,
       },
     } = this.props;
-    this.fetchArticleData(this.props, prevUrl, state);
+    if (state === constants.INITIAL_STATE || state === constants.FAILURE_STATE) {
+      this.fetchArticleData(this.props, prevUrl, state);
+    }
   }
 
   componentWillReceiveProps(nextProps) {

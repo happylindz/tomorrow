@@ -67,7 +67,6 @@ const mapDispatchToProps = (dispatch) => {
 @connect(mapStateToProps, mapDispatchToProps)
 export default class extends Component {
   componentDidMount() {
-    document.title = 'Hello Archives';
     const {
       state,
     } = this.props;

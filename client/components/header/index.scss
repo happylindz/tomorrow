@@ -16,10 +16,16 @@
     margin: auto;
     display: flex;
     flex-wrap: nowrap;
+    height: 60px;
     .logo {
       flex: 1;
       background: #fff;
       z-index: 1;
+      & > img {
+        height: 100%;
+        position: relative;
+        top: -2px;
+      }
     }
     .toggle-menu {
       background-color: #fff;
@@ -62,6 +68,9 @@
 @media screen and (min-width: 768px) {
   .header-wrap {
     .header {
+      .logo {
+        padding-left: 100px;
+      }
       .toggle-menu {
         display: none;
       }
@@ -118,6 +127,9 @@
 @media screen and (max-width: 768px) {
   .header-wrap {
     .header {
+      .logo {
+        padding-left: px2rem(30px);
+      }
       .toggle-menu {
         height: 60px;
         width: 60px;

@@ -33,7 +33,7 @@ export default ({ comments, replyMessage }) => {
   return <section className="comments-wrap">
     {
       comments && comments.length !== 0 ? comments.map((comment, index) => {
-        return <Comment replyMessage={replyMessage} key={comment.postId} {...comment} index={index} />;
+        return <Comment replyMessage={replyMessage} key={comment._id} {...comment} index={index} />;
       }) : <p className="no-posts">来做第一个留言的人吧！</p>
     }
   </section>;

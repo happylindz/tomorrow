@@ -100,7 +100,9 @@ export default class extends Component {
 
     return <div className="header-wrap">
       <header className="header">
-        <div className="logo"></div>
+        <div className="logo">
+          <img src="http://images.lindongzhou.com/website/logo.jpg" />
+        </div>
         <div className="toggle-menu" onClick={this.toggleMenu}>
           <span className={classNames({
             'menu-icon': true,

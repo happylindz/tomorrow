@@ -31,7 +31,7 @@ import {
   FAILURE_STATE,
 } from '../constants';
 
-export const about = (state = { state: INITIAL_STATE, html: '' }, action) => produce(state, (draft) => {
+export const info = (state = { state: INITIAL_STATE, html: '' }, action) => produce(state, (draft) => {
   switch (action.type) {
   case LOADING_ABOUT:
     draft.state = LOADING_STATE;
@@ -48,7 +48,7 @@ export const about = (state = { state: INITIAL_STATE, html: '' }, action) => pro
   }
 });
 
-export const project = (state = { state: INITIAL_STATE, projects: [] }, action) => produce(state, (draft) => {
+export const projects = (state = { state: INITIAL_STATE, projects: [] }, action) => produce(state, (draft) => {
   switch (action.type) {
   case LOADING_PROJECT:
     draft.state = LOADING_STATE;
@@ -134,7 +134,6 @@ export const comment = (state = { commentState: INITIAL_STATE, comments: [] }, a
   switch (action.type) {
   case LOADING_COMMENT:
     draft.commentState = LOADING_STATE;
-    draft.comments = [];
     break;
   case LOADING_COMMENT_SUCCESS:
     draft.commentState = SUCCESS_STATE;
@@ -144,7 +143,6 @@ export const comment = (state = { commentState: INITIAL_STATE, comments: [] }, a
     break;
   case LOADING_COMMENT_FAILURE:
     draft.commentState = FAILURE_STATE;
-    draft.comments = [];
     break;
   }
 });
@@ -153,7 +151,6 @@ export const message = (state = { messageState: INITIAL_STATE, comments: [] }, a
   switch (action.type) {
   case LOADING_MESSAGE:
     draft.messageState = LOADING_STATE;
-    draft.comments = [];
     break;
   case LOADING_MESSAGE_SUCCESS:
     draft.messageState = SUCCESS_STATE;
@@ -163,7 +160,6 @@ export const message = (state = { messageState: INITIAL_STATE, comments: [] }, a
     break;
   case LOADING_MESSAGE_FAILURE:
     draft.messageState = FAILURE_STATE;
-    draft.comments = [];
     break;
   }
 });

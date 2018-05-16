@@ -8,7 +8,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const HtmlIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 const constants = require('./constants');
 const baseConfig = require('./webpack.config.base');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = webpackMerge(baseConfig, {
   output: {
@@ -53,7 +53,7 @@ module.exports = webpackMerge(baseConfig, {
         removeComments: true,
         removeAttributeQuotes: true,
       },
-      title: 'React App',
+      title: "Lindz's Blog",
     }),
     new HtmlWebpackPlugin({
       filename: 'admin.html',
@@ -124,7 +124,7 @@ module.exports = webpackMerge(baseConfig, {
         count >= 2
       ),
     }),
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
     new webpack.HashedModuleIdsPlugin(),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   ],

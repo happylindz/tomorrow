@@ -9,14 +9,13 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --inline --progress --config ./build/webpack.config.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config ./build/webpack.config.prod.js",
     "dll": "cross-env NODE_ENV=production webpack --config ./build/dll.config.js",
-    "pre": "cross-env webpack --config ./build/webpack.config.server.js"
+    "build:server": "cross-env webpack --config ./build/webpack.config.server.js"
   },
   "dependencies": {
     "antd": "^3.4.1",
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.5",
-    "dataloader": "^1.4.0",
     "dva": "^2.2.2",
     "egg": "^2.6.1",
     "egg-bin": "^4.6.3",

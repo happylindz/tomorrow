@@ -14,6 +14,9 @@ module.exports = {
     extensions: ['.jsx', '.js', '.json'],
     modules: [path.resolve(__dirname, '../node_modules')],
     mainFields: ['browser', 'module', 'main'],
+    alias: {
+      '@': constants.clientPath,
+    },
   },
   module: {
     rules: [

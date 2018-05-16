@@ -20,6 +20,7 @@ module.exports = (app) => {
   router.get('/admin/info', controller.admin.route);
   router.get('/admin/project', controller.admin.route);
   router.get('/admin/comment', controller.admin.route);
+  router.get('/admin/message', controller.admin.route);
 
   // 公共接口
   app.resources('comment', '/api/comment', 'comment');

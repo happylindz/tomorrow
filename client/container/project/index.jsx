@@ -9,7 +9,7 @@ import './index.scss';
 
 const mapStateToProps = (state) => {
   return {
-    ...state.project,
+    ...state.projects,
   };
 };
 const mapDispatchToProps = (dispatch) => {

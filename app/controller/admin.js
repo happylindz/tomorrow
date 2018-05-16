@@ -1,6 +1,5 @@
 
 const { Controller } = require('egg');
-const config = require('../../secret/config.json');
 
 class AdminController extends Controller {
   async route(ctx) {
@@ -13,8 +12,9 @@ class AdminController extends Controller {
 
   async check(ctx) {
     const { username, password } = ctx.request.body;
-    if (username === config.username && password === config.password) {
-      ctx.session.userId = config.appKey;
+    const { info, appKey } = this.app.config;
+    if (username === info.username && password === info.password) {
+      ctx.session.userId = appKey;
       ctx.redirect('/admin/post');
     } else {
       ctx.body = '密码错误';

@@ -6,7 +6,7 @@ import ArticleIndex from '@/components/article-index';
 export default ({ index, scrollToContent, content, title, date, tags, previous, next }) => {
   return <section className="article-wrapper">
     <h1>{title}</h1>
-    <p className="subtitle"><span className="time"><i className="iconfont icon-time" />{date}</span> <span className="tags"><i className="iconfont icon-tag" />{tags.split(',').map((tag) => (<Link to={`/archives?topic=${encodeURI(tag)}`} key={tag}>{tag}</Link>))}</span> </p>
+    <p className="subtitle"><span className="time"><i className="iconfont icon-time" />{date}</span> <span className="tags"><i className="iconfont icon-tag" />{tags && tags.split(',').map((tag) => (<Link to={`/archives?topic=${encodeURI(tag)}`} key={tag}>{tag}</Link>))}</span> </p>
     <ArticleIndex index={index} scrollToContent={scrollToContent} />
     <article className="article markdown-body" dangerouslySetInnerHTML={{ __html: content }} />
     {(previous || next) && <p className="pager">

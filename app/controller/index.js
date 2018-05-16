@@ -2,7 +2,7 @@
 const { Controller } = require('egg');
 const constants = require('../../client/constants');
 const createApp = require('../server/index.js').default;
-const moment = require('moment');
+const SQL = require('../../client/services/sql');
 
 class IndexController extends Controller {
   async renderView(ctx, data) {
@@ -14,35 +14,13 @@ class IndexController extends Controller {
   }
 
   async home(ctx) {
-    const {
-      page,
-    } = ctx.query;
     try {
-      const postsData = await ctx.service.post.query('title cover tags url createdTime desc', page || 1);
-      for (let i = 0; i < postsData.length; i++) {
-        const post = postsData[i];
-        postsData[i] = {
-          _id: post._id,
-          title: post.title,
-          cover: post.cover,
-          tags: post.tags.split(','),
-          url: post.url,
-          createdTime: moment(post.createdTime).format('YYYY-MM-DD'),
-          desc: post.desc,
-        };
-      }
-      const data = {
-        postsData,
-        total: await ctx.service.post.count(),
-        page,
-      };
-      const preloadedState = {
-        posts: {
-          state: constants.SUCCESS_STATE,
-          ...data,
-        },
-      };
-      await this.renderView(ctx, preloadedState);
+      const query = JSON.stringify(SQL.postsSQL({
+        size: 10,
+      }));
+      const res = await ctx.service.graphql.query(query);
+      res.data.posts.state = constants.SUCCESS_STATE;
+      await this.renderView(ctx, res.data);
     } catch (e) {
       ctx.app.emit('error', e);
       await ctx.render('index');
@@ -51,25 +29,12 @@ class IndexController extends Controller {
 
   async archives(ctx) {
     try {
-      const postsData = await ctx.service.post.queryAll('title url tags createdTime');
-      for (let i = 0; i < postsData.length; i++) {
-        const post = postsData[i];
-        postsData[i] = {
-          _id: post._id,
-          title: post.title,
-          tags: post.tags.split(','),
-          url: post.url,
-          year: moment(post.createdTime).format('YYYY'),
-          time: moment(post.createdTime).format('MM-DD'),
-        };
-      }
-      const preloadedState = {
-        archives: {
-          state: constants.SUCCESS_STATE,
-          postsData,
-        },
-      };
-      await this.renderView(ctx, preloadedState);
+      const query = JSON.stringify(SQL.archivesSQL());
+      const res = await ctx.service.graphql.query(query);
+      res.data.posts.state = constants.SUCCESS_STATE;
+      res.data.archives = res.data.posts;
+      delete res.data.posts;
+      await this.renderView(ctx, res.data);
     } catch (e) {
       ctx.app.emit('error', e);
       await ctx.render('index');
@@ -77,21 +42,29 @@ class IndexController extends Controller {
   }
 
   async about(ctx) {
-    await ctx.render('index');
+    try {
+      const query = JSON.stringify(SQL.infoSQL());
+      const res = await ctx.service.graphql.query(query);
+      res.data.info.state = constants.SUCCESS_STATE;
+      const comments = res.data.info.comments;
+      delete res.data.info.comments;
+      res.data.message = {
+        messageState: constants.SUCCESS_STATE,
+        comments: comments,
+      };
+      await this.renderView(ctx, res.data);
+    } catch (e) {
+      ctx.app.emit('error', e);
+      await ctx.render('index');
+    }
   }
 
   async project(ctx) {
     try {
-      const data = await ctx.service.project.queryAll();
-      if (Array.isArray(data)) {
-        const preloadedState = {
-          project: {
-            projectData: data,
-            state: constants.SUCCESS_STATE,
-          },
-        };
-        await this.renderView(ctx, preloadedState);
-      }
+      const query = JSON.stringify(SQL.projectsSQL());
+      const res = await ctx.service.graphql.query(query);
+      res.data.projects.state = constants.SUCCESS_STATE;
+      await this.renderView(ctx, res.data);
     } catch (e) {
       ctx.app.emit('error', e);
       await ctx.render('index');
@@ -101,18 +74,20 @@ class IndexController extends Controller {
   async article(ctx) {
     const { url } = ctx.params;
     try {
-      const data = await ctx.service.post.queryArticle(url);
-      const preloadedState = {
-        article: {
-          state: constants.SUCCESS_STATE,
-          article: {
-            url,
-            content: data[0].content,
-            index: data[0].index,
-          },
-        },
+      const query = JSON.stringify(SQL.postSQL({ url }));
+      const res = await ctx.service.graphql.query(query);
+      const comments = res.data.post.comments;
+      delete res.data.post.comments;
+      res.data.article = {
+        article: res.data.post,
+        state: constants.SUCCESS_STATE
       };
-      await this.renderView(ctx, preloadedState);
+      delete res.data.post;
+      res.data.comment = {
+        commentState: constants.SUCCESS_STATE,
+        comments: comments,
+      };
+      await this.renderView(ctx, res.data);
     } catch (e) {
       ctx.app.emit('error', e);
       await ctx.render('index');
