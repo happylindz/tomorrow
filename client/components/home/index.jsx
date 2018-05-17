@@ -21,7 +21,7 @@ export default ({ posts, end, loading, state }) => {
               </Link>
               <div className="footer"><span>阅读({item.readCount})</span><Link to={`/article/${item.url}#comments`}>评论({item.commentCount})</Link></div>
             </section>);
-        }) : '暂无博文'
+        }) : <p className="no-posts">暂无博文</p>
       }
     </div>
     <p id="loading" className={classNames({

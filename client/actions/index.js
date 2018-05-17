@@ -1,6 +1,15 @@
-import axios from 'axios';
 import * as actionTypes from '../actionTypes';
-import { queryPosts, queryArchives, queryProjects, queryInfo, queryPost, queryComments, queryMessage } from '../services';
+import {
+  queryPosts,
+  queryArchives,
+  queryProjects,
+  queryInfo,
+  queryPost,
+  queryComments,
+  queryMessage,
+  addComment as addCommentData,
+  addMessage as addMessageData,
+} from '../services';
 const pageSize = 10;
 export const fetchProjectData = () => {
   return async (dispatch) => {
@@ -178,7 +187,7 @@ export const fetchCommentData = (options) => {
 export const addComment =  (options) => {
   return async (dispatch) => {
     try {
-      const res = await axios.post('/api/comment', options);
+      const res = await addCommentData(options);
       if (res.status === 200 && res.data.code === 0) {
         dispatch(fetchCommentData({
           postId: options.postId,
@@ -219,7 +228,7 @@ export const fetchMessageData = () => {
 export const addMessage =  (options) => {
   return async (dispatch) => {
     try {
-      const res = await axios.post('/api/message', options);
+      const res = await addMessageData(options);
       if (res.status === 200 && res.data.code === 0) {
         dispatch(fetchMessageData());
       }

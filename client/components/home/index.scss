@@ -4,6 +4,12 @@
   margin: auto;
   .posts-main {
     background-color: #fff;
+    .no-posts {
+      text-align: center;
+      line-height: 2;
+      color: #444;
+      margin: 20px 0;
+    }
     .post-item {
       border-radius: 4px;
       border-bottom: 1px solid #ddd;

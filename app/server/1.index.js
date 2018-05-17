@@ -156,10 +156,8 @@ var _default = (_dec = Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["connect
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return addComment; });
 /* unused harmony export fetchMessageData */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return addMessage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(124);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actionTypes__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__actionTypes__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(132);
 var _this = this;
 
 (function () {
@@ -169,7 +167,6 @@ var _this = this;
 })();
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
 
 
 
@@ -183,11 +180,11 @@ var fetchProjectData = function fetchProjectData() {
           switch (_context.prev = _context.next) {
             case 0:
               dispatch({
-                type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["w" /* LOADING_PROJECT */]
+                type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["w" /* LOADING_PROJECT */]
               });
               _context.prev = 1;
               _context.next = 4;
-              return Object(__WEBPACK_IMPORTED_MODULE_2__services__["g" /* queryProjects */])();
+              return Object(__WEBPACK_IMPORTED_MODULE_1__services__["i" /* queryProjects */])();
 
             case 4:
               res = _context.sent;
@@ -198,7 +195,7 @@ var fetchProjectData = function fetchProjectData() {
               }
 
               dispatch({
-                type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["y" /* LOADING_PROJECT_SUCCESS */],
+                type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["y" /* LOADING_PROJECT_SUCCESS */],
                 payload: res.data.data.projects
               });
               _context.next = 10;
@@ -216,7 +213,7 @@ var fetchProjectData = function fetchProjectData() {
               _context.t0 = _context['catch'](1);
 
               dispatch({
-                type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["x" /* LOADING_PROJECT_FAILURE */]
+                type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["x" /* LOADING_PROJECT_FAILURE */]
               });
 
             case 15:
@@ -242,11 +239,11 @@ var fetchInfoData = function fetchInfoData() {
           switch (_context2.prev = _context2.next) {
             case 0:
               dispatch({
-                type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["c" /* LOADING_ABOUT */]
+                type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["c" /* LOADING_ABOUT */]
               });
               _context2.prev = 1;
               _context2.next = 4;
-              return Object(__WEBPACK_IMPORTED_MODULE_2__services__["c" /* queryInfo */])();
+              return Object(__WEBPACK_IMPORTED_MODULE_1__services__["e" /* queryInfo */])();
 
             case 4:
               res = _context2.sent;
@@ -257,12 +254,12 @@ var fetchInfoData = function fetchInfoData() {
               }
 
               dispatch({
-                type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["e" /* LOADING_ABOUT_SUCCESS */],
+                type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["e" /* LOADING_ABOUT_SUCCESS */],
                 payload: res.data.data.info
               });
               if (res.data.data.info.comments) {
                 dispatch({
-                  type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["q" /* LOADING_MESSAGE_SUCCESS */],
+                  type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["q" /* LOADING_MESSAGE_SUCCESS */],
                   payload: {
                     comments: res.data.data.info.comments
                   }
@@ -283,7 +280,7 @@ var fetchInfoData = function fetchInfoData() {
               _context2.t0 = _context2['catch'](1);
 
               dispatch({
-                type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["d" /* LOADING_ABOUT_FAILURE */]
+                type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["d" /* LOADING_ABOUT_FAILURE */]
               });
 
             case 16:
@@ -310,18 +307,18 @@ var fetchPostsData = function fetchPostsData(options) {
             case 0:
               if (options && options.time) {
                 dispatch({
-                  type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["t" /* LOADING_POSTS_MORE */]
+                  type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["t" /* LOADING_POSTS_MORE */]
                 });
               } else {
                 options = {};
                 dispatch({
-                  type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["r" /* LOADING_POSTS */]
+                  type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["r" /* LOADING_POSTS */]
                 });
               }
               options.size = pageSize;
               _context3.prev = 2;
               _context3.next = 5;
-              return Object(__WEBPACK_IMPORTED_MODULE_2__services__["f" /* queryPosts */])(options);
+              return Object(__WEBPACK_IMPORTED_MODULE_1__services__["h" /* queryPosts */])(options);
 
             case 5:
               res = _context3.sent;
@@ -335,12 +332,12 @@ var fetchPostsData = function fetchPostsData(options) {
 
               if (options && options.time) {
                 dispatch({
-                  type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["u" /* LOADING_POSTS_MORE_SUCCESS */],
+                  type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["u" /* LOADING_POSTS_MORE_SUCCESS */],
                   payload: payload
                 });
               } else {
                 dispatch({
-                  type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["v" /* LOADING_POSTS_SUCCESS */],
+                  type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["v" /* LOADING_POSTS_SUCCESS */],
                   payload: payload
                 });
               }
@@ -360,7 +357,7 @@ var fetchPostsData = function fetchPostsData(options) {
               _context3.t0 = _context3['catch'](2);
 
               dispatch({
-                type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["s" /* LOADING_POSTS_FAILURE */]
+                type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["s" /* LOADING_POSTS_FAILURE */]
               });
 
             case 17:
@@ -386,11 +383,11 @@ var fetchArchivesData = function fetchArchivesData() {
           switch (_context4.prev = _context4.next) {
             case 0:
               dispatch({
-                type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["f" /* LOADING_ARCHIVES */]
+                type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["f" /* LOADING_ARCHIVES */]
               });
               _context4.prev = 1;
               _context4.next = 4;
-              return Object(__WEBPACK_IMPORTED_MODULE_2__services__["a" /* queryArchives */])();
+              return Object(__WEBPACK_IMPORTED_MODULE_1__services__["c" /* queryArchives */])();
 
             case 4:
               res = _context4.sent;
@@ -401,7 +398,7 @@ var fetchArchivesData = function fetchArchivesData() {
               }
 
               dispatch({
-                type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["h" /* LOADING_ARCHIVES_SUCCESS */],
+                type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["h" /* LOADING_ARCHIVES_SUCCESS */],
                 payload: res.data.data.posts
               });
               _context4.next = 10;
@@ -419,7 +416,7 @@ var fetchArchivesData = function fetchArchivesData() {
               _context4.t0 = _context4['catch'](1);
 
               dispatch({
-                type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["g" /* LOADING_ARCHIVES_FAILURE */]
+                type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["g" /* LOADING_ARCHIVES_FAILURE */]
               });
 
             case 15:
@@ -445,11 +442,11 @@ var fetchPostData = function fetchPostData(options) {
           switch (_context5.prev = _context5.next) {
             case 0:
               dispatch({
-                type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["i" /* LOADING_ARTICLE */]
+                type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["i" /* LOADING_ARTICLE */]
               });
               _context5.prev = 1;
               _context5.next = 4;
-              return Object(__WEBPACK_IMPORTED_MODULE_2__services__["e" /* queryPost */])(options);
+              return Object(__WEBPACK_IMPORTED_MODULE_1__services__["g" /* queryPost */])(options);
 
             case 4:
               res = _context5.sent;
@@ -463,12 +460,12 @@ var fetchPostData = function fetchPostData(options) {
 
               res.data.data.post.comments = null;
               dispatch({
-                type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["k" /* LOADING_ARTICLE_SUCCESS */],
+                type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["k" /* LOADING_ARTICLE_SUCCESS */],
                 payload: res.data.data.post
               });
               if (comments) {
                 dispatch({
-                  type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["n" /* LOADING_COMMENT_SUCCESS */],
+                  type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["n" /* LOADING_COMMENT_SUCCESS */],
                   payload: {
                     comments: comments
                   }
@@ -489,7 +486,7 @@ var fetchPostData = function fetchPostData(options) {
               _context5.t0 = _context5['catch'](1);
 
               dispatch({
-                type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["j" /* LOADING_ARTICLE_FAILURE */]
+                type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["j" /* LOADING_ARTICLE_FAILURE */]
               });
 
             case 18:
@@ -515,11 +512,11 @@ var fetchCommentData = function fetchCommentData(options) {
           switch (_context6.prev = _context6.next) {
             case 0:
               dispatch({
-                type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["l" /* LOADING_COMMENT */]
+                type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["l" /* LOADING_COMMENT */]
               });
               _context6.prev = 1;
               _context6.next = 4;
-              return Object(__WEBPACK_IMPORTED_MODULE_2__services__["b" /* queryComments */])(options);
+              return Object(__WEBPACK_IMPORTED_MODULE_1__services__["d" /* queryComments */])(options);
 
             case 4:
               res = _context6.sent;
@@ -530,7 +527,7 @@ var fetchCommentData = function fetchCommentData(options) {
               }
 
               dispatch({
-                type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["n" /* LOADING_COMMENT_SUCCESS */],
+                type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["n" /* LOADING_COMMENT_SUCCESS */],
                 payload: res.data.data.comments
               });
               _context6.next = 10;
@@ -548,7 +545,7 @@ var fetchCommentData = function fetchCommentData(options) {
               _context6.t0 = _context6['catch'](1);
 
               dispatch({
-                type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["m" /* LOADING_COMMENT_FAILURE */]
+                type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["m" /* LOADING_COMMENT_FAILURE */]
               });
 
             case 15:
@@ -575,7 +572,7 @@ var addComment = function addComment(options) {
             case 0:
               _context7.prev = 0;
               _context7.next = 3;
-              return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/api/comment', options);
+              return Object(__WEBPACK_IMPORTED_MODULE_1__services__["a" /* addComment */])(options);
 
             case 3:
               res = _context7.sent;
@@ -592,7 +589,7 @@ var addComment = function addComment(options) {
               _context7.t0 = _context7['catch'](0);
 
               dispatch({
-                type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["a" /* ADD_COMMENT_FAILURE */]
+                type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["a" /* ADD_COMMENT_FAILURE */]
               });
 
             case 11:
@@ -618,11 +615,11 @@ var fetchMessageData = function fetchMessageData() {
           switch (_context8.prev = _context8.next) {
             case 0:
               dispatch({
-                type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["o" /* LOADING_MESSAGE */]
+                type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["o" /* LOADING_MESSAGE */]
               });
               _context8.prev = 1;
               _context8.next = 4;
-              return Object(__WEBPACK_IMPORTED_MODULE_2__services__["d" /* queryMessage */])();
+              return Object(__WEBPACK_IMPORTED_MODULE_1__services__["f" /* queryMessage */])();
 
             case 4:
               res = _context8.sent;
@@ -633,7 +630,7 @@ var fetchMessageData = function fetchMessageData() {
               }
 
               dispatch({
-                type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["q" /* LOADING_MESSAGE_SUCCESS */],
+                type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["q" /* LOADING_MESSAGE_SUCCESS */],
                 payload: res.data.data.message
               });
               _context8.next = 10;
@@ -651,7 +648,7 @@ var fetchMessageData = function fetchMessageData() {
               _context8.t0 = _context8['catch'](1);
 
               dispatch({
-                type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["p" /* LOADING_MESSAGE_FAILURE */]
+                type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["p" /* LOADING_MESSAGE_FAILURE */]
               });
 
             case 15:
@@ -678,7 +675,7 @@ var addMessage = function addMessage(options) {
             case 0:
               _context9.prev = 0;
               _context9.next = 3;
-              return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/api/message', options);
+              return Object(__WEBPACK_IMPORTED_MODULE_1__services__["b" /* addMessage */])(options);
 
             case 3:
               res = _context9.sent;
@@ -693,7 +690,7 @@ var addMessage = function addMessage(options) {
               _context9.t0 = _context9['catch'](0);
 
               dispatch({
-                type: __WEBPACK_IMPORTED_MODULE_1__actionTypes__["b" /* ADD_MESSAGE_FAILURE */]
+                type: __WEBPACK_IMPORTED_MODULE_0__actionTypes__["b" /* ADD_MESSAGE_FAILURE */]
               });
 
             case 11:
@@ -742,13 +739,15 @@ var addMessage = function addMessage(options) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return queryProjects; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return queryPosts; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return queryArchives; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return queryInfo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return queryPost; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return queryComments; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return queryMessage; });
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return queryProjects; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return queryPosts; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return queryArchives; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return queryInfo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return queryPost; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return queryComments; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return queryMessage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return addComment; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return addMessage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(124);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sql__ = __webpack_require__(133);
@@ -761,6 +760,29 @@ var addMessage = function addMessage(options) {
 
 
 
+function getCookie(name) {
+  var reg = new RegExp('(^| )' + name + '=([^;]*)(;|$)');
+  var arr = document.cookie.match(reg);
+  if (arr) {
+    return unescape(arr[2]);
+  } else {
+    return null;
+  }
+}
+function csrfSafeMethod(method) {
+  return (/^(get|head|options|trace)$/.test(method)
+  );
+}
+
+__WEBPACK_IMPORTED_MODULE_0_axios___default.a.interceptors.request.use(function (config) {
+  var xtoken = getCookie('csrfToken');
+  if (!csrfSafeMethod(config.method)) {
+    config.headers['x-csrf-token'] = xtoken;
+  }
+  return config;
+}, function (error) {
+  return Promise.reject(error);
+});
 
 var queryProjects = function queryProjects() {
   return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/graphql', {
@@ -807,6 +829,14 @@ var queryMessage = function queryMessage() {
     }
   });
 };
+
+var addComment = function addComment(options) {
+  return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/api/comment', options);
+};
+
+var addMessage = function addMessage(options) {
+  return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/api/message', options);
+};
 ;
 
 (function () {
@@ -818,6 +848,8 @@ var queryMessage = function queryMessage() {
     return;
   }
 
+  reactHotLoader.register(getCookie, 'getCookie', '/Users/Mac/tomorrow1/client/services/index.js');
+  reactHotLoader.register(csrfSafeMethod, 'csrfSafeMethod', '/Users/Mac/tomorrow1/client/services/index.js');
   reactHotLoader.register(queryProjects, 'queryProjects', '/Users/Mac/tomorrow1/client/services/index.js');
   reactHotLoader.register(queryPosts, 'queryPosts', '/Users/Mac/tomorrow1/client/services/index.js');
   reactHotLoader.register(queryArchives, 'queryArchives', '/Users/Mac/tomorrow1/client/services/index.js');
@@ -825,6 +857,8 @@ var queryMessage = function queryMessage() {
   reactHotLoader.register(queryPost, 'queryPost', '/Users/Mac/tomorrow1/client/services/index.js');
   reactHotLoader.register(queryComments, 'queryComments', '/Users/Mac/tomorrow1/client/services/index.js');
   reactHotLoader.register(queryMessage, 'queryMessage', '/Users/Mac/tomorrow1/client/services/index.js');
+  reactHotLoader.register(addComment, 'addComment', '/Users/Mac/tomorrow1/client/services/index.js');
+  reactHotLoader.register(addMessage, 'addMessage', '/Users/Mac/tomorrow1/client/services/index.js');
   leaveModule(module);
 })();
 
