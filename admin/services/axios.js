@@ -9,7 +9,6 @@ function csrfSafeMethod(method) {
   return (/^(get|head|options|trace)$/.test(method));
 }
 
-
 axios.interceptors.request.use(config => {
   let xtoken = getCookie('csrfToken');
   if (!csrfSafeMethod(config.method)) {

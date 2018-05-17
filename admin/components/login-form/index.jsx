@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button } from 'antd';
 const FormItem = Form.Item;
-
+function getCookie(name) {
+  const reg = new RegExp('(^| )' + name + '=([^;]*)(;|$)');
+  const arr = document.cookie.match(reg);
+  if (arr) { return unescape(arr[2]) }
+  else { return null }
+}
 function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
 
 function post(url, params) {
   const temp = document.createElement('form');
-  temp.action = url;
+  temp.action = `${url}?_csrf=${getCookie('csrfToken')}`;
   temp.method = 'post';
   temp.style.display = 'none';
 

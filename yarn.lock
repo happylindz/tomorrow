@@ -3338,6 +3338,16 @@ egg-static@^2.1.0:
     mkdirp "^0.5.1"
     ylru "^1.2.0"
 
+egg-static@^2.1.1:
+  version "2.1.1"
+  resolved "http://registry.npm.taobao.org/egg-static/download/egg-static-2.1.1.tgz#d76ce75162bd27a002e4922a73c868be9e412496"
+  dependencies:
+    koa-compose "^4.0.0"
+    koa-range "^0.3.0"
+    koa-static-cache "^5.1.1"
+    mkdirp "^0.5.1"
+    ylru "^1.2.0"
+
 egg-utils@^2.3.0:
   version "2.3.0"
   resolved "http://registry.npm.taobao.org/egg-utils/download/egg-utils-2.3.0.tgz#72c80172e833bc174c0265d0c68c0dc60ae1bada"
