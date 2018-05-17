@@ -2,9 +2,8 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Home from '@/components/home';
-import {
-  fetchPostsData,
-} from '../../actions';
+import SkeletonHome from '@/components/skeleton-home';
+import { fetchPostsData } from '../../actions';
 import throttle from '../../util/throttle';
 import * as constants from '../../constants';
 import eventUtil from '../../util/eventUtil';
@@ -69,11 +68,11 @@ export default class extends PureComponent {
     switch (state) {
     case constants.INITIAL_STATE:
     case constants.LOADING_STATE:
-      return <section>loading state</section>;
+      return <SkeletonHome />;
     case constants.SUCCESS_STATE:
       return <Home posts={posts} end={end} loading={loading} state={state} />;
     default:
-      return <section>something error on page, please fresh!</section>;
+      return <section className="loading-failure">系统繁忙，请稍后重试</section>;
     }
   }
 }

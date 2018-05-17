@@ -1,9 +1,8 @@
 
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import {
-  fetchProjectData,
-} from '../../actions';
+import SkeletonProject from '@/components/skeleton-project';
+import { fetchProjectData } from '../../actions';
 import * as constants from '../../constants';
 import './index.scss';
 
@@ -34,7 +33,7 @@ export default class extends PureComponent {
     switch (state) {
     case constants.INITIAL_STATE:
     case constants.LOADING_STATE:
-      return <section>loading state</section>;
+      return <SkeletonProject />;
     case constants.SUCCESS_STATE:
       return (<section className="project-wrapper">{
         projects.map((item) => {
@@ -47,7 +46,7 @@ export default class extends PureComponent {
         })
       }</section>);
     default:
-      return <section>something error on page, please fresh!</section>;
+      return <section className="loading-failure">系统繁忙，请稍后重试</section>;
     }
   }
 }

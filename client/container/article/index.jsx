@@ -10,6 +10,7 @@ import scroll from '../../util/scroll';
 import './index.scss';
 import MessageBoard from '@/components/message-board';
 import Article from '@/components/article';
+import SkeletonArticle from '@/components/skeleton-article';
 
 const mapStateToProps = (state) => {
   return {
@@ -95,14 +96,14 @@ export default class extends Component {
     switch (state) {
     case constants.INITIAL_STATE:
     case constants.LOADING_STATE:
-      return <section style={{ minHeight: 9999 }}>loading state</section>;
+      return <SkeletonArticle />;
     case constants.SUCCESS_STATE:
       return [
         <Article key="article" {...article} scrollToContent={this.scrollToContent} />,
         <MessageBoard key="message-board" submit={this.addComment} comments={comments} />,
       ];
     default:
-      return <section>something error on page, please fresh!</section>;
+      return <section className="loading-failure">系统繁忙，请稍后重试</section>;
     }
 
   }

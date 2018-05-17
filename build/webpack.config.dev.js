@@ -57,7 +57,7 @@ module.exports = webpackMerge(baseConfig, {
       publicPath: '',
       chunks: ['manifest', 'vendor', 'main'],
       chunksSortMode: 'manual',
-      title: 'React App',
+      title: "Lindz's Blog",
     }),
     new HtmlWebpackPlugin({
       filename: 'admin.html',

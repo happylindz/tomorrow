@@ -51,7 +51,7 @@ export default class extends Component {
         <MessageBoard key="message-board" submit={this.addMessage} comments={comments} />,
       ];
     default:
-      return <section>something error on page, please fresh!</section>;
+      return <section className="loading-failure">系统繁忙，请稍后重试</section>;
     }
   }
 }

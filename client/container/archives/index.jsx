@@ -90,7 +90,7 @@ export default class extends Component {
           <Archives posts={posts} />
         </div>];
     default:
-      return <section>something error on page, please fresh!</section>;
+      return <section className="loading-failure">系统繁忙，请稍后重试</section>;
     }
   }
 }

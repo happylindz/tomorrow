@@ -1,0 +1,45 @@
+@import '../../common/px2rem.scss';
+.skeleton-article {
+  margin: 10px auto;
+  max-width: 768px;
+  padding: 0 10px;
+  .title {
+    display: inline-block;
+    height: 24px;
+    width: 200px;
+    margin-bottom: 10px;
+  }
+  .index-wrapper {
+    padding: 0 10px;
+    margin-bottom: 10px;
+    .index {
+      display: inline-block;
+      height: 200px;
+      width: 150px;
+    }
+  }
+  .desc {
+    padding: 0 10px;
+    height: 20px;
+    margin-bottom: 10px;
+  }
+    
+}
+
+@media screen and (max-width: 768px) {
+  .skeleton-article {
+    margin: px2rem(5px) auto;
+    padding: 0 px2rem(10px);
+    .title {
+      margin-bottom: px2rem(5px);
+    }
+    .index-wrapper {
+      padding: 0 px2rem(6px);
+      margin-bottom: px2rem(5px);
+    }
+    .desc {
+      padding: 0 px2rem(6px);
+      margin-bottom: px2rem(5px);
+    }
+  }
+}

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import './index.scss';
 import constants from  '../../constants';
+import { SkeletonItem } from '../skeleton-home/skeleton-item';
 
 export default ({ posts, end, loading, state }) => {
   return <section className="home-wrapper">
@@ -24,10 +25,10 @@ export default ({ posts, end, loading, state }) => {
         }) : <p className="no-posts">暂无博文</p>
       }
     </div>
-    <p id="loading" className={classNames({
+    <div id="loading" className={classNames({
       'loading': true,
       'active': loading && state === constants.SUCCESS_STATE,
-    })}>loading...</p>
+    })}><SkeletonItem /></div>
     <p className={classNames({
       'no-more-posts': true,
       'active': end && posts.length > 0,
