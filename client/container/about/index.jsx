@@ -46,7 +46,7 @@ export default class extends Component {
       return <SkeletonAbout />;
     case constants.SUCCESS_STATE:
       return [
-        <Banner key="banner" title="About me" cover="http://images.lindongzhou.com/website/about-banner.jpeg" />,
+        <Banner key="banner" title="About me" cover="//images.lindongzhou.com/website/about-banner.jpeg" />,
         <article key="about" className="about markdown-body" dangerouslySetInnerHTML={{ __html: html }} />,
         <MessageBoard key="message-board" submit={this.addMessage} comments={comments} />,
       ];

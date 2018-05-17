@@ -102,7 +102,7 @@ var _default = (_dec = Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["connect
         case __WEBPACK_IMPORTED_MODULE_4__constants___default.a.LOADING_STATE:
           return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__components_skeleton_about__["a" /* default */], null);
         case __WEBPACK_IMPORTED_MODULE_4__constants___default.a.SUCCESS_STATE:
-          return [__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_banner__["a" /* default */], { key: 'banner', title: 'About me', cover: 'http://images.lindongzhou.com/website/about-banner.jpeg' }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('article', { key: 'about', className: 'about markdown-body', dangerouslySetInnerHTML: { __html: html } }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_message_board__["a" /* default */], { key: 'message-board', submit: this.addMessage, comments: comments })];
+          return [__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_banner__["a" /* default */], { key: 'banner', title: 'About me', cover: '//images.lindongzhou.com/website/about-banner.jpeg' }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('article', { key: 'about', className: 'about markdown-body', dangerouslySetInnerHTML: { __html: html } }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_message_board__["a" /* default */], { key: 'message-board', submit: this.addMessage, comments: comments })];
         default:
           return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'section',

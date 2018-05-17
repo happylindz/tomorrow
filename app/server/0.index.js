@@ -155,7 +155,7 @@ var _default = (_dec = Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["connect
         case __WEBPACK_IMPORTED_MODULE_3__constants__["LOADING_STATE"]:
           return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__components_skeleton_archives__["a" /* default */], null);
         case __WEBPACK_IMPORTED_MODULE_3__constants__["SUCCESS_STATE"]:
-          return [__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__components_banner__["a" /* default */], { title: 'Archives', key: 'banner', cover: 'http://images.lindongzhou.com/website/archives-banner.jpg' }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          return [__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__components_banner__["a" /* default */], { title: 'Archives', key: 'banner', cover: '//images.lindongzhou.com/website/archives-banner.jpg' }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             { key: 'archives-body', className: 'archives-body' },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__components_tags__["a" /* default */], { tags: tags, topic: topic }),

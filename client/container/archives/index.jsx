@@ -84,7 +84,7 @@ export default class extends Component {
       return <SkeletonArchives />;
     case constants.SUCCESS_STATE:
       return [
-        <Banner title="Archives" key="banner" cover="http://images.lindongzhou.com/website/archives-banner.jpg" />,
+        <Banner title="Archives" key="banner" cover="//images.lindongzhou.com/website/archives-banner.jpg" />,
         <div key="archives-body" className="archives-body">
           <Tags tags={tags} topic={topic} />
           <Archives posts={posts} />
