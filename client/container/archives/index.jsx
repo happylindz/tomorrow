@@ -9,6 +9,8 @@ import Tags from '@/components/tags';
 import Banner from '@/components/banner';
 import Archives from '@/components/archives';
 import SkeletonArchives from '@/components/skeleton-archives';
+import sql from '@/services/sql';
+import { saveAPIData } from '@/util/cache';
 import './index.scss';
 
 const mapStateToProps = (state, ownProps) => {
@@ -54,6 +56,7 @@ const mapStateToProps = (state, ownProps) => {
     tags: tagsRes,
     topic: topic,
     posts,
+    originPosts: postsData,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -72,6 +75,16 @@ export default class extends Component {
     } = this.props;
     if (state === constants.INITIAL_STATE || state === constants.FAILURE_STATE) {
       this.props.fetchArchivesData();
+    } else {
+      const params = sql.archivesSQL();
+      // save API data
+      saveAPIData(`/graphql?query=${sql.encode(params.query)}`, {
+        data: {
+          posts: {
+            posts: this.props.originPosts,
+          },
+        }
+      });
     }
   }
 

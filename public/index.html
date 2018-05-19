@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <meta property="og:site_name" content="林东洲的博客"/>
+    <meta name="author" content="Lindz">
+    <meta name="description" content="记录生活、技术,林东洲的博客">
+    <meta name="keywords" content="前端开发,程序员,移动互联网"/>
+    <meta name="mobile-web-app-capable" content="yes">
+    <script>
+      var htmlDom = document.getElementsByTagName('html')[0];
+      var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth;
+      if (htmlWidth > 768) {
+        htmlWidth = 768;
+      }
+      htmlDom.style.fontSize = (htmlWidth / 10) + 'px';
+    </script>
+    <link rel="shortcut icon" href="//cdn.lindongzhou.com/favicon.ico">
+    <link rel="stylesheet" href="//cdn.lindongzhou.com/css/reset.min.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_656686_c3j4j1cjhr5rvn29.css">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="root"></div>
+  </body>
+</html>

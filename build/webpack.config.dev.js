@@ -1,9 +1,11 @@
+const path = require('path');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const HtmlIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const constants = require('./constants');
 const baseConfig = require('./webpack.config.base');
+const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 module.exports = webpackMerge(baseConfig, {
   output: {
@@ -66,7 +68,10 @@ module.exports = webpackMerge(baseConfig, {
       chunks: ['manifest', 'vendor', 'admin'],
       chunksSortMode: 'manual',
       title: '博客管理系统',
-    })
+    }),
+    new ServiceWorkerWebpackPlugin({
+      entry: path.join(constants.clientPath, 'sw.js'),
+    }),
   ],
   devtool: 'source-map',
 });

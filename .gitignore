@@ -12,4 +12,5 @@ secret/
 config/
 app/view/js/**/*
 app/view/css/**/*
+app/view/icons/**/*
 dist/

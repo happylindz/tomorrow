@@ -5,6 +5,8 @@ import MessageBoard from '@/components/message-board';
 import constants from '@/constants';
 import SkeletonAbout from '@/components/skeleton-about';
 import { fetchInfoData, addMessage } from '@/actions';
+import { saveAPIData } from '@/util/cache';
+import sql from '@/services/sql';
 import './index.scss';
 
 const mapStateToProps = (state) => {
@@ -30,6 +32,18 @@ export default class extends Component {
     const { state } = this.props;
     if (state === constants.INITIAL_STATE || state === constants.FAILURE_STATE) {
       this.props.fetchInfoData();
+    } else {
+      const params = sql.infoSQL();
+      // save API data
+      saveAPIData(`/graphql?query=${sql.encode(params.query)}`, {
+        data: {
+          info: {
+            comments: this.props.comments,
+            _id: this.props._id,
+            html: this.props.html,
+          },
+        }
+      });
     }
   }
 

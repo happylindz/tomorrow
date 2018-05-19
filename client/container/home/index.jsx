@@ -3,10 +3,12 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Home from '@/components/home';
 import SkeletonHome from '@/components/skeleton-home';
-import { fetchPostsData } from '../../actions';
-import throttle from '../../util/throttle';
-import * as constants from '../../constants';
-import eventUtil from '../../util/eventUtil';
+import { fetchPostsData } from '@/actions';
+import * as constants from '@/constants';
+import sql from '@/services/sql';
+import eventUtil from '@/util/eventUtil';
+import throttle from '@/util/throttle';
+import { saveAPIData } from '@/util/cache';
 import './index.scss';
 
 
@@ -15,6 +17,7 @@ const mapStateToProps = (state) => {
     ...state.posts,
   };
 };
+
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchPostsData: (options) => {
@@ -36,6 +39,19 @@ export default class extends PureComponent {
     const { state } = this.props;
     if (state === constants.INITIAL_STATE || state === constants.FAILURE_STATE) {
       this.props.fetchPostsData();
+    } else {
+      const params = sql.postsSQL({
+        size: 10,
+      });
+      // save API data
+      saveAPIData(`/graphql?query=${sql.encode(params.query)}`, {
+        data: {
+          posts: {
+            posts: this.props.posts,
+            end: this.props.end
+          },
+        }
+      });
     }
     eventUtil.addHandler(window, 'scroll', this.fetchPostsData);
   }
@@ -51,7 +67,7 @@ export default class extends PureComponent {
       loading,
     } = this.props;
     const len = posts.length;
-    if (!end && !loading) {
+    if (!end && loading !== constants.LOADING_STATE && loading !== constants.FAILURE_STATE) {
       const options =  {
         time: posts[len - 1].time,
       };

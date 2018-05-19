@@ -102,6 +102,14 @@
       display: block;
     }
   }
+  .failure {
+    font-size: 14px;
+    line-height: 2;
+    padding: 0 px2rem(14px);
+    color: #888;
+    text-align: center;
+    display: block;    
+  }
 }
 
 
@@ -161,7 +169,7 @@
       .no-more-posts {
         font-size: 14px;
       }
-      .loading {
+      .failure, .loading {
         font-size: 14px;
       }
     }
@@ -250,7 +258,7 @@
     .no-more-posts {
       font-size: 13px;
     }
-    .loading {
+    .failure, .loading {
       font-size: 13px;
     }
   }
@@ -294,7 +302,7 @@
     .no-more-posts {
       font-size: 12px;
     }
-    .loading {
+    .failure, .loading {
       font-size: 12px;
     }
   }

@@ -11,6 +11,8 @@ import './index.scss';
 import MessageBoard from '@/components/message-board';
 import Article from '@/components/article';
 import SkeletonArticle from '@/components/skeleton-article';
+import { saveAPIData } from '@/util/cache';
+import sql from '@/services/sql';
 
 const mapStateToProps = (state) => {
   return {
@@ -41,6 +43,19 @@ export default class extends Component {
     } = this.props;
     if (state === constants.INITIAL_STATE || state === constants.FAILURE_STATE) {
       this.fetchArticleData(this.props, prevUrl, state);
+    } else {
+      const params = sql.postSQL({
+        url: this.props.match.params.url,
+      });
+      // save API data
+      saveAPIData(`/graphql?query=${sql.encode(params.query)}`, {
+        data: {
+          post: {
+            ...this.props.article,
+            comments: this.props.comments,
+          },
+        }
+      });
     }
   }
 

@@ -27,8 +27,9 @@ export default ({ posts, end, loading, state }) => {
     </div>
     <div id="loading" className={classNames({
       'loading': true,
-      'active': loading && state === constants.SUCCESS_STATE,
-    })}><SkeletonItem /></div>
+      'active': loading === constants.LOADING_STATE && state === constants.SUCCESS_STATE,
+      'failure': loading === constants.FAILURE_STATE && state === constants.SUCCESS_STATE,
+    })}>{loading === constants.LOADING_STATE ? <SkeletonItem /> : '系统繁忙，请稍后重试'}</div>
     <p className={classNames({
       'no-more-posts': true,
       'active': end && posts.length > 0,

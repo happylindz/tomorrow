@@ -1,4 +1,4 @@
-// const path = require('path');
+const path = require('path');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -8,12 +8,16 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const HtmlIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 const constants = require('./constants');
 const baseConfig = require('./webpack.config.base');
+const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
+
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = webpackMerge(baseConfig, {
   output: {
     path: constants.distPath,
     filename: 'js/[name].[chunkhash:8].js',
+    // publicPath: '/',
     publicPath: '//cdn.lindongzhou.com/',
     chunkFilename: 'js/[name].[chunkhash:8].js',
   },
@@ -44,7 +48,7 @@ module.exports = webpackMerge(baseConfig, {
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: './public/template.html',
+      template: './public/index.html',
       publicPath: '/public',
       chunks: ['manifest', 'common', 'main-vendor', 'main'],
       chunksSortMode: 'manual',
@@ -122,5 +126,29 @@ module.exports = webpackMerge(baseConfig, {
     // new BundleAnalyzerPlugin(),
     new webpack.HashedModuleIdsPlugin(),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new ServiceWorkerWebpackPlugin({
+      entry: path.join(constants.clientPath, 'sw.js'),
+    }),
+    new WebpackPwaManifest({
+      name: 'Lindz\'s Blog',
+      short_name: 'Blog',
+      description: 'An isomorphic progressive web blog built by React & Node',
+      background_color: '#000',
+      filename: 'manifest.[hash:8].json',
+      publicPath: '/',
+      icons: [
+        {
+          src: path.resolve(constants.publicPath, 'icon.png'),
+          sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
+          destination: path.join('icons')
+        }
+      ],
+      ios: {
+        'apple-mobile-web-app-title': 'Blog',
+        'apple-mobile-web-app-status-bar-style': 'black',
+        'apple-mobile-web-app-capable': 'yes',
+        'apple-touch-icon': '/icons/icon_128x128.cc0714ab18fa6ee6de42ef3d5ca8fd09.png',
+      },
+    })
   ],
 });

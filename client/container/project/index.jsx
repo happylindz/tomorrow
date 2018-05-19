@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import SkeletonProject from '@/components/skeleton-project';
 import { fetchProjectData } from '../../actions';
 import * as constants from '../../constants';
+import { saveAPIData } from '@/util/cache';
+import sql from '@/services/sql';
 import './index.scss';
 
 const mapStateToProps = (state) => {
@@ -25,6 +27,16 @@ export default class extends PureComponent {
     const { state } = this.props;
     if (state === constants.INITIAL_STATE || state === constants.FAILURE_STATE) {
       this.props.fetchProjectData();
+    } else {
+      const params = sql.projectsSQL();
+      // save API data
+      saveAPIData(`/graphql?query=${sql.encode(params.query)}`, {
+        data: {
+          projects: {
+            projects: this.props.projects,
+          },
+        },
+      });
     }
   }
 

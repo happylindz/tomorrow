@@ -342,7 +342,9 @@ module.exports = {
   INITIAL_STATE: 'INITIAL_STATE',
   LOADING_STATE: 'LOADING_STATE',
   SUCCESS_STATE: 'SUCCESS_STATE',
-  FAILURE_STATE: 'FAILURE_STATE'
+  FAILURE_STATE: 'FAILURE_STATE',
+  cacheName: 'html-0-1',
+  apiCacheName: 'api-0-1'
 };
 
 /***/ }),
@@ -356,14 +358,15 @@ module.exports = require("react-redux");
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "w", function() { return LOADING_PROJECT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "y", function() { return LOADING_PROJECT_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "x", function() { return LOADING_PROJECT_FAILURE; });
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "x", function() { return LOADING_PROJECT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "z", function() { return LOADING_PROJECT_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "y", function() { return LOADING_PROJECT_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return LOADING_POSTS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return LOADING_POSTS_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "w", function() { return LOADING_POSTS_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return LOADING_POSTS_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return LOADING_POSTS_MORE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return LOADING_POSTS_MORE_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return LOADING_POSTS_MORE_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return LOADING_POSTS_MORE_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return LOADING_ARTICLE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return LOADING_ARTICLE_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return LOADING_ARTICLE_FAILURE; });
@@ -400,6 +403,7 @@ var LOADING_POSTS_SUCCESS = 'LOADING_POSTS_SUCCESS';
 var LOADING_POSTS_FAILURE = 'LOADING_POSTS_FAILURE';
 var LOADING_POSTS_MORE = 'LOADING_POSTS_MORE';
 var LOADING_POSTS_MORE_SUCCESS = 'LOADING_POSTS_MORE_SUCCESS';
+var LOADING_POSTS_MORE_FAILURE = 'LOADING_POSTS_MORE_FAILURE';
 
 var LOADING_ARTICLE = 'LOADING_ARTICLE';
 var LOADING_ARTICLE_SUCCESS = 'LOADING_ARTICLE_SUCCESS';
@@ -447,6 +451,7 @@ var ADD_MESSAGE_FAILURE = 'ADD_MESSAGE_FAILURE';
   reactHotLoader.register(LOADING_POSTS_FAILURE, 'LOADING_POSTS_FAILURE', '/Users/Mac/tomorrow1/client/actionTypes/index.js');
   reactHotLoader.register(LOADING_POSTS_MORE, 'LOADING_POSTS_MORE', '/Users/Mac/tomorrow1/client/actionTypes/index.js');
   reactHotLoader.register(LOADING_POSTS_MORE_SUCCESS, 'LOADING_POSTS_MORE_SUCCESS', '/Users/Mac/tomorrow1/client/actionTypes/index.js');
+  reactHotLoader.register(LOADING_POSTS_MORE_FAILURE, 'LOADING_POSTS_MORE_FAILURE', '/Users/Mac/tomorrow1/client/actionTypes/index.js');
   reactHotLoader.register(LOADING_ARTICLE, 'LOADING_ARTICLE', '/Users/Mac/tomorrow1/client/actionTypes/index.js');
   reactHotLoader.register(LOADING_ARTICLE_SUCCESS, 'LOADING_ARTICLE_SUCCESS', '/Users/Mac/tomorrow1/client/actionTypes/index.js');
   reactHotLoader.register(LOADING_ARTICLE_FAILURE, 'LOADING_ARTICLE_FAILURE', '/Users/Mac/tomorrow1/client/actionTypes/index.js');
@@ -1673,17 +1678,17 @@ var projects = function projects() {
   var action = arguments[1];
   return __WEBPACK_IMPORTED_MODULE_0_immer___default()(state, function (draft) {
     switch (action.type) {
-      case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["w" /* LOADING_PROJECT */]:
+      case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["x" /* LOADING_PROJECT */]:
         draft.state = __WEBPACK_IMPORTED_MODULE_2__constants__["LOADING_STATE"];
         draft.projects = [];
         break;
-      case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["y" /* LOADING_PROJECT_SUCCESS */]:
+      case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["z" /* LOADING_PROJECT_SUCCESS */]:
         draft.state = __WEBPACK_IMPORTED_MODULE_2__constants__["SUCCESS_STATE"];
         Object.keys(action.payload).forEach(function (key) {
           draft[key] = action.payload[key];
         });
         break;
-      case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["x" /* LOADING_PROJECT_FAILURE */]:
+      case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["y" /* LOADING_PROJECT_FAILURE */]:
         draft.state = __WEBPACK_IMPORTED_MODULE_2__constants__["FAILURE_STATE"];
         draft.projects = [];
         break;
@@ -1692,7 +1697,7 @@ var projects = function projects() {
 };
 
 var posts = function posts() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { state: __WEBPACK_IMPORTED_MODULE_2__constants__["INITIAL_STATE"], posts: [], loading: false, end: false };
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { state: __WEBPACK_IMPORTED_MODULE_2__constants__["INITIAL_STATE"], posts: [], loading: __WEBPACK_IMPORTED_MODULE_2__constants__["INITIAL_STATE"], end: false };
   var action = arguments[1];
   return __WEBPACK_IMPORTED_MODULE_0_immer___default()(state, function (draft) {
     switch (action.type) {
@@ -1700,7 +1705,7 @@ var posts = function posts() {
         draft.state = __WEBPACK_IMPORTED_MODULE_2__constants__["LOADING_STATE"];
         draft.posts = [];
         break;
-      case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["v" /* LOADING_POSTS_SUCCESS */]:
+      case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["w" /* LOADING_POSTS_SUCCESS */]:
         draft.state = __WEBPACK_IMPORTED_MODULE_2__constants__["SUCCESS_STATE"];
         Object.keys(action.payload).forEach(function (key) {
           draft[key] = action.payload[key];
@@ -1711,12 +1716,15 @@ var posts = function posts() {
         draft.posts = [];
         break;
       case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["t" /* LOADING_POSTS_MORE */]:
-        draft.loading = true;
+        draft.loading = __WEBPACK_IMPORTED_MODULE_2__constants__["LOADING_STATE"];
         break;
-      case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["u" /* LOADING_POSTS_MORE_SUCCESS */]:
+      case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["v" /* LOADING_POSTS_MORE_SUCCESS */]:
         draft.end = action.payload.end;
         draft.posts = draft.posts.concat(action.payload.posts);
-        draft.loading = false;
+        draft.loading = __WEBPACK_IMPORTED_MODULE_2__constants__["SUCCESS_STATE"];
+        break;
+      case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["u" /* LOADING_POSTS_MORE_FAILURE */]:
+        draft.loading = __WEBPACK_IMPORTED_MODULE_2__constants__["FAILURE_STATE"];
         break;
     }
   });

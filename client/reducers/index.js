@@ -23,6 +23,7 @@ import {
   LOADING_MESSAGE,
   LOADING_MESSAGE_SUCCESS,
   LOADING_MESSAGE_FAILURE,
+  LOADING_POSTS_MORE_FAILURE,
 } from '../actionTypes';
 import {
   INITIAL_STATE,
@@ -67,7 +68,7 @@ export const projects = (state = { state: INITIAL_STATE, projects: [] }, action)
   }
 });
 
-export const posts = (state = { state: INITIAL_STATE, posts: [], loading: false, end: false }, action) => produce(state, (draft) => {
+export const posts = (state = { state: INITIAL_STATE, posts: [], loading: INITIAL_STATE, end: false }, action) => produce(state, (draft) => {
   switch (action.type) {
   case LOADING_POSTS:
     draft.state = LOADING_STATE;
@@ -84,12 +85,15 @@ export const posts = (state = { state: INITIAL_STATE, posts: [], loading: false,
     draft.posts = [];
     break;
   case LOADING_POSTS_MORE:
-    draft.loading = true;
+    draft.loading = LOADING_STATE;
     break;
   case LOADING_POSTS_MORE_SUCCESS:
     draft.end = action.payload.end;
     draft.posts = draft.posts.concat(action.payload.posts);
-    draft.loading = false;
+    draft.loading = SUCCESS_STATE;
+    break;
+  case LOADING_POSTS_MORE_FAILURE:
+    draft.loading = FAILURE_STATE;
     break;
   }
 });

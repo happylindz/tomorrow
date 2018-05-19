@@ -93,14 +93,19 @@ export const fetchPostsData = (options) => {
             payload,
           });
         }
-
       } else {
         throw new Error('获取数据失败');
       }
     } catch (e) {
-      dispatch({
-        type: actionTypes.LOADING_POSTS_FAILURE,
-      });
+      if (options && options.time) {
+        dispatch({
+          type: actionTypes.LOADING_POSTS_MORE_FAILURE,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.LOADING_POSTS_FAILURE,
+        });
+      }
     }
   };
 };
