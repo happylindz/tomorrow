@@ -144,8 +144,8 @@ module.exports = webpackMerge(baseConfig, {
         }
       ],
       ios: {
-        'apple-mobile-web-app-title': 'Blog',
-        'apple-mobile-web-app-status-bar-style': 'black',
+        'apple-mobile-web-app-title': 'Lindz\'s Blog',
+        'apple-mobile-web-app-status-bar-style': 'transparent',
         'apple-mobile-web-app-capable': 'yes',
         'apple-touch-icon': '/icons/icon_128x128.cc0714ab18fa6ee6de42ef3d5ca8fd09.png',
       },
