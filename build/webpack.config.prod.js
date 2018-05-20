@@ -133,7 +133,7 @@ module.exports = webpackMerge(baseConfig, {
       name: 'Lindz\'s Blog',
       short_name: 'Blog',
       description: 'An isomorphic progressive web blog built by React & Node',
-      background_color: '#000',
+      background_color: 'transparent',
       filename: 'manifest.[hash:8].json',
       publicPath: '/',
       icons: [
