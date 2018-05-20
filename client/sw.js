@@ -1,11 +1,11 @@
 /**
  * service worker
  */
+import URL from 'url-parse';
 import constants from './constants';
 const cacheName = constants.cacheName;
 const apiCacheName = constants.apiCacheName;
 const cacheFileList = ['/index.html'];
-const HOST = process.env.NODE_ENV === 'production' ? 'http://127.0.0.1:7001' : 'http://127.0.0.1:7001';
 const htmlPage = ['/', '/about', '/project', '/article/', '/archives'];
 
 
@@ -32,14 +32,15 @@ self.addEventListener('activate', (e) => {
 });
 
 const matchHtml = (currentUrl) => {
-  return htmlPage.map((page) => HOST + page).some((url, index) => {
+  const pathname = (new URL(currentUrl)).pathname;
+  return htmlPage.some((url, index) => {
     if (index === 0) {
-      if (url === currentUrl) {
+      if (url === pathname) {
         return true;
       } else {
         return false;
       }
-    } else if (currentUrl.startsWith(url)) {
+    } else if (pathname.startsWith(url)) {
       return true;
     } else {
       return false;
@@ -48,7 +49,8 @@ const matchHtml = (currentUrl) => {
 };
 
 const matchApi = (currentUrl) => {
-  return currentUrl.startsWith(HOST + '/graphql?');
+  const pathname = (new URL(currentUrl)).pathname;
+  return pathname === '/graphql';
 };
 
 self.addEventListener('fetch', function (e) {
