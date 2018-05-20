@@ -35,7 +35,7 @@
   "short_name": "Blog",
   "orientation": "portrait",
   "display": "standalone",
-  "start_url": ".",
+  "start_url": "/",
   "description": "An isomorphic progressive web blog built by React & Node",
-  "background_color": "#000"
+  "background_color": "#333"
 }
