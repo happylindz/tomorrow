@@ -68,8 +68,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
   };
 };
 
-var _default = (_dec = Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["connect"])(mapStateToProps, mapDispatchToProps), _dec(_class = function (_Component) {
-  _inherits(_default, _Component);
+var _default = (_dec = Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["connect"])(mapStateToProps, mapDispatchToProps), _dec(_class = function (_PureComponent) {
+  _inherits(_default, _PureComponent);
 
   function _default() {
     var _ref;
@@ -92,44 +92,31 @@ var _default = (_dec = Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["connect
   _createClass(_default, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _props = this.props,
-          state = _props.state,
-          prevUrl = _props.article.url;
+      var state = this.props.state;
 
       if (state === __WEBPACK_IMPORTED_MODULE_3__constants__["INITIAL_STATE"] || state === __WEBPACK_IMPORTED_MODULE_3__constants__["FAILURE_STATE"]) {
-        this.fetchArticleData(this.props, prevUrl, state);
-      } else {
-        var params = __WEBPACK_IMPORTED_MODULE_10__services_sql___default.a.postSQL({
+        this.props.fetchPostData({
           url: this.props.match.params.url
         });
-        // save API data
-        Object(__WEBPACK_IMPORTED_MODULE_9__util_cache__["a" /* saveAPIData */])('/graphql?query=' + __WEBPACK_IMPORTED_MODULE_10__services_sql___default.a.encode(params.query), {
-          data: {
-            post: _extends({}, this.props.article, {
-              comments: this.props.comments
-            })
-          }
-        });
-      }
-    }
-  }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      var _props$match$params$u = this.props.match.params.url,
-          prevUrl = _props$match$params$u === undefined ? '' : _props$match$params$u;
-
-      this.fetchArticleData(nextProps, prevUrl);
-    }
-  }, {
-    key: 'fetchArticleData',
-    value: function fetchArticleData(props, prevUrl, state) {
-      var _props$match$params$u2 = props.match.params.url,
-          nextUrl = _props$match$params$u2 === undefined ? '' : _props$match$params$u2;
-
-      if (state === __WEBPACK_IMPORTED_MODULE_3__constants__["INITIAL_STATE"] || prevUrl !== nextUrl) {
-        props.fetchPostData({
-          url: nextUrl
-        });
+      } else if (state === __WEBPACK_IMPORTED_MODULE_3__constants__["SUCCESS_STATE"]) {
+        var url = this.props.match.params.url;
+        if (url === this.props.article.url) {
+          var params = __WEBPACK_IMPORTED_MODULE_10__services_sql___default.a.postSQL({
+            url: this.props.match.params.url
+          });
+          // save API data
+          Object(__WEBPACK_IMPORTED_MODULE_9__util_cache__["a" /* saveAPIData */])('/graphql?query=' + __WEBPACK_IMPORTED_MODULE_10__services_sql___default.a.encode(params.query), {
+            data: {
+              post: _extends({}, this.props.article, {
+                comments: this.props.comments
+              })
+            }
+          });
+        } else {
+          this.props.fetchPostData({
+            url: this.props.match.params.url
+          });
+        }
       }
     }
   }, {
@@ -145,10 +132,10 @@ var _default = (_dec = Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["connect
   }, {
     key: 'render',
     value: function render() {
-      var _props2 = this.props,
-          article = _props2.article,
-          state = _props2.state,
-          comments = _props2.comments;
+      var _props = this.props,
+          article = _props.article,
+          state = _props.state,
+          comments = _props.comments;
 
       switch (state) {
         case __WEBPACK_IMPORTED_MODULE_3__constants__["INITIAL_STATE"]:
@@ -172,7 +159,7 @@ var _default = (_dec = Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["connect
   }]);
 
   return _default;
-}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"])) || _class);
+}(__WEBPACK_IMPORTED_MODULE_0_react__["PureComponent"])) || _class);
 
 
 ;
@@ -217,7 +204,7 @@ exports.postsSQL = function (options) {
 
 exports.postSQL = function (options) {
   return {
-    query: '{\n      post(url: "' + options.url + '") {\n        _id\n        title\n        tags\n        content\n        date\n        next {\n          title\n          url\n        }\n        index {\n          tag\n          content\n          anchor\n        }\n        previous {\n          title\n          url\n        }\n        comments {\n          _id\n          name\n          time\n          content\n          refTo {\n            _id\n            name\n            content\n          }\n        }\n      }\n    }'
+    query: '{\n      post(url: "' + options.url + '") {\n        _id\n        title\n        tags\n        content\n        date\n        url\n        next {\n          title\n          url\n        }\n        index {\n          tag\n          content\n          anchor\n        }\n        previous {\n          title\n          url\n        }\n        comments {\n          _id\n          name\n          time\n          content\n          refTo {\n            _id\n            name\n            content\n          }\n        }\n      }\n    }'
   };
 };
 

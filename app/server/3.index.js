@@ -209,7 +209,7 @@ exports.postsSQL = function (options) {
 
 exports.postSQL = function (options) {
   return {
-    query: '{\n      post(url: "' + options.url + '") {\n        _id\n        title\n        tags\n        content\n        date\n        next {\n          title\n          url\n        }\n        index {\n          tag\n          content\n          anchor\n        }\n        previous {\n          title\n          url\n        }\n        comments {\n          _id\n          name\n          time\n          content\n          refTo {\n            _id\n            name\n            content\n          }\n        }\n      }\n    }'
+    query: '{\n      post(url: "' + options.url + '") {\n        _id\n        title\n        tags\n        content\n        date\n        url\n        next {\n          title\n          url\n        }\n        index {\n          tag\n          content\n          anchor\n        }\n        previous {\n          title\n          url\n        }\n        comments {\n          _id\n          name\n          time\n          content\n          refTo {\n            _id\n            name\n            content\n          }\n        }\n      }\n    }'
   };
 };
 

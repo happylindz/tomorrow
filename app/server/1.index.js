@@ -65,8 +65,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-var _default = (_dec = Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["connect"])(mapStateToProps, mapDispatchToProps), _dec(_class = function (_Component) {
-  _inherits(_default, _Component);
+var _default = (_dec = Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["connect"])(mapStateToProps, mapDispatchToProps), _dec(_class = function (_PureComponent) {
+  _inherits(_default, _PureComponent);
 
   function _default() {
     var _ref;
@@ -136,7 +136,7 @@ var _default = (_dec = Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["connect
   }]);
 
   return _default;
-}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"])) || _class);
+}(__WEBPACK_IMPORTED_MODULE_0_react__["PureComponent"])) || _class);
 
 
 ;
@@ -181,7 +181,7 @@ exports.postsSQL = function (options) {
 
 exports.postSQL = function (options) {
   return {
-    query: '{\n      post(url: "' + options.url + '") {\n        _id\n        title\n        tags\n        content\n        date\n        next {\n          title\n          url\n        }\n        index {\n          tag\n          content\n          anchor\n        }\n        previous {\n          title\n          url\n        }\n        comments {\n          _id\n          name\n          time\n          content\n          refTo {\n            _id\n            name\n            content\n          }\n        }\n      }\n    }'
+    query: '{\n      post(url: "' + options.url + '") {\n        _id\n        title\n        tags\n        content\n        date\n        url\n        next {\n          title\n          url\n        }\n        index {\n          tag\n          content\n          anchor\n        }\n        previous {\n          title\n          url\n        }\n        comments {\n          _id\n          name\n          time\n          content\n          refTo {\n            _id\n            name\n            content\n          }\n        }\n      }\n    }'
   };
 };
 

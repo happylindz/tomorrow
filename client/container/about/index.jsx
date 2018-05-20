@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Banner from '@/components/banner';
 import MessageBoard from '@/components/message-board';
@@ -27,7 +27,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 @connect(mapStateToProps, mapDispatchToProps)
-export default class extends Component {
+export default class extends PureComponent {
   componentDidMount() {
     const { state } = this.props;
     if (state === constants.INITIAL_STATE || state === constants.FAILURE_STATE) {

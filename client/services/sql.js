@@ -46,6 +46,7 @@ exports.postSQL = function(options) {
         tags
         content
         date
+        url
         next {
           title
           url

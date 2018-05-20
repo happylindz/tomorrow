@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import {
   fetchPostData,
@@ -33,55 +33,33 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 };
 
 @connect(mapStateToProps, mapDispatchToProps)
-export default class extends Component {
+export default class extends PureComponent {
   componentDidMount() {
-    const {
-      state,
-      article: {
-        url: prevUrl,
-      },
-    } = this.props;
+    const { state } = this.props;
     if (state === constants.INITIAL_STATE || state === constants.FAILURE_STATE) {
-      this.fetchArticleData(this.props, prevUrl, state);
-    } else {
-      const params = sql.postSQL({
-        url: this.props.match.params.url,
+      this.props.fetchPostData({
+        url: this.props.match.params.url
       });
-      // save API data
-      saveAPIData(`/graphql?query=${sql.encode(params.query)}`, {
-        data: {
-          post: {
-            ...this.props.article,
-            comments: this.props.comments,
-          },
-        }
-      });
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const {
-      match: {
-        params: {
-          url: prevUrl = '',
-        },
-      },
-    } = this.props;
-    this.fetchArticleData(nextProps, prevUrl);
-  }
-
-  fetchArticleData(props, prevUrl, state) {
-    const {
-      match: {
-        params: {
-          url: nextUrl = '',
-        },
-      },
-    } = props;
-    if (state === constants.INITIAL_STATE || prevUrl !== nextUrl) {
-      props.fetchPostData({
-        url: nextUrl,
-      });
+    } else if (state === constants.SUCCESS_STATE) {
+      const url = this.props.match.params.url;
+      if (url === this.props.article.url) {
+        const params = sql.postSQL({
+          url: this.props.match.params.url,
+        });
+        // save API data
+        saveAPIData(`/graphql?query=${sql.encode(params.query)}`, {
+          data: {
+            post: {
+              ...this.props.article,
+              comments: this.props.comments,
+            },
+          }
+        });
+      } else {
+        this.props.fetchPostData({
+          url: this.props.match.params.url
+        });
+      }
     }
   }
 
