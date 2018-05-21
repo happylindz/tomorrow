@@ -8,7 +8,6 @@
   right: 0;
   background-color: #fff;
   z-index: 1;
-  // box-shadow: 0 1px 3px 0 rgba(23,81,153,.05);
   box-shadow: 0 3px 2px 0 rgba(0, 0, 0, 0.03);
   .header {
     max-width: 768px;
@@ -21,9 +20,9 @@
       background: #fff;
       z-index: 1;
       padding: 10px 0;
-      display: block;
+      max-width: 100px;
       & > img {
-        height: 100%;
+        height: 40px;
         position: relative;
         top: -2px;
       }
