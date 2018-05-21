@@ -103,6 +103,7 @@ export default class extends Component {
         <div className="logo">
           <img src="//cdn.lindongzhou.com/logo.jpg" />
         </div>
+        <div className="space"></div>
         <div className="toggle-menu" onClick={this.toggleMenu}>
           <span className={classNames({
             'menu-icon': true,

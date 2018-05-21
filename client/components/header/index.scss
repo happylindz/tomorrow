@@ -18,15 +18,20 @@
     flex-wrap: nowrap;
     height: 60px;
     .logo {
-      flex: 1;
       background: #fff;
       z-index: 1;
       padding: 10px 0;
+      display: block;
       & > img {
         height: 100%;
         position: relative;
         top: -2px;
       }
+    }
+    .space {
+      flex: 1;
+      background-color: #fff;
+      z-index: 1;
     }
     .toggle-menu {
       background-color: #fff;
