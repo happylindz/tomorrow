@@ -56,7 +56,7 @@ module.exports = webpackMerge(baseConfig, {
         collapseWhitespace: true,
         removeComments: true,
         removeAttributeQuotes: true,
-        minifyJS: true,
+        // minifyJS: true,
       },
       title: "Lindz's Blog",
     }),
