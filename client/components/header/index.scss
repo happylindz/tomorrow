@@ -21,6 +21,7 @@
       flex: 1;
       background: #fff;
       z-index: 1;
+      padding: 10px 0;
       & > img {
         height: 100%;
         position: relative;
@@ -69,7 +70,7 @@
   .header-wrap {
     .header {
       .logo {
-        padding-left: 100px;
+        padding-left: 40px;
       }
       .toggle-menu {
         display: none;
@@ -128,7 +129,7 @@
   .header-wrap {
     .header {
       .logo {
-        padding-left: px2rem(30px);
+        padding-left: px2rem(24px);
       }
       .toggle-menu {
         height: 60px;

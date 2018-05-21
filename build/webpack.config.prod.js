@@ -56,6 +56,7 @@ module.exports = webpackMerge(baseConfig, {
         collapseWhitespace: true,
         removeComments: true,
         removeAttributeQuotes: true,
+        minifyJS: true,
       },
       title: "Lindz's Blog",
     }),
@@ -69,6 +70,7 @@ module.exports = webpackMerge(baseConfig, {
         collapseWhitespace: true,
         removeComments: true,
         removeAttributeQuotes: true,
+        minifyJS: true,
       },
       title: '博客管理系统',
     }),
@@ -133,7 +135,8 @@ module.exports = webpackMerge(baseConfig, {
       name: 'Lindz\'s Blog',
       short_name: 'Blog',
       description: 'An isomorphic progressive web blog built by React & Node',
-      background_color: 'transparent',
+      background_color: '#838a88',
+      theme_color: '#fff',
       filename: 'manifest.[hash:8].json',
       publicPath: '/',
       icons: [
@@ -145,9 +148,9 @@ module.exports = webpackMerge(baseConfig, {
       ],
       ios: {
         'apple-mobile-web-app-title': 'Lindz\'s Blog',
-        'apple-mobile-web-app-status-bar-style': 'transparent',
+        'apple-mobile-web-app-status-bar-style': '#838a88',
         'apple-mobile-web-app-capable': 'yes',
-        'apple-touch-icon': '/icons/icon_128x128.cc0714ab18fa6ee6de42ef3d5ca8fd09.png',
+        'apple-touch-icon': '//cdn.lindongzhou.com/icons/icon_128x128.cc0714ab18fa6ee6de42ef3d5ca8fd09.png',
       },
     })
   ],

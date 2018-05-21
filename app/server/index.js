@@ -2263,7 +2263,11 @@ var _default = Object(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["withRouter
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'header',
           { className: 'header' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'logo' }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'logo' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: '//cdn.lindongzhou.com/logo.jpg' })
+          ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             { className: 'toggle-menu', onClick: this.toggleMenu },
