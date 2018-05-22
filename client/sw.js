@@ -53,7 +53,7 @@ const matchApi = (currentUrl) => {
   return pathname === '/graphql';
 };
 
-self.addEventListener('fetch', function (e) {
+self.addEventListener('fetch', (e) => {
   console.log('现在正在请求：' + e.request.url);
   const currentUrl = e.request.url;
   if (matchHtml(currentUrl)) {
@@ -70,8 +70,8 @@ self.addEventListener('fetch', function (e) {
         console.log(response);
         return response;
       }).catch(function() {
-        return caches.match(e.request).then(function(response) {
-          return response || fetch('/index.html');
+        return caches.match(e.request).then((response) => {
+          return response || caches.match('/index.html');
         });
       })
     );

@@ -37,6 +37,6 @@
   "display": "standalone",
   "start_url": ".",
   "description": "An isomorphic progressive web blog built by React & Node",
-  "background_color": "#838a88",
-  "theme_color": "#fff"
+  "background_color": "#333",
+  "theme_color": "#333"
 }

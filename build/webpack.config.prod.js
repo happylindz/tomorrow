@@ -135,8 +135,8 @@ module.exports = webpackMerge(baseConfig, {
       name: 'Lindz\'s Blog',
       short_name: 'Blog',
       description: 'An isomorphic progressive web blog built by React & Node',
-      background_color: '#838a88',
-      theme_color: '#fff',
+      background_color: '#333',
+      theme_color: '#333',
       filename: 'manifest.[hash:8].json',
       publicPath: '/',
       icons: [
@@ -148,9 +148,9 @@ module.exports = webpackMerge(baseConfig, {
       ],
       ios: {
         'apple-mobile-web-app-title': 'Lindz\'s Blog',
-        'apple-mobile-web-app-status-bar-style': '#838a88',
+        'apple-mobile-web-app-status-bar-style': '#333',
         'apple-mobile-web-app-capable': 'yes',
-        'apple-touch-icon': '//cdn.lindongzhou.com/icons/icon_128x128.cc0714ab18fa6ee6de42ef3d5ca8fd09.png',
+        'apple-touch-icon': '//cdn.lindongzhou.com/icons/icon_96x96.dbfccb1a5cef8093a77c079f761b2d63.png',
       },
     })
   ],

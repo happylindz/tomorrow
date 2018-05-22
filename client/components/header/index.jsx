@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink, withRouter, Link } from 'react-router-dom';
 import throttle from '../../util/throttle';
 import classNames from 'classnames';
 import eventUtil from '../../util/eventUtil';
@@ -101,7 +101,9 @@ export default class extends Component {
     return <div className="header-wrap">
       <header className="header">
         <div className="logo">
-          <img src="//cdn.lindongzhou.com/logo.jpg" />
+          <Link to="/">
+            <img src="//cdn.lindongzhou.com/logo.jpeg" />
+          </Link>
         </div>
         <div className="space"></div>
         <div className="toggle-menu" onClick={this.toggleMenu}>
