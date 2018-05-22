@@ -29,9 +29,6 @@
         color: #4a4a4a;
         transition: color .4s;
         line-height: 1.2;
-        &:hover {
-          color: orange;
-        }
       }
     }
   }
@@ -44,6 +41,11 @@
       }
       .archives-item {
         font-size: 16px;
+        & > a {
+          &:hover {
+            color: orange;
+          }
+        }
       }
     }
   }
