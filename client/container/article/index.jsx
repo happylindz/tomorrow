@@ -62,6 +62,16 @@ export default class extends PureComponent {
       }
     }
   }
+  componentWillReceiveProps(nextProps) {
+    const url = nextProps.article.url;
+    const nextUrl = nextProps.match.params.url;
+    const state = nextProps.state;
+    if (state === constants.SUCCESS_STATE && url !== nextUrl) {
+      this.props.fetchPostData({
+        url: nextProps.match.params.url
+      });
+    }
+  }
 
   scrollToContent(e) {
     e.preventDefault();
