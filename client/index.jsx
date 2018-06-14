@@ -16,7 +16,7 @@ ReactDOM.render(<Provider store={store}><Router /></Provider>, document.getEleme
 
 if (module.hot && process.env.NODE_ENV === 'development') {
   module.hot.accept(['./router'], () => {
-    ReactDOM.render(<Provider store={store}><Router /></Provider>, document.getElementById('root'));
+    ReactDOM.hydrate(<Provider store={store}><Router /></Provider>, document.getElementById('root'));
   });
 }
 

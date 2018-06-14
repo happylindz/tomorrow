@@ -2,7 +2,7 @@
 module.exports = (app) => {
   const { router, controller } = app;
 
-  // 首页路由跳转，用于服务端渲染
+  // 站点路由跳转，用于服务端渲染
   router.get('', controller.index.home);
   router.get('/project', controller.index.project);
   router.get('/about', controller.index.about);

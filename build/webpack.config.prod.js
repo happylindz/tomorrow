@@ -11,7 +11,7 @@ const baseConfig = require('./webpack.config.base');
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = webpackMerge(baseConfig, {
   output: {
@@ -125,7 +125,7 @@ module.exports = webpackMerge(baseConfig, {
         count >= 2
       ),
     }),
-    // new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin(),
     new webpack.HashedModuleIdsPlugin(),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new ServiceWorkerWebpackPlugin({
