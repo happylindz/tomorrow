@@ -3,11 +3,18 @@ const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const HtmlIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const os = require('os');
+const HappyPack = require('happypack');
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 const constants = require('./constants');
 const baseConfig = require('./webpack.config.base');
-const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
+// const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 module.exports = webpackMerge(baseConfig, {
+  entry: {
+    admin: path.resolve(constants.adminPath, 'index.js'),
+    main: path.resolve(constants.clientPath, 'index.jsx'),
+  },
   output: {
     path: constants.publicPath,
     filename: 'js/[name].js',
@@ -16,6 +23,10 @@ module.exports = webpackMerge(baseConfig, {
   },
   module: {
     rules: [{
+      test: /\.jsx?$/,
+      exclude: /node_modules/,
+      use: 'happypack/loader?id=babel',
+    }, {
       test: /\.css$/,
       use: ['style-loader', 'css-loader', 'postcss-loader'],
     },
@@ -41,6 +52,12 @@ module.exports = webpackMerge(baseConfig, {
     }]
   },
   plugins: [
+    new HappyPack({
+      id: 'babel',
+      threadPool: happyThreadPool,
+      loaders: ['babel-loader?cacheDirectory'],
+      verbose: true,
+    }),
     new webpack.DllReferencePlugin({
       manifest: require('../public/dll.manifest.json')
     }),
@@ -55,23 +72,18 @@ module.exports = webpackMerge(baseConfig, {
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: './public/template.html',
+      template: './views/dev.html',
       publicPath: '',
-      chunks: ['manifest', 'vendor', 'main'],
-      chunksSortMode: 'manual',
-      title: "Lindz's Blog",
+      chunks: ['main'],
     }),
     new HtmlWebpackPlugin({
       filename: 'admin.html',
-      template: './public/template.html',
+      template: './views/dev.html',
       publicPath: '',
-      chunks: ['manifest', 'vendor', 'admin'],
-      chunksSortMode: 'manual',
-      title: '博客管理系统',
+      chunks: ['admin'],
     }),
-    new ServiceWorkerWebpackPlugin({
-      entry: path.join(constants.clientPath, 'sw.js'),
-    }),
+    // new ServiceWorkerWebpackPlugin({
+    //   entry: path.join(constants.clientPath, 'sw.js'),
+    // }),
   ],
-  devtool: 'source-map',
 });

@@ -1,5 +1,6 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const constants = require('./constants');
 module.exports = {
   entry: path.resolve(constants.clientPath, 'server.js'),
@@ -35,4 +36,22 @@ module.exports = {
       },
     ]
   },
+  plugins: [
+    new UglifyJSPlugin({
+      uglifyOptions: {
+        compress: {
+          warnings: false,
+          drop_console: true,
+          collapse_vars: true,
+          reduce_vars: true,
+        },
+        output: {
+          beautify: false,
+          comments: false,
+        },
+      },
+      parallel: true,
+      cache: true,
+    }),
+  ]
 };

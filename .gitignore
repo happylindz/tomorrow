@@ -14,3 +14,4 @@ app/view/js/**/*
 app/view/css/**/*
 app/view/icons/**/*
 dist/
+config.json

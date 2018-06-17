@@ -2,7 +2,7 @@
   "presets": [["env", { 
     "modules": false,       
     "targets": {
-      "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
+      "browsers": "defaults"
     },
     "useBuiltIns": true 
   }], "react"],
@@ -14,8 +14,6 @@
       "libraryName": "antd"
     }],
     "react-hot-loader/babel",
-    "transform-async-to-generator",
     "syntax-dynamic-import"
-
   ]
 }

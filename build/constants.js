@@ -5,10 +5,14 @@ const resolveRoot = relativePath => path.resolve(rootDirectory, relativePath);
 module.exports = {
   publicPath: resolveRoot('./public'),
   appPath: resolveRoot('./app'),
-  distPath: resolveRoot('./app/view'),
+  distPath: resolveRoot('./app/public'),
   viewPath: resolveRoot('./app/view'),
   clientPath: resolveRoot('./client'),
   adminPath: resolveRoot('./admin'),
   contenBase: resolveRoot('./dist'),
+  templatePath: resolveRoot('./views'),
   rootDirectory,
+  manifestFileName: 'revisioned-asset-manifest.json',
+  // cdnPath: '//cdn.lindongzhou.com/',
+  cdnPath: '/',
 };

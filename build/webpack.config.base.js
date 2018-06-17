@@ -1,40 +1,24 @@
 const webpack = require('webpack');
 const path = require('path');
-const os = require('os');
-const HappyPack = require('happypack');
 const constants = require('./constants');
-const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
-
 module.exports = {
-  entry: {
-    admin: path.resolve(constants.adminPath, 'index.js'),
-    main: path.resolve(constants.clientPath, 'index.jsx'),
-  },
   module: {
-    rules: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: 'happypack/loader?id=babel',
+    rules: [{
+      test: /\.(jpe?g|png|gif|svg)$/,
+      loader: 'url-loader',
+      query: {
+        limit: 8192,
+        name: 'images/[name].[ext]?[hash:7]'
       },
-      {
-        test: /\.(jpe?g|png|gif|svg)$/,
-        loader: 'url-loader',
-        query: {
-          limit: 8192,
-          name: 'images/[name].[ext]?[hash:7]'
-        },
-        exclude: /node_modules/,
+      exclude: /node_modules/,
+    }, {
+      test: /\.(ttf|eot|woff|woff2)$/,
+      loader: 'file-loader',
+      options: {
+        name: 'fonts/[name].[ext]',
       },
-      {
-        test: /\.(ttf|eot|woff|woff2)$/,
-        loader: 'file-loader',
-        options: {
-          name: 'fonts/[name].[ext]',
-        },
-        exclude: /node_modules/,
-      },
-    ],
+      exclude: /node_modules/,
+    }],
   },
   resolve: {
     extensions: ['.jsx', '.js', '.json'],
@@ -45,12 +29,6 @@ module.exports = {
     },
   },
   plugins: [
-    new HappyPack({
-      id: 'babel',
-      threadPool: happyThreadPool,
-      loaders: ['babel-loader?cacheDirectory'],
-      verbose: true,
-    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),

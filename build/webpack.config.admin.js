@@ -1,15 +1,19 @@
-// const path = require('path');
+const path = require('path');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const os = require('os');
+const HappyPack = require('happypack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 const constants = require('./constants');
 const baseConfig = require('./webpack.config.base');
-// const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
-const ManifestPlugin = require('webpack-manifest-plugin');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = webpackMerge(baseConfig, {
+  entry: {
+    'admin': path.resolve(constants.adminPath, 'index.js'),
+  },
   output: {
     path: constants.distPath,
     filename: 'js/[name].[chunkhash:8].js',
@@ -18,6 +22,11 @@ module.exports = webpackMerge(baseConfig, {
   },
   module: {
     rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: 'happypack/loader?id=babel',
+      },
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader?minimize', 'postcss-loader'] })
@@ -32,6 +41,12 @@ module.exports = webpackMerge(baseConfig, {
     ]
   },
   plugins: [
+    new HappyPack({
+      id: 'babel',
+      threadPool: happyThreadPool,
+      loaders: ['babel-loader?cacheDirectory'],
+      verbose: true,
+    }),
     new ExtractTextPlugin({
       filename: 'css/[name].[contenthash:8].css',
       allChunks: true,
@@ -53,26 +68,10 @@ module.exports = webpackMerge(baseConfig, {
       parallel: true,
       cache: true,
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: ({ resource }) => {
-        return resource && resource.indexOf('node_modules') >= 0 && resource.match(/\.js$/);
-      },
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      async: 'used-twice',
-      minChunks: (module, count) => (
-        count >= 2
-      ),
-    }),
-    // new BundleAnalyzerPlugin(),
     new webpack.HashedModuleIdsPlugin(),
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    new ManifestPlugin({
-      fileName: constants.manifestFileName,
+    new HtmlWebpackPlugin({
+      filename: '../view/admin.html',
+      template: './views/admin.html',
     }),
-    // new ServiceWorkerWebpackPlugin({
-    //   entry: path.join(constants.clientPath, 'sw.js'),
-    // })
   ],
 });
