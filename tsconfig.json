@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+      "module": "es6",
+      "target": "es6",
+      "sourceMap": true,
+      "importHelpers": true,
+      "experimentalDecorators": true,
+      "allowJs": true,
+      "jsx": "preserve",
+      "allowSyntheticDefaultImports": true
+    },
+    "exclude": [
+      "node_modules"
+    ]
+  }

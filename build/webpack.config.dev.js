@@ -11,6 +11,7 @@ const baseConfig = require('./webpack.config.base');
 // const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 module.exports = webpackMerge(baseConfig, {
+  mode: 'development',
   entry: {
     admin: path.resolve(constants.adminPath, 'index.js'),
     main: path.resolve(constants.clientPath, 'index.jsx'),
@@ -26,7 +27,9 @@ module.exports = webpackMerge(baseConfig, {
       test: /\.jsx?$/,
       exclude: /node_modules/,
       use: 'happypack/loader?id=babel',
-    }, {
+    },
+    { test: /\.tsx?$/, loader: ['babel-loader', 'ts-loader'] },
+    {
       test: /\.css$/,
       use: ['style-loader', 'css-loader', 'postcss-loader'],
     },
@@ -49,7 +52,7 @@ module.exports = webpackMerge(baseConfig, {
     proxy: [{
       context: ['/api', '/graphql'],
       target: 'http://localhost:7001',
-    }]
+    }],
   },
   plugins: [
     new HappyPack({
@@ -58,18 +61,18 @@ module.exports = webpackMerge(baseConfig, {
       loaders: ['babel-loader?cacheDirectory'],
       verbose: true,
     }),
-    new webpack.DllReferencePlugin({
-      manifest: require('../public/dll.manifest.json')
-    }),
-    new HtmlIncludeAssetsPlugin({
-      assets: ['js/dll.js'],
-      append: false,
-    }),
-    new HtmlIncludeAssetsPlugin({
-      assets: ['css/antd.min.css'],
-      append: false,
-      files: 'admin.html',
-    }),
+    // new webpack.DllReferencePlugin({
+    //   manifest: require('../public/dll.manifest.json')
+    // }),
+    // new HtmlIncludeAssetsPlugin({
+    //   assets: ['js/dll.js'],
+    //   append: false,
+    // }),
+    // new HtmlIncludeAssetsPlugin({
+    //   assets: ['css/antd.min.css'],
+    //   append: false,
+    //   files: 'admin.html',
+    // }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './views/dev.html',

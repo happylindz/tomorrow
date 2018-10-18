@@ -1,11 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import './index.scss';
-import constants from  '../../constants';
+import * as constants from  '../../constants';
 import { SkeletonItem } from '../skeleton-home/skeleton-item';
+import './index.scss';
 
-export default ({ posts, end, loading, state }) => {
+
+interface Post {
+  _id: number,
+  tags: string,
+  date: string,
+  url: string,
+  title: string,
+  cover: string,
+  desc: string,
+  commentCount: number,
+  readCount: number,
+}
+
+type HomeProps = {
+  posts: Array<Post>,
+  end: string,
+  loading: string,
+  state: Object,
+}
+
+export default ({ posts, end, loading, state }: HomeProps): JSX.Element=> {
   return <section className="home-wrapper">
     <div id="posts-main" className="posts-main">
       {
